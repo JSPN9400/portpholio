@@ -5,19 +5,19 @@ Welcome to my personal portfolio website! This project is a clean, modern, and f
 ## Features
 
 - **Responsive Design:** Looks great on desktops, tablets, and mobile devices.
-- **Project Showcase:** Highlights my key projects with descriptions and images.
+- **Project Showcase:** Highlights key projects with descriptions and images.
 - **Resume Download:** Easily view or download my resume in PDF format.
 - **About Me:** Learn more about my background, skills, and interests.
 - **Contact Information:** Simple way to get in touch with me.
 
 ## Live Demo
 
-You can view the portfolio by opening `index.html` in your browser.
+To view the portfolio, open `index.html` in your browser.
 
 ## File Structure
 
 ```
-My-portfolio-/
+portpholio/
 ├── img of dashboard.png
 ├── IMG_20240728_093706662_HDR.png
 ├── index.html
@@ -30,8 +30,8 @@ My-portfolio-/
 ## Getting Started
 
 1. **Clone the repository:**
-   ```
-   git clone https://github.com/jaishankar9400/My-Portpholiw.git
+   ```sh
+   git clone https://github.com/JSPN9400/student-report-card-generqator.git
    ```
 2. **Open the folder:**
    Navigate to the project directory and open `index.html` in your web browser.
@@ -55,11 +55,9 @@ Python Developer & Data Science Enthusiast
 
 ## Contact
 
-- Email: [your-email@example.com](mailto:your-email@example.com)
-- GitHub: [jaishankar9400](https://github.com/jaishankar9400)
+- Email: [your-email@example.com](mailto:jaisankar.9400@gmail.com)
+- GitHub: [jaishankar9400](https://github.com/JSPN9400)
 
 ---
-Thank you for visiting my portfolio!
 
-
-
+Thank you for visiting my
