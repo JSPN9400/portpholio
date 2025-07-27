@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jaishankar Prasad Nirala | Portfolio</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Portfolio of Jaishankar Prasad Nirala, Data Analyst & Automation Specialist. Explore projects, skills, and contact information." />
+    <meta name="keywords"
+        content="Jaishankar Prasad Nirala, Data Analyst, Automation, Power BI, Python, Portfolio, Dashboard, Finance, Business Analytics" />
+    <meta name="author" content="Jaishankar Prasad Nirala" />
+    <meta property="og:title" content="Jaishankar Prasad Nirala | Portfolio" />
+    <meta property="og:description"
+        content="Portfolio of Jaishankar Prasad Nirala, Data Analyst & Automation Specialist. Explore projects, skills, and contact information." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/" />
+    <meta property="og:image" content="https://yourdomain.com/IMG_20240728_093706662_HDR.jpg" />
+    <link rel="canonical" href="https://yourdomain.com/" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Footer Contact Animation */
+        .footer-contact {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(.4, 2, .6, 1), transform 0.8s cubic-bezier(.4, 2, .6, 1);
+            background: var(--color-card);
+            border-radius: 16px;
+            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            border: 1.5px solid var(--color-border);
+            padding: 2rem 1.5rem 1.2rem 1.5rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-contact.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Social icon subtle pulse on hover */
+        .footer-social-link:hover .icon,
+        .footer-social-link:focus .icon {
+            animation: iconPulse 0.5s cubic-bezier(.4, 2, .6, 1);
+        }
+
+        @keyframes iconPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            60% {
+                transform: scale(1.18) rotate(-8deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        /* About Website section in footer */
+        .footer-about {
+            margin-top: 2.2rem;
+            color: #888;
+            font-size: 1rem;
+            text-align: center;
+            background: var(--color-bg-alt);
+            border-radius: 10px;
+            padding: 1.1rem 1.2rem 0.7rem 1.2rem;
+            box-shadow: 0 2px 12px 0 var(--color-shadow);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        :root {
+            --color-bg: #f7f8fa;
+            --color-bg-alt: #fff;
+            --color-text: #22223b;
+            --color-accent: #4f46e5;
+            --color-accent2: #7c3aed;
+            --color-accent3: #e0e7ff;
+            --color-card: #fff;
+            --color-shadow: rgba(44, 62, 80, 0.04);
+            --color-border: #e0e7ff;
+            --color-btn: #4f46e5;
+            --color-btn-hover: #7c3aed;
+            --color-btn-text: #fff;
+        }
+
+        html.dark {
+            --color-bg: linear-gradient(120deg, #181c2f 0%, #232946 100%);
+            --color-bg-alt: rgba(24, 28, 47, 0.85);
+            --color-text: #f3f4f6;
+            --color-accent: #7f9cf5;
+            --color-accent2: #a5b4fc;
+            --color-accent3: #232946;
+            --color-card: rgba(36, 40, 62, 0.7);
+            --color-shadow: #23294633;
+            --color-border: #232946;
+            --color-btn: linear-gradient(90deg, #7f9cf5 0%, #a5b4fc 100%);
+            --color-btn-hover: linear-gradient(90deg, #a5b4fc 0%, #7f9cf5 100%);
+            --color-btn-text: #181c2f;
+        }
+
+        html {
+            box-sizing: border-box;
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            color: var(--color-text);
+            min-height: 100vh;
+            line-height: 1.6;
+            background: var(--color-bg);
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        /* Animated gradient background for depth */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -2;
+            background: var(--color-bg);
+            opacity: 1;
+            animation: bgmove 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgmove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Subtle floating shapes for visual interest */
+        .bg-shape {
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(32px);
+            opacity: 0.18;
+            pointer-events: none;
+            animation: floatShape 16s ease-in-out infinite alternate;
+        }
+
+        .bg-shape1 {
+            width: 420px;
+            height: 420px;
+            top: 5vh;
+            left: 8vw;
+            background: linear-gradient(120deg, #7f9cf5 0%, #a5b4fc 100%);
+            animation-delay: 0s;
+        }
+
+        .bg-shape2 {
+            width: 320px;
+            height: 320px;
+            bottom: 8vh;
+            right: 10vw;
+            background: linear-gradient(120deg, #a5b4fc 0%, #7f9cf5 100%);
+            animation-delay: 4s;
+        }
+
+        @keyframes floatShape {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                transform: translateY(-40px) scale(1.08);
+            }
+        }
+
+        a {
+            color: #7f9cf5;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover,
+        a:focus {
+            color: #a5b4fc;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            backdrop-filter: blur(0.5px);
+        }
+
+        .site-header {
+            background: var(--color-bg-alt);
+            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            border-bottom: 1.5px solid var(--color-border);
+            transition: background 0.4s, box-shadow 0.4s, border-color 0.4s;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .logo-initials {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: #fff;
+            letter-spacing: 2px;
+            border: 2.5px solid #7f9cf5;
+            border-radius: 12px;
+            padding: 0.2em 0.6em;
+            margin-right: 0.5em;
+            background: linear-gradient(120deg, #232946 60%, #181c2f 100%);
+            box-shadow: 0 2px 16px 0 rgba(44, 62, 80, 0.18);
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .logo-initials:hover {
+            box-shadow: 0 4px 24px 0 rgba(44, 62, 80, 0.25);
+            border-color: #a5b4fc;
+        }
+
+        .site-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px #23294644;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--color-text);
+            padding: 0.3em 0.7em;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-link.active,
+        .nav-link:hover,
+        .nav-link:focus {
+            background: var(--color-accent3);
+            color: var(--color-accent);
+            box-shadow: 0 2px 8px 0 var(--color-shadow);
+        }
+
+        .hero {
+            background: var(--color-bg-alt);
+            padding: 4.5rem 0 4.5rem 0;
+            text-align: center;
+            border-radius: 0 0 48px 48px;
+            box-shadow: 0 8px 48px 0 var(--color-shadow);
+            margin-bottom: 2.5rem;
+            transition: background 0.5s, box-shadow 0.5s;
+        }
+
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .profile-pic-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 180px;
+            height: 180px;
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 18px;
+            border: none;
+            box-shadow: 0 6px 48px 0 #7f9cf544;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: scale(0.7);
+            background: transparent;
+            animation: picReveal 1.2s cubic-bezier(.4, 2, .6, 1) 0.2s forwards, profileFloat 3.5s ease-in-out infinite alternate;
+        }
+
+        .large-pic {
+            width: 180px;
+            height: 180px;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.06);
+            box-shadow: 0 12px 64px 0 #a5b4fc66;
+        }
+
+        .hero-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--color-accent2);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 16px #23294699;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--color-text);
+            margin-bottom: 0.7rem;
+            opacity: 0.92;
+        }
+
+        .hero-highlights {
+            margin: 1.2rem 0 1rem 0;
+            color: var(--color-accent);
+            font-weight: 500;
+            font-size: 1rem;
+            list-style: disc inside;
+            text-align: left;
+            display: inline-block;
+            background: var(--color-card);
+            border-radius: 10px;
+            padding: 0.7em 1.2em;
+            box-shadow: 0 2px 8px 0 var(--color-shadow);
+        }
+
+        .hero-actions {
+            margin-top: 1.2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.6em 1.3em;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 16px 0 #7f9cf533;
+        }
+
+        .btn-primary {
+            background: var(--color-btn);
+            color: var(--color-btn-text);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: var(--color-btn-hover);
+            color: var(--color-accent3);
+        }
+
+        .btn-secondary {
+            background: var(--color-card);
+            color: var(--color-accent2);
+            border: 1.5px solid var(--color-accent);
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background: var(--color-accent3);
+            color: var(--color-text);
+            border-color: var(--color-accent2);
+        }
+
+        .about,
+        .skills,
+        .projects,
+        .contact {
+            padding: 3.2rem 0 3rem 0;
+        }
+
+        .section-title {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--color-accent2);
+            margin-bottom: 2.2rem;
+            text-align: center;
+            letter-spacing: 1.2px;
+            text-shadow: 0 2px 8px #23294644;
+            transition: color 0.3s;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.2rem;
+        }
+
+        .skill-card {
+            background: var(--color-card);
+            border-radius: 14px;
+            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            padding: 1.1rem 1rem 0.9rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-start;
+            border: 1.5px solid var(--color-border);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .icon {
+            width: 1.5em;
+            height: 1.5em;
+            margin-right: 0.3em;
+            vertical-align: middle;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--color-accent3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-accent) 60%, var(--color-accent2) 100%);
+            border-radius: 4px;
+            transition: width 1s cubic-bezier(.4, 2, .6, 1);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.2rem;
+        }
+
+        .project-card {
+            background: var(--color-card);
+            border-radius: 14px;
+            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            padding: 1.2rem 1rem 1rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            align-items: flex-start;
+            transition: box-shadow 0.2s, transform 0.2s;
+            border: 1.5px solid var(--color-border);
+        }
+
+        .project-card:hover {
+            box-shadow: 0 6px 32px 0 #7f9cf544;
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-accent2);
+            margin-bottom: 0.2em;
+        }
+
+        .project-desc {
+            color: var(--color-text);
+            font-size: 1rem;
+            margin-bottom: 0.2em;
+            opacity: 0.92;
+        }
+
+        .project-link {
+            color: var(--color-accent);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .project-link:hover,
+        .project-link:focus {
+            color: var(--color-accent2);
+        }
+
+        .contact-social {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-top: 1.2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            font-weight: 600;
+            color: var(--color-text);
+            background: var(--color-card);
+            border-radius: 10px;
+            padding: 0.5em 1em;
+            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            border: 1.5px solid var(--color-border);
+        }
+
+        .social-link:hover,
+        .social-link:focus {
+            background: var(--color-accent3);
+            color: var(--color-accent);
+            box-shadow: 0 4px 24px 0 var(--color-shadow);
+        }
+
+        .site-footer {
+            background: var(--color-bg-alt);
+            color: var(--color-text);
+            text-align: center;
+            padding: 1.2rem 0 1.1rem 0;
+            font-size: 1rem;
+            border-top: 1.5px solid var(--color-border);
+            margin-top: 2rem;
+            backdrop-filter: blur(8px);
+            transition: background 0.4s, color 0.4s, border-color 0.4s;
+        }
+
+        /* Fade-in animation for sections */
+        .fadein-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(.4, 2, .6, 1),
+                transform 0.8s cubic-bezier(.4, 2, .6, 1);
+        }
+
+        .fadein-section.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+
+        /* Big Bang entrance animation for landing page */
+        .bigbang-animate {
+            opacity: 0;
+            transform: scale(0.2) translateY(40px);
+            animation: bigBangIn 0.8s cubic-bezier(.4, 2, .6, 1) forwards;
+        }
+
+        .bigbang-delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .bigbang-delay-2 {
+            animation-delay: 0.25s;
+        }
+
+        .bigbang-delay-3 {
+            animation-delay: 0.4s;
+        }
+
+        .bigbang-delay-4 {
+            animation-delay: 0.55s;
+        }
+
+        .bigbang-delay-5 {
+            animation-delay: 0.7s;
+        }
+
+        @keyframes bigBangIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.2) translateY(40px);
+            }
+
+            80% {
+                opacity: 1;
+                transform: scale(1.08) translateY(-8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 0 0.7rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                height: auto;
+                gap: 0.7rem;
+                padding: 0.7rem 0;
+            }
+
+            .main-nav {
+                gap: 0.7rem;
+            }
+
+            .hero-title {
+                font-size: 1.3rem;
+            }
+
+            .profile-pic-wrapper {
+                width: 104px;
+                height: 104px;
+            }
+
+            .profile-pic,
+            .large-pic {
+                width: 90px;
+                height: 90px;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                font-size: 0.95rem;
+                padding: 0.5em 1em;
+            }
+        }
+
+        /* Keyframes for profile pic animations */
+        @keyframes picReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.7);
+                filter: blur(12px);
+            }
+
+            60% {
+                opacity: 1;
+                transform: scale(1.08);
+                filter: blur(0.5px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes profileFloat {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                transform: translateY(-18px) scale(1.03);
+            }
+        }
+
+        .about-books-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .about-book-card {
+            background: var(--color-card);
+            border-radius: 12px;
+            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            padding: 1.2rem 1.1rem;
+            min-width: 220px;
+            max-width: 320px;
+            flex: 1 1 220px;
+            opacity: 0;
+            transform: perspective(600px) rotateY(60deg) scale(0.96) translateY(40px);
+            box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.10);
+            transition: opacity 0.7s cubic-bezier(.4, 2, .6, 1),
+                transform 0.7s cubic-bezier(.4, 2, .6, 1),
+                box-shadow 0.7s cubic-bezier(.4, 2, .6, 1);
+        }
+
+        .about-book-card p {
+            margin: 0;
+            color: var(--color-text);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .book-animate {
+            opacity: 0;
+            transform: translateY(40px) scale(0.96);
+        }
+
+        .book-animate.visible {
+            opacity: 1;
+            transform: perspective(600px) rotateY(0deg) scale(1) translateY(0);
+            box-shadow: 0 4px 24px 0 rgba(44, 62, 80, 0.18);
+        }
+
+        .book-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .book-delay-2 {
+            transition-delay: 0.3s;
+        }
+
+        .book-delay-3 {
+            transition-delay: 0.5s;
+        }
+
+        .book-delay-4 {
+            transition-delay: 0.7s;
+        }
+
+        .book-delay-5 {
+            transition-delay: 0.9s;
+        }
+
+        @media (max-width: 500px) {
+            .about-books-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- Decorative background shapes for large screens moved to body -->
+    <script>
+        // Theme toggle logic
+        function setTheme(mode) {
+            if (mode === 'dark') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        // Detect system preference
+        (function () {
+            const userTheme = localStorage.getItem('theme');
+            if (userTheme) {
+                setTheme(userTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark');
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <header class="site-header">
+        <div class="container nav-container">
+            <div class="logo-area">
+                <span class="logo-initials">J.S.P.N.</span>
+                <span class="site-title">Jaishankar Prasad Nirala</span>
+            </div>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <button id="theme-toggle" aria-label="Toggle dark/light mode"
+                style="margin-left:1.5rem;padding:0.4em 1em;border-radius:8px;border:none;background:var(--color-accent3);color:var(--color-accent);font-weight:600;cursor:pointer;transition:background 0.2s, color 0.2s;">
+                <span id="theme-toggle-icon">🌙</span>
+            </button>
+        </div>
+        <script>
+            // Theme toggle button logic
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-toggle-icon');
+            function updateThemeIcon() {
+                if (document.documentElement.classList.contains('dark')) {
+                    themeIcon.textContent = '☀️';
+                    themeToggle.title = 'Switch to light mode';
+                } else {
+                    themeIcon.textContent = '🌙';
+                    themeToggle.title = 'Switch to dark mode';
+                }
+            }
+            themeToggle.addEventListener('click', function () {
+                if (document.documentElement.classList.contains('dark')) {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+                updateThemeIcon();
+            });
+            updateThemeIcon();
+        </script>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-image bigbang-animate bigbang-delay-1">
+                    <div class="profile-pic-wrapper">
+                        <img src="IMG_20240728_093706662_HDR.png" alt="Jaishankar Prasad Nirala"
+                            class="profile-pic large-pic" />
+                    </div>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title bigbang-animate bigbang-delay-2">Data Analyst</h1>
+                    <p class="hero-subtitle bigbang-animate bigbang-delay-3">
+                        Results-driven professional with expertise in data analysis, process automation, and dashboard
+                        development for finance and business operations. Proven ability to deliver actionable insights,
+                        streamline workflows, and support data-driven decision making.
+                    </p>
+                    <div class="hero-actions bigbang-animate bigbang-delay-5">
+                        <a href="resume.html" class="btn btn-primary">View Resume</a>
+                        <a href="resume.pdf" class="btn btn-secondary" download>Download Resume (PDF)</a>
+                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container fadein-section">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-books-row">
+                    <div class="about-book-card book-animate book-delay-1">
+                        <p>Hi, I’m Jaishankar Prasad Nirala, a data analyst with a strong foundation in Python and a
+                            passion
+                            for turning raw data into meaningful insights.</p>
+                    </div>
+                    <div class="about-book-card book-animate book-delay-2">
+                        <p>My journey started with an interest in automating manual financial tasks, which led me to
+                            build ABAAS, an AI-based account analysis system that streamlined bookkeeping for real-world
+                            use.</p>
+                    </div>
+                    <div class="about-book-card book-animate book-delay-3">
+                        <p>I specialize in building dashboards that make data easy to understand, cleaning and
+                            transforming datasets for business clarity, and automating reports to save time and reduce
+                            errors.</p>
+                    </div>
+                    <div class="about-book-card book-animate book-delay-4">
+                        <p>With experience in tools like Power BI, Excel, and SQL, I bring a mix of technical skills and
+                            business sense. I'm always exploring new ways to improve decision-making through data and
+                            love creating solutions that make work smarter—not harder.</p>
+                    </div>
+                    <div class="about-book-card book-animate book-delay-5">
+                        <p>If you're looking for someone who blends curiosity, discipline, and clarity—welcome to my
+                            space.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills">
+            <div class="container fadein-section">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <span class="skill-name"><img class="icon"
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                alt="Python" />Python</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width:90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-name"><img class="icon"
+                                src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/powerbi.svg" alt="Power BI"
+                                style="background:#fff; border-radius:2px;" />Power BI</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width:85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-name"><img class="icon"
+                                src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoftexcel.svg" alt="Excel"
+                                style="background:#635353; border-radius:2px;" />Excel</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width:80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-name"><img class="icon"
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                alt="SQL" />SQL</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width:70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-name"><img class="icon"
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                                alt="Data Cleaning" />Data Cleaning</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width:75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-name"><img class="icon" src="img of dashboard.png"
+                                alt="Dashboard Development" />Dashboard Development</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width:80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects">
+            <div class="container fadein-section">
+                <h2 class="section-title">Featured Projects</h2>
+                <div id="featured-project-landing"></div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <!-- Contact section moved to footer -->
+            <script>
+                // Animate fade-in for main content sections on scroll
+                document.addEventListener('DOMContentLoaded', function () {
+                    function revealSections() {
+                        document.querySelectorAll('.fadein-section').forEach(function (section) {
+                            var rect = section.getBoundingClientRect();
+                            if (rect.top < window.innerHeight - 60) {
+                                section.classList.add('visible');
+                            }
+                        });
+                    }
+                    window.addEventListener('scroll', revealSections);
+                    revealSections();
+                });
+            </script>
+            <script>
+                // Animate about book cards in sequence (more elegant, staggered, and 3D)
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.querySelectorAll('.about-book-card').forEach(function (card, i) {
+                        setTimeout(function () {
+                            card.classList.add('visible');
+                            card.style.transitionTimingFunction = 'cubic-bezier(.7,1.7,.5,1)';
+                        }, 250 + i * 240);
+                    });
+                });
+            </script>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-contact" id="contact">
+                <h2 class="footer-title">Contact</h2>
+                <div class="footer-socials">
+                    <a href="mailto:nirla9400@gmail.com" aria-label="Email" class="footer-social-link" title="Email">
+                        <img class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gmail.svg"
+                            alt="Email" />
+                    </a>
+                    <a href="https://github.com/jaishankar9400" target="_blank" aria-label="GitHub"
+                        class="footer-social-link" title="GitHub">
+                        <img class="icon"
+                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                            alt="GitHub" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/jaishankar-prasad-nirala-440a44243/" target="_blank"
+                        aria-label="LinkedIn" class="footer-social-link" title="LinkedIn">
+                        <img class="icon"
+                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+                            alt="LinkedIn" />
+                    </a>
+                    <a href="https://www.instagram.com/jaisankar9400/" target="_blank" aria-label="Instagram"
+                        class="footer-social-link" title="Instagram">
+                        <svg class="icon" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="24" height="24" rx="6" fill="#fff" />
+                            <path d="M12 7.2A4.8 4.8 0 1 0 12 16.8A4.8 4.8 0 1 0 12 7.2Z" stroke="#E4405F"
+                                stroke-width="1.5" />
+                            <circle cx="18.2" cy="5.8" r="1.2" fill="#E4405F" />
+                            <rect x="3.5" y="3.5" width="17" height="17" rx="5.5" stroke="#E4405F" stroke-width="1.5" />
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/+918084310066" target="_blank" aria-label="WhatsApp"
+                        class="footer-social-link" title="WhatsApp">
+                        <svg class="icon" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="24" height="24" rx="6" fill="#fff" />
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.09-1.33A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.61 0-3.13-.39-4.45-1.08l-.32-.17-3.02.79.8-2.95-.2-.33A7.96 7.96 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.29-5.1c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.51.12-.15.23-.58.75-.71.9-.13.15-.26.17-.49.06-.23-.12-.97-.36-1.85-1.13-.68-.6-1.14-1.34-1.28-1.57-.13-.23-.01-.35.1-.47.1-.1.23-.26.34-.39.11-.13.15-.23.23-.38.08-.15.04-.28-.02-.4-.06-.12-.51-1.23-.7-1.68-.18-.44-.37-.38-.51-.39-.13-.01-.28-.01-.43-.01-.15 0-.4.06-.61.28-.21.22-.8.78-.8 1.9 0 1.12.82 2.2.94 2.36.12.16 1.61 2.46 3.91 3.35.55.19.98.3 1.31.38.55.14 1.05.12 1.45.07.44-.06 1.36-.56 1.55-1.1.19-.54.19-1 .13-1.1-.06-.1-.21-.16-.44-.28z"
+                                fill="#25D366" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-about">
+                <strong>About this website:</strong> This is a modern, animated portfolio for Jaishankar Prasad Nirala,
+                built with HTML, CSS, and a touch of JavaScript. It features a dynamic hero, book-style About Me,
+                animated skills, and a modern contact section. <br>
+                <span style="color:#aaa; font-size:0.98em;">Last updated: July 26, 2025</span>
+            </div>
+            <p style="margin-top:1.2rem; color:#888; font-size:1rem;">&copy; 2025 Jaishankar Prasad Nirala. All rights
+                reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Animate footer contact section on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            function revealFooterContact() {
+                var footerContact = document.querySelector('.footer-contact');
+                if (!footerContact) return;
+                var rect = footerContact.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) {
+                    footerContact.classList.add('visible');
+                    window.removeEventListener('scroll', revealFooterContact);
+                }
+            }
+            window.addEventListener('scroll', revealFooterContact);
+            revealFooterContact();
+
+            // Featured Project logic for landing page
+            const projects = [
+                {
+                    key: 'ABAAS',
+                    title: 'ABAAS – AI-Based Accounts Analysis System',
+                    desc: 'Automated bookkeeping, GST error detection, and dashboarding for finance teams. Built with Python, Pandas, and Power BI.',
+                    link: 'https://github.com/jaishankar9400/ABAAS',
+                },
+                {
+                    key: 'Sales Dashboard',
+                    title: 'Sales Dashboard',
+                    desc: 'Interactive dashboard for sales analytics and KPI tracking, built for business insights.',
+                    link: 'https://github.com/jaishankar9400',
+                },
+                {
+                    key: 'Data Cleaning Toolkit',
+                    title: 'Data Cleaning Toolkit',
+                    desc: 'Python toolkit for automating data cleaning and preprocessing tasks for analytics projects.',
+                    link: 'https://github.com/jaishankar9400',
+                },
+                {
+                    key: 'Pratima',
+                    title: 'Pratima – Fashion Brand Dashboard',
+                    desc: 'Created a business intelligence dashboard for inventory, orders, and analytics using pandas, openpyxl, and Excel.',
+                    link: null,
+                },
+            ];
+            function renderFeaturedLanding(key) {
+                const featured = projects.find(p => p.key === key) || projects[0];
+                let html = `<div class="project-card" style="box-shadow:0 6px 32px 0 var(--color-shadow);border:2px solid var(--color-accent2);">
+                    <h3 class="project-title">${featured.title}</h3>
+                    <p class="project-desc">${featured.desc}</p>`;
+                if (featured.link) {
+                    html += `<a href="${featured.link}" target="_blank" class="project-link">View on GitHub</a>`;
+                }
+                html += `</div>`;
+                document.getElementById('featured-project-landing').innerHTML = html;
+            }
+            // On load, show featured project from localStorage
+            let featuredKey = localStorage.getItem('featuredProject') || projects[0].key;
+            renderFeaturedLanding(featuredKey);
+        });
+    </script>
+</body>
+
+</html>
