@@ -1,177 +1,734 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume | Jaishankar Prasad Nirala</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap"
-        rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaishankar Prasad Nirala - Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
-            background: #162238;
-            color: #232946;
+        :root {
+            /* Light theme variables */
+            --bg-light: #f8f9fa;
+            --card-light: #ffffff;
+            --text-light: #232946;
+            --accent-light: #4f46e5;
+            --secondary-light: #7c3aed;
+            --border-light: #e0e7ff;
+            --shadow-light: rgba(44, 62, 80, 0.1);
+            
+            /* Dark theme variables */
+            --bg-dark: #121826;
+            --card-dark: #1e293b;
+            --text-dark: #e9ecef;
+            --accent-dark: #818cf8;
+            --secondary-dark: #a78bfa;
+            --border-dark: #334155;
+            --shadow-dark: rgba(0, 0, 0, 0.3);
+            
+            /* Common variables */
+            --transition: all 0.4s ease;
+            --border-radius: 16px;
+            --spacing: 2rem;
+            --section-spacing: 2.5rem;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: background-color 0.5s ease;
+        }
+
+        body.dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-dark);
         }
 
         .resume-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 2.5rem auto;
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 4px 32px 0 rgba(44, 62, 80, 0.10);
-            padding: 2.5rem 2rem 2rem 2rem;
+            background: var(--card-light);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px var(--shadow-light);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
         }
 
+        .dark-mode .resume-container {
+            background: var(--card-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+        /* Header styling with profile picture */
         .resume-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-bottom: var(--section-spacing);
+            position: relative;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .profile-picture 
+        {
+         width: 100px; /* adjust size */
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f0f0f0; /* fallback bg */
+        }
+        .profile-picture img 
+        {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        }
+
+
+        .dark-mode .resume-header {
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .profile-picture {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--accent-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            position: relative;
+            background: linear-gradient(45deg, #7c3aed, #4f46e5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark-mode .profile-picture {
+            border: 4px solid var(--accent-dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-picture .initials {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            flex-grow: 1;
         }
 
         .resume-header h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin: 0 0 0.3em 0;
-            color: #4f46e5;
+            margin: 0 0 0.5rem 0;
+            color: var(--accent-light);
+            letter-spacing: -0.5px;
         }
 
-        .resume-header .contact-info {
+        .dark-mode .resume-header h1 {
+            color: var(--accent-dark);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 0.8rem;
             font-size: 1.05rem;
-            color: #555;
-            margin-bottom: 0.5em;
+            color: var(--text-light);
         }
 
-        .resume-header .links {
-            font-size: 1rem;
-            color: #7c3aed;
-            margin-bottom: 0.5em;
+        .dark-mode .contact-info {
+            color: var(--text-dark);
         }
 
+        .contact-info i {
+            margin-right: 0.5rem;
+            color: var(--accent-light);
+        }
+
+        .dark-mode .contact-info i {
+            color: var(--accent-dark);
+        }
+
+        .links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--secondary-light);
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .dark-mode .links a {
+            color: var(--secondary-dark);
+            background: rgba(167, 139, 250, 0.1);
+        }
+
+        .links a:hover {
+            transform: translateY(-3px);
+            color: var(--accent-light);
+            background: rgba(79, 70, 229, 0.15);
+        }
+
+        .dark-mode .links a:hover {
+            color: var(--accent-dark);
+            background: rgba(129, 140, 248, 0.2);
+        }
+
+        .links a i {
+            margin-right: 0.5rem;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: var(--accent-light);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+            z-index: 10;
+        }
+
+        .dark-mode .theme-toggle {
+            background: var(--accent-dark);
+            box-shadow: 0 4px 10px rgba(129, 140, 248, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        /* Section styling */
         .resume-section {
-            margin-bottom: 2rem;
+            margin-bottom: var(--section-spacing);
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--accent-light);
+        }
+
+        .dark-mode .resume-section {
+            border-left: 3px solid var(--accent-dark);
         }
 
         .resume-section h2 {
-            font-size: 1.2rem;
-            color: #4f46e5;
-            margin-bottom: 0.7em;
-            border-bottom: 1.5px solid #e0e7ff;
-            padding-bottom: 0.2em;
+            font-size: 1.4rem;
+            color: var(--accent-light);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-light);
             font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .dark-mode .resume-section h2 {
+            color: var(--accent-dark);
+            border-bottom: 2px solid var(--border-dark);
+        }
+
+        .resume-section h2 i {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .resume-section p {
+            margin-bottom: 1rem;
         }
 
         ul {
-            margin: 0.5em 0 0.5em 1.2em;
-            padding: 0;
+            list-style-type: none;
+            margin: 0.8rem 0;
         }
 
         li {
-            margin-bottom: 0.4em;
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
         }
 
-        .project-title {
+        li:before {
+            content: "•";
+            color: var(--accent-light);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .dark-mode li:before {
+            color: var(--accent-dark);
+        }
+
+        .project-title, .job-title, .edu-title {
+            font-weight: 700;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .dark-mode .project-title, 
+        .dark-mode .job-title, 
+        .dark-mode .edu-title {
+            color: var(--text-dark);
+        }
+
+        .date {
+            font-style: italic;
+            color: var(--text-light);
+            opacity: 0.8;
+            font-size: 0.95rem;
+            margin-left: 0.5rem;
+            font-weight: 400;
+        }
+
+        .dark-mode .date {
+            color: var(--text-dark);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--accent-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: #232946;
         }
 
-        .job-title {
-            font-weight: 600;
-            color: #232946;
+        .dark-mode .tech-item {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--accent-dark);
         }
 
-        .edu-title {
-            font-weight: 600;
-            color: #232946;
+        .skill-bars {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
 
-        .cert-list {
-            margin-left: 1.2em;
+        .skill-bar {
+            margin-bottom: 1.2rem;
         }
 
-        @media (max-width: 600px) {
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .skill-progress {
+            height: 8px;
+            background: var(--border-light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dark-mode .skill-progress {
+            background: var(--border-dark);
+        }
+
+        .skill-progress-inner {
+            height: 100%;
+            background: var(--accent-light);
+            border-radius: 4px;
+        }
+
+        .dark-mode .skill-progress-inner {
+            background: var(--accent-dark);
+        }
+
+        /* Animation for skill bars */
+        @keyframes fillProgress {
+            from { width: 0; }
+            to { width: var(--progress); }
+        }
+
+        .skill-progress-inner {
+            animation: fillProgress 1.5s ease-out forwards;
+        }
+
+        /* Footer styling */
+        .resume-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-light);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .dark-mode .resume-footer {
+            border-top: 1px solid var(--border-dark);
+            color: var(--text-dark);
+        }
+
+        /* GitHub ribbon */
+        .github-ribbon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .github-ribbon a {
+            position: absolute;
+            top: 45px;
+            right: -45px;
+            transform: rotate(45deg);
+            width: 200px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            padding: 5px 0;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .github-ribbon a:hover {
+            background: #555;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .resume-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .profile-picture {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .links {
+                justify-content: center;
+            }
+            
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
             .resume-container {
-                padding: 1.2rem 0.5rem;
+                padding: 1.8rem;
+                margin: 1.5rem;
+            }
+            
+            .resume-section {
+                padding-left: 1rem;
+            }
+            
+            .github-ribbon {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .github-ribbon a {
+                top: 35px;
+                right: -35px;
+                width: 170px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .resume-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .skill-bars {
+                grid-template-columns: 1fr;
+            }
+            
+            .github-ribbon {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .github-ribbon a {
+                top: 30px;
+                right: -30px;
+                width: 140px;
+                font-size: 0.7rem;
             }
         }
     </style>
 </head>
-
 <body>
+    <!-- GitHub Ribbon -->
+    <!-- <div class="github-ribbon">
+        <a href="https://github.com/JSPN9400" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+    </div> -->
+    
     <div class="resume-container">
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+        
         <div class="resume-header">
-            <h1>Jaishankar Prasad Nirala</h1>
-            <div class="contact-info">
-                Aurangabad, Bihar &bull; +91-8084310066 &bull; <a
-                    href="mailto:jaishankar.9400@gmail.com">jaishankar.9400@gmail.com</a>
+            <div class="profile-picture">
+                <img src="assets/IMG_20240728_093706662_HDR.png" alt="J">
+                <!-- <div class="initials">J</div> -->
             </div>
-            <div class="links">
-                <a href="https://linkedin.com/in/jaishankar-prasad-nirala-4b94a8170" target="_blank">LinkedIn</a> |
-                <a href="index.html" target="_blank">Portfolio</a>
+            
+            <div class="header-content">
+                <h1>Jaishankar Prasad Nirala</h1>
+                <div class="contact-info">
+                    <div><i class="fas fa-map-marker-alt"></i> Aurangabad, Bihar</div>
+                    <div><i class="fas fa-phone"></i> +91-8084310066</div>
+                    <div><i class="fas fa-envelope"></i> <a href="mailto:jaishankar.9400@gmail.com">jaishankar.9400@gmail.com</a></div>
+                </div>
+                <div class="links">
+                    <a href="https://linkedin.com/in/jaishankar-prasad-nirala-4b94a8170" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="index.html" target="_blank">
+                        <i class="fas fa-briefcase"></i> Portfolio
+                    </a>
+                    <a href="https://github.com/JSPN9400" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
             </div>
         </div>
+        
         <div class="resume-section">
-            <h2>Professional Summary</h2>
-            <p>Aspiring Data Analyst with strong Python knowledge and a background in managing structured data. Skilled
-                in automating reporting tasks and building insightful dashboards using Power BI and Excel. Creator of
-                ABAAS, a smart analysis system for financial data, and currently expanding skills in SQL. Seeking a data
-                analyst role to apply real-world problem-solving skills and advance in the analytics field.</p>
+            <h2><i class="fas fa-user-tie"></i> Professional Summary</h2>
+            <p>Aspiring Data Analyst with strong Python knowledge and a background in managing structured data. Skilled in automating reporting tasks and building insightful dashboards using Power BI and Excel. Creator of ABAAS, a smart analysis system for financial data, and currently expanding skills in SQL. Seeking a data analyst role to apply real-world problem-solving skills and advance in the analytics field.</p>
         </div>
+        
         <div class="resume-section">
-            <h2>Technical Skills</h2>
+            <h2><i class="fas fa-laptop-code"></i> Technical Skills</h2>
+            <div class="skill-bars">
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>Python</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-inner" style="--progress:90%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>Power BI</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-inner" style="--progress:85%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>MS Excel</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-inner" style="--progress:95%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>SQL</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-inner" style="--progress:75%"></div>
+                    </div>
+                </div>
+            </div>
             <ul>
-                <li><b>Languages & Tools:</b> Python, SQL (Learning), Power BI, MS Excel</li>
                 <li><b>Data Handling:</b> Data Cleaning, Data Transformation, Dashboard Development</li>
                 <li><b>Other:</b> Google Analytics, Excel Formulas, Pivot Tables</li>
             </ul>
         </div>
+        
         <div class="resume-section">
-            <h2>Projects</h2>
-            <div class="project-title">ABAAS – AI-Based Accounts Analysis System <span
-                    style="font-weight:400; color:#888;">(Self-Driven | Apr 2025 – Present)</span></div>
+            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+            <div>
+                <span class="project-title">ABAAS – AI-Based Accounts Analysis System</span>
+                <span class="date">(Self-Driven | Apr 2025 – Present)</span>
+                <ul>
+                    <li>Developed a command-line based smart finance assistant that automated 40% of manual bookkeeping.</li>
+                    <li>Integrated GST error detection, automated tax summaries, and categorized 5,000+ transactions using Python and Pandas.</li>
+                    <li>Designed real-time Power BI dashboards to track cash flow, tax dues, and financial KPIs.</li>
+                    <li>Reduced monthly manual effort by 15+ hours and improved reporting accuracy by 30%.</li>
+                </ul>
+                <div class="tech-stack">
+                    <div class="tech-item">Python</div>
+                    <div class="tech-item">Pandas</div>
+                    <div class="tech-item">SQLite</div>
+                    <div class="tech-item">Excel</div>
+                    <div class="tech-item">Power BI</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resume-section">
+            <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            <div>
+                <span class="job-title">Finance Assistant (Data Ops) – PM Modern Academy, Gaya</span>
+                <span class="date">(May 2024 – Apr 2025)</span>
+                <ul>
+                    <li>Managed structured financial data using Excel & CSV logs; reduced manual errors by 20%.</li>
+                    <li>Prepared month-end summaries and automated report generation using basic Python scripts.</li>
+                    <li>Worked with ₹8 to 10 L monthly data for student fees, vendor payments, and expenses.</li>
+                    <li>Gained early exposure to real-world datasets and business KPIs.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="resume-section">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div>
+                <span class="edu-title">Bachelor of Computer Applications (BCA)</span>
+                <div>Ram Lakhan Singh Yadav College, Aurangabad</div>
+                <div>Expected: August 2024</div>
+            </div>
+        </div>
+        
+        <div class="resume-section">
+            <h2><i class="fas fa-certificate"></i> Certifications</h2>
             <ul>
-                <li>Developed a command-line based smart finance assistant that automated 40% of manual bookkeeping.
-                </li>
-                <li>Integrated GST error detection, automated tax summaries, and categorized 5,000+ transactions using
-                    Python and Pandas.</li>
-                <li>Designed real-time Power BI dashboards to track cash flow, tax dues, and financial KPIs.</li>
-                <li>Reduced monthly manual effort by 15+ hours and improved reporting accuracy by 30%.</li>
-                <li><b>Tech Stack:</b> Python, Pandas, SQLite, Excel, Power BI</li>
-            </ul>
-        </div>
-        <div class="resume-section">
-            <h2>Professional Experience</h2>
-            <div class="job-title">Finance Assistant (Data Ops) – PM Modern Academy, Gaya <span
-                    style="font-weight:400; color:#888;">(May 2024 – Apr 2025)</span></div>
-            <ul>
-                <li>Managed structured financial data using Excel & CSV logs; reduced manual errors by 20%.</li>
-                <li>Prepared month-end summaries and automated report generation using basic Python scripts.</li>
-                <li>Worked with ₹8 to 10 L monthly data for student fees, vendor payments, and expenses.</li>
-                <li>Gained early exposure to real-world datasets and business KPIs.</li>
-            </ul>
-        </div>
-        <div class="resume-section">
-            <h2>Education</h2>
-            <div class="edu-title">Bachelor of Computer Applications (BCA)</div>
-            <div>Ram Lakhan Singh Yadav College, Aurangabad</div>
-            <div>Expected: August 2024</div>
-        </div>
-        <div class="resume-section">
-            <h2>Certifications</h2>
-            <ul class="cert-list">
                 <li>Kushal Yuva Program – Bihar Govt (2021)</li>
                 <li>Outreach Training Program – Prashant Advaid Foundation (2025)</li>
             </ul>
         </div>
+        
         <div class="resume-section">
-            <h2>Self-Learning & Growth</h2>
+            <h2><i class="fas fa-seedling"></i> Self-Learning & Growth</h2>
             <ul>
                 <li>Learning Data Analysis using YouTube + ChatGPT-guided study.</li>
                 <li>Practiced real-world data projects including ABAAS without any paid courses.</li>
             </ul>
         </div>
+        
+        <div class="resume-footer">
+            Designed with ❤️ | Last updated: August 2025
+        </div>
     </div>
-</body>
 
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add subtle animation to profile picture
+            const profilePic = document.querySelector('.profile-picture');
+            profilePic.style.transform = 'scale(0.95)';
+            profilePic.style.opacity = '0';
+            
+            setTimeout(() => {
+                profilePic.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+                profilePic.style.transform = 'scale(1)';
+                profilePic.style.opacity = '1';
+            }, 300);
+            
+            // Add animations to sections
+            const sections = document.querySelectorAll('.resume-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+                    section.style.transform = 'translateY(0)';
+                    section.style.opacity = '1';
+                }, 500 + (index * 150));
+            });
+        });
+    </script>
+</body>
 </html>
