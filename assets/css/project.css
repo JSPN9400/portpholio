@@ -1,0 +1,99 @@
+:root {
+  --bg: #ffffff;
+  --text: #222222;
+  --card-bg: #f9f9f9;
+  --accent: #0077ff;
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #f1f1f1;
+  --card-bg: #1f1f1f;
+  --accent: #4dabf7;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--card-bg);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.navbar a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+}
+.navbar a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+#theme-toggle {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* Projects Section */
+.projects-section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.projects-section h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: gray;
+}
+
+/* Project Cards */
+.projects-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.project-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+}
+.project-card h3 {
+  margin: 0 0 0.5rem;
+}
+.project-links a {
+  margin-right: 1rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.project-links a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--card-bg);
+  margin-top: 2rem;
+}

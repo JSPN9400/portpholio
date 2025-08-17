@@ -1,466 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projects | Jaishankar Prasad Nirala</title>
-    <meta name="description" content="Projects by Jaishankar Prasad Nirala, Data Analyst & Automation Specialist." />
-    <meta name="author" content="Jaishankar Prasad Nirala" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --color-bg: #f7f8fa;
-            --color-bg-alt: #fff;
-            --color-text: #22223b;
-            --color-accent: #4f46e5;
-            --color-accent2: #7c3aed;
-            --color-accent3: #e0e7ff;
-            --color-card: #fff;
-            --color-shadow: rgba(44, 62, 80, 0.04);
-            --color-border: #e0e7ff;
-        }
-
-        [data-theme="dark"] {
-            --color-bg: #181c2f;
-            --color-bg-alt: #232946;
-            --color-text: #f7f8fa;
-            --color-accent: #a5b4fc;
-            --color-accent2: #7f9cf5;
-            --color-accent3: #232946;
-            --color-card: #232946;
-            --color-shadow: rgba(44, 62, 80, 0.18);
-            --color-border: #353a5a;
-        }
-
-        body {
-            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
-            color: var(--color-text);
-            background: var(--color-bg);
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2.5rem;
-            backdrop-filter: blur(0.5px);
-        }
-
-        .site-header {
-            background: var(--color-bg-alt);
-            box-shadow: 0 2px 16px 0 var(--color-shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(8px);
-            border-bottom: 1.5px solid var(--color-border);
-            transition: background 0.4s, box-shadow 0.4s, border-color 0.4s;
-        }
-
-        .theme-toggle-btn {
-            background: var(--color-accent3);
-            border: none;
-            border-radius: 8px;
-            padding: 0.4em 0.8em;
-            font-size: 1.1rem;
-            cursor: pointer;
-            color: var(--color-accent2);
-            margin-left: 1.2rem;
-            transition: background 0.2s, color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.4em;
-        }
-
-        .theme-toggle-btn:hover {
-            background: var(--color-accent2);
-            color: #fff;
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-
-        .logo-initials {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.7rem;
-            color: #fff;
-            letter-spacing: 2px;
-            border: 2.5px solid #7f9cf5;
-            border-radius: 12px;
-            padding: 0.2em 0.6em;
-            margin-right: 0.5em;
-            background: linear-gradient(120deg, #232946 60%, #181c2f 100%);
-            box-shadow: 0 2px 16px 0 rgba(44, 62, 80, 0.18);
-            transition: box-shadow 0.2s, border-color 0.2s;
-        }
-
-        .logo-initials:hover {
-            box-shadow: 0 4px 24px 0 rgba(44, 62, 80, 0.25);
-            border-color: #a5b4fc;
-        }
-
-        .site-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--color-text);
-            letter-spacing: 1px;
-            text-shadow: 0 2px 8px #23294644;
-        }
-
-        .main-nav {
-            display: flex;
-            gap: 1.2rem;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            color: var(--color-text);
-            padding: 0.3em 0.7em;
-            border-radius: 8px;
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-        }
-
-        .nav-link.active,
-        .nav-link:hover,
-        .nav-link:focus {
-            background: var(--color-accent3);
-            color: var(--color-accent);
-            box-shadow: 0 2px 8px 0 var(--color-shadow);
-        }
-
-        .section-title {
-            font-size: 2.1rem;
-            font-weight: 700;
-            color: var(--color-accent2);
-            margin-bottom: 2.2rem;
-            text-align: center;
-            letter-spacing: 1.2px;
-            text-shadow: 0 2px 8px #23294644;
-            transition: color 0.3s;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.2rem;
-        }
-
-        .project-card {
-            background: var(--color-card);
-            border-radius: 14px;
-            box-shadow: 0 2px 16px 0 var(--color-shadow);
-            padding: 1.2rem 1rem 1rem 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-            align-items: flex-start;
-            transition: box-shadow 0.2s, transform 0.2s;
-            border: 1.5px solid var(--color-border);
-        }
-
-        .project-card:hover {
-            box-shadow: 0 6px 32px 0 #7f9cf544;
-            transform: translateY(-4px) scale(1.03);
-        }
-
-        .project-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--color-accent2);
-            margin-bottom: 0.2em;
-        }
-
-        .project-desc {
-            color: var(--color-text);
-            font-size: 1rem;
-            margin-bottom: 0.2em;
-            opacity: 0.92;
-        }
-
-        .project-link {
-            color: var(--color-accent);
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.2s;
-            text-decoration: none;
-        }
-
-        .project-link:hover,
-        .project-link:focus {
-            color: var(--color-accent2);
-        }
-
-        .site-footer {
-            background: var(--color-bg-alt);
-            color: var(--color-text);
-            text-align: center;
-            padding: 1.2rem 0 1.1rem 0;
-            font-size: 1rem;
-            border-top: 1.5px solid var(--color-border);
-            margin-top: 2rem;
-            backdrop-filter: blur(8px);
-            transition: background 0.4s, color 0.4s, border-color 0.4s;
-        }
-
-        .footer-contact {
-            opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            transition: opacity 0.8s cubic-bezier(.4, 2, .6, 1), transform 0.8s cubic-bezier(.4, 2, .6, 1);
-            background: var(--color-card);
-            border-radius: 16px;
-            box-shadow: 0 2px 16px 0 var(--color-shadow);
-            border: 1.5px solid var(--color-border);
-            padding: 2rem 1.5rem 1.2rem 1.5rem;
-            max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 2.2rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .footer-contact.visible {
-            opacity: 1;
-            transform: none;
-        }
-
-        .footer-title {
-            font-size: 1.3rem;
-            color: var(--color-accent2);
-            margin-bottom: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .footer-socials {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.1rem;
-        }
-
-        .footer-social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--color-accent3);
-            box-shadow: 0 2px 12px 0 var(--color-shadow);
-            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-            font-size: 1.3rem;
-        }
-
-        .footer-social-link:hover,
-        .footer-social-link:focus {
-            background: var(--color-accent2);
-            box-shadow: 0 4px 24px 0 var(--color-shadow);
-            transform: translateY(-3px) scale(1.08);
-        }
-
-        .footer-social-link .icon {
-            width: 1.5em;
-            height: 1.5em;
-        }
-
-        .footer-contact-info {
-            color: #555;
-            font-size: 1.05rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-about {
-            margin-top: 2.2rem;
-            color: #888;
-            font-size: 1rem;
-            text-align: center;
-            background: var(--color-bg-alt);
-            border-radius: 10px;
-            padding: 1.1rem 1.2rem 0.7rem 1.2rem;
-            box-shadow: 0 2px 12px 0 var(--color-shadow);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        @media (max-width: 700px) {
-            .container {
-                padding: 0 0.7rem;
-            }
-
-            .main-nav {
-                gap: 0.7rem;
-            }
-
-            .section-title {
-                font-size: 1.1rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects</title>
+  <link rel="stylesheet" href="assets/css/project.css">
+  <script src="assets/js/project.js" defer></script>
 </head>
-
 <body>
-    <header class="site-header">
-        <div class="container nav-container">
-            <div class="logo-area">
-                <span class="logo-initials">J.S.P.N.</span>
-                <span class="site-title">Jaishankar Prasad Nirala</span>
-            </div>
-            <nav class="main-nav" aria-label="Main navigation">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="projects.html" class="nav-link active">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
-            <button class="theme-toggle-btn" id="theme-toggle" title="Toggle dark/light mode"
-                aria-label="Toggle dark/light mode">
-                <span id="theme-icon" aria-hidden="true">🌙</span>
-            </button>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3 class="project-title">ABAAS – AI-Based Accounts Analysis System</h3>
-                    <p class="project-desc">Automated bookkeeping, GST error detection, and dashboarding for finance
-                        teams. Built with Python, Pandas, and Power BI.</p>
-                    <a href="https://github.com/JSPN9400" target="_blank" class="project-link">View on
-                        GitHub</a>
-                </div>
-                <div class="project-card">
-                    <h3 class="project-title">Sales Dashboard</h3>
-                    <p class="project-desc">Interactive dashboard for sales analytics and KPI tracking, built for
-                        business insights.</p>
-                    <a href="https://github.com/JSPN9400" target="_blank" class="project-link">View on GitHub</a>
-                </div>
-                <div class="project-card">
-                    <h3 class="project-title">Data Cleaning Toolkit</h3>
-                    <p class="project-desc">Python toolkit for automating data cleaning and preprocessing tasks for
-                        analytics projects.</p>
-                    <a href="https://github.com/JSPN9400" target="_blank" class="project-link">View on GitHub</a>
-                </div>
-                <div class="project-card">
-                    <h3 class="project-title">Pratima – Fashion Brand Dashboard</h3>
-                    <p class="project-desc">Created a business intelligence dashboard for inventory, orders, and
-                        analytics using pandas, openpyxl, and Excel.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-contact" id="contact">
-                <h2 class="footer-title">Contact</h2>
-                <div class="footer-socials">
-                    <a href="mailto:nirla9400@gmail.com" aria-label="Email" class="footer-social-link" title="Email">
-                        <img class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gmail.svg"
-                            alt="Email" />
-                    </a>
-                    <a href="https://github.com/jaishankar9400" target="_blank" aria-label="GitHub"
-                        class="footer-social-link" title="GitHub">
-                        <img class="icon"
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                            alt="GitHub" />
-                    </a>
-                    <a href="https://www.linkedin.com/in/jaishankar-prasad-nirala-440a44243/" target="_blank"
-                        aria-label="LinkedIn" class="footer-social-link" title="LinkedIn">
-                        <img class="icon"
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
-                            alt="LinkedIn" />
-                    </a>
-                    <a href="https://www.instagram.com/jaisankar9400/" target="_blank" aria-label="Instagram"
-                        class="footer-social-link" title="Instagram">
-                        <svg class="icon" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="24" height="24" rx="6" fill="#fff" />
-                            <path d="M12 7.2A4.8 4.8 0 1 0 12 16.8A4.8 4.8 0 1 0 12 7.2Z" stroke="#E4405F"
-                                stroke-width="1.5" />
-                            <circle cx="18.2" cy="5.8" r="1.2" fill="#E4405F" />
-                            <rect x="3.5" y="3.5" width="17" height="17" rx="5.5" stroke="#E4405F" stroke-width="1.5" />
-                        </svg>
-                    </a>
-                    <a href="https://wa.me/+918084310066" target="_blank" aria-label="WhatsApp"
-                        class="footer-social-link" title="WhatsApp">
-                        <svg class="icon" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="24" height="24" rx="6" fill="#fff" />
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.09-1.33A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.61 0-3.13-.39-4.45-1.08l-.32-.17-3.02.79.8-2.95-.2-.33A7.96 7.96 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.29-5.1c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.51.12-.15.23-.58.75-.71.9-.13.15-.26.17-.49.06-.23-.12-.97-.36-1.85-1.13-.68-.6-1.14-1.34-1.28-1.57-.13-.23-.01-.35.1-.47.1-.1.23-.26.34-.39.11-.13.15-.23.23-.38.08-.15.04-.28-.02-.4-.06-.12-.51-1.23-.7-1.68-.18-.44-.37-.38-.51-.39-.13-.01-.28-.01-.43-.01-.15 0-.4.06-.61.28-.21.22-.8.78-.8 1.9 0 1.12.82 2.2.94 2.36.12.16 1.61 2.46 3.91 3.35.55.19.98.3 1.31.38.55.14 1.05.12 1.45.07.44-.06 1.36-.56 1.55-1.1.19-.54.19-1 .13-1.1-.06-.1-.21-.16-.44-.28z"
-                                fill="#25D366" />
-                        </svg>
-                    </a>
-                </div>
-                <div class="footer-contact-info" style="color:#555; font-size:1.05rem; margin-bottom:0.5rem;">
-                </div>
-            </div>
-            <div class="footer-about">
-                <strong>About this website:</strong> This is a modern, animated portfolio for Jaishankar Prasad Nirala,
-                built with HTML, CSS, and a touch of JavaScript. It features a dynamic hero, book-style About Me,
-                animated skills, and a modern contact section. <br>
-                <span style="color:#aaa; font-size:0.98em;">Last updated: July 26, 2025</span>
-            </div>
-            <p style="margin-top:1.2rem; color:#888; font-size:1rem;">&copy; 2025 Jaishankar Prasad Nirala. All rights
-                reserved.</p>
-        </div>
-    </footer>
-    <script>
-        // Animate footer contact section on scroll
-        document.addEventListener('DOMContentLoaded', function () {
-            function revealFooterContact() {
-                var footerContact = document.querySelector('.footer-contact');
-                if (!footerContact) return;
-                var rect = footerContact.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 60) {
-                    footerContact.classList.add('visible');
-                    window.removeEventListener('scroll', revealFooterContact);
-                }
-            }
-            window.addEventListener('scroll', revealFooterContact);
-            revealFooterContact();
+  <!-- Navbar -->
+  <header class="navbar">
+    <h1 class="logo">My Portfolio</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="index.html#contact">Contact</a>
 
-            // Theme toggle logic
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = document.getElementById('theme-icon');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            function setTheme(theme) {
-                document.documentElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                themeIcon.textContent = theme === 'dark' ? '🌞' : '🌙';
-            }
-            // On load, set theme from localStorage or system
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else if (prefersDark) {
-                setTheme('dark');
-            } else {
-                setTheme('light');
-            }
-            themeToggle.addEventListener('click', function () {
-                const current = document.documentElement.getAttribute('data-theme');
-                setTheme(current === 'dark' ? 'light' : 'dark');
-            });
-        });
-    </script>
+    </nav>
+    <button id="theme-toggle">🌙</button>
+  </header>
+
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <h2>🚀 My Projects</h2>
+    <p class="subtitle">Here are some of the works I’ve done with code, data & AI.</p>
+
+    <div class="projects-grid">
+      <!-- Example Project 1 -->
+      <div class="project-card">
+        <h3>🔹 Personal AI Assistant (Shikha)</h3>
+        <p>A voice + GUI based Windows assistant built with Ollama R1, TTS, and automation features.</p>
+        <div class="project-links">
+          <a href="https://github.com/yourgithub/shikha" target="_blank">GitHub</a>
+          <a href="https://yourliveurl.com/shikha" target="_blank">Live Demo</a>
+        </div>
+      </div>
+
+      <!-- Example Project 2 -->
+      <div class="project-card">
+        <h3>🔹 NLP for Sanskrit Texts</h3>
+        <p>An NLP system based on Paninian grammar to interpret Vedic Sanskrit texts accurately.</p>
+        <div class="project-links">
+          <a href="https://github.com/yourgithub/sanskrit-nlp" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <!-- Example Project 3 -->
+      <div class="project-card">
+        <h3>🔹 ABAAS (AI Based Account Analysis System)</h3>
+        <p>A financial analysis tool that integrates Vyapar + Google Sheets to track and analyze business accounts.</p>
+        <div class="project-links">
+          <a href="https://github.com/yourgithub/abaas" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Jaishankar Prasad Nirala | Built with ❤️</p>
+  </footer>
 </body>
-
 </html>
