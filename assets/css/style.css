@@ -865,4 +865,39 @@
                 font-size: 2rem;
             }
         }
-    
+.hero-large-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image style */
+.profile-pic {
+  width: 300px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;  /* minimal rounded corners */
+  border: 3px ; /* border ko change karenge color ke hisab se */
+  transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+/* Desktop par thoda bada */
+@media (min-width: 1024px) {
+  .profile-pic {
+    width: 360px;
+    height: 320px;
+  }
+}
+
+/* Minimal hover animation */
+.profile-pic:hover {
+  transform: scale(1.02);
+}
+.profile-pic.hero-large-pic {
+  width: 300px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px; /* minimal rounded corners */
+  border: 3px solid #7572b1; /* border color */
+  transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
