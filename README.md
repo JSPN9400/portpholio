@@ -87,3 +87,4 @@ Crafting meaningful solutions with code and creativity.
 ---
 
 Thank you for visiting my portfolio! 🌟
+python -c "import lxml; print('lxml OK')"
