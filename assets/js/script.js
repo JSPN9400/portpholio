@@ -1,4 +1,3 @@
-
         // Theme toggle logic
         function setTheme(mode) {
             if (mode === 'dark') {
@@ -43,12 +42,12 @@
             updateThemeIcon();
         
 
-                // Animate fade-in for main content sections on scroll
+                // Animate fade-in for main content sections on scroll with enhanced easing
                 document.addEventListener('DOMContentLoaded', function () {
                     function revealSections() {
                         document.querySelectorAll('.fadein-section').forEach(function (section) {
                             var rect = section.getBoundingClientRect();
-                            if (rect.top < window.innerHeight - 60) {
+                            if (rect.top < window.innerHeight - 100) {
                                 section.classList.add('visible');
                             }
                         });
@@ -58,16 +57,30 @@
                 });
             
 
-                // Animate about book cards in sequence (more elegant, staggered, and 3D)
+                // Animate about book cards in sequence with improved timing
                 document.addEventListener('DOMContentLoaded', function () {
                     document.querySelectorAll('.about-book-card').forEach(function (card, i) {
                         setTimeout(function () {
                             card.classList.add('visible');
-                            card.style.transitionTimingFunction = 'cubic-bezier(.7,1.7,.5,1)';
-                        }, 250 + i * 240);
+                            card.style.transitionTimingFunction = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+                        }, 200 + i * 180);
                     });
                 });
             
+
+        // Animate hero elements on load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Reveal hero elements
+            document.querySelectorAll('.hero-animate').forEach(function (el) {
+                el.classList.add('visible');
+            });
+
+            // Reveal fade-in photo
+            const photoElement = document.querySelector('.fadein-photo');
+            if (photoElement) {
+                photoElement.classList.add('visible');
+            }
+        });
 
         // Animate footer contact section on scroll
         document.addEventListener('DOMContentLoaded', function () {

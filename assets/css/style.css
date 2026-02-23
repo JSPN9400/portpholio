@@ -57,33 +57,35 @@
         }
 
         :root {
-            --color-bg: #f7f8fa;
-            --color-bg-alt: #fff;
-            --color-text: #22223b;
-            --color-accent: #4f46e5;
-            --color-accent2: #7c3aed;
-            --color-accent3: #e0e7ff;
-            --color-card: #fff;
-            --color-shadow: rgba(44, 62, 80, 0.04);
-            --color-border: #e0e7ff;
-            --color-btn: #4f46e5;
-            --color-btn-hover: #7c3aed;
+            --color-bg: #fafbfc;
+            --color-bg-alt: #ffffff;
+            --color-text: #2c2c2c;
+            --color-text-light: #666666;
+            --color-accent: #5b8fb8;
+            --color-accent2: #8ba5c4;
+            --color-accent3: #f0f4f8;
+            --color-card: #ffffff;
+            --color-shadow: rgba(0, 0, 0, 0.08);
+            --color-border: #e8ecf1;
+            --color-btn: #5b8fb8;
+            --color-btn-hover: #4a7096;
             --color-btn-text: #fff;
         }
 
         html.dark {
-            --color-bg: linear-gradient(120deg, #181c2f 0%, #232946 100%);
-            --color-bg-alt: rgba(24, 28, 47, 0.85);
-            --color-text: #f3f4f6;
-            --color-accent: #7f9cf5;
-            --color-accent2: #a5b4fc;
-            --color-accent3: #232946;
-            --color-card: rgba(36, 40, 62, 0.7);
-            --color-shadow: #23294633;
-            --color-border: #232946;
-            --color-btn: linear-gradient(90deg, #7f9cf5 0%, #a5b4fc 100%);
-            --color-btn-hover: linear-gradient(90deg, #a5b4fc 0%, #7f9cf5 100%);
-            --color-btn-text: #181c2f;
+            --color-bg: #1a1a1a;
+            --color-bg-alt: #252525;
+            --color-text: #e8e8e8;
+            --color-text-light: #b0b0b0;
+            --color-accent: #7ba3c0;
+            --color-accent2: #9ab3d0;
+            --color-accent3: #333333;
+            --color-card: #2d2d2d;
+            --color-shadow: rgba(0, 0, 0, 0.3);
+            --color-border: #3a3a3a;
+            --color-btn: #7ba3c0;
+            --color-btn-hover: #6a92ac;
+            --color-btn-text: #1a1a1a;
         }
 
         html {
@@ -140,8 +142,8 @@
             position: fixed;
             z-index: -1;
             border-radius: 50%;
-            filter: blur(32px);
-            opacity: 0.18;
+            filter: blur(64px);
+            opacity: 0.05;
             pointer-events: none;
             animation: floatShape 16s ease-in-out infinite alternate;
         }
@@ -151,7 +153,7 @@
             height: 420px;
             top: 5vh;
             left: 8vw;
-            background: linear-gradient(120deg, #7f9cf5 0%, #a5b4fc 100%);
+            background: #5b8fb8;
             animation-delay: 0s;
         }
 
@@ -160,7 +162,7 @@
             height: 320px;
             bottom: 8vh;
             right: 10vw;
-            background: linear-gradient(120deg, #a5b4fc 0%, #7f9cf5 100%);
+            background: #8ba5c4;
             animation-delay: 4s;
         }
 
@@ -194,12 +196,11 @@
 
         .site-header {
             background: var(--color-bg-alt);
-            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            box-shadow: 0 2px 8px 0 var(--color-shadow);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(8px);
-            border-bottom: 1.5px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
             transition: background 0.4s, box-shadow 0.4s, border-color 0.4s;
         }
 
@@ -222,18 +223,18 @@
             font-size: 1.7rem;
             color: #fff;
             letter-spacing: 2px;
-            border: 2.5px solid #7f9cf5;
+            border: 2.5px solid var(--color-accent);
             border-radius: 12px;
             padding: 0.2em 0.6em;
             margin-right: 0.5em;
-            background: linear-gradient(120deg, #232946 60%, #181c2f 100%);
-            box-shadow: 0 2px 16px 0 rgba(44, 62, 80, 0.18);
+            background: linear-gradient(120deg, var(--color-accent) 60%, var(--color-accent2) 100%);
+            box-shadow: 0 2px 8px 0 rgba(91, 143, 184, 0.15);
             transition: box-shadow 0.2s, border-color 0.2s;
         }
 
         .logo-initials:hover {
-            box-shadow: 0 4px 24px 0 rgba(44, 62, 80, 0.25);
-            border-color: #a5b4fc;
+            box-shadow: 0 4px 12px 0 rgba(91, 143, 184, 0.2);
+            border-color: var(--color-accent2);
         }
 
         .site-title {
@@ -269,8 +270,8 @@
             background: var(--color-bg-alt);
             padding: 4.5rem 0 4.5rem 0;
             text-align: center;
-            border-radius: 0 0 48px 48px;
-            box-shadow: 0 8px 48px 0 var(--color-shadow);
+            border-radius: 0 0 0 0;
+            box-shadow: 0 2px 8px 0 var(--color-shadow);
             margin-bottom: 2.5rem;
             transition: background 0.5s, box-shadow 0.5s;
         }
@@ -341,11 +342,11 @@
         .section-title {
             font-size: 2.1rem;
             font-weight: 700;
-            color: var(--color-accent2);
+            color: var(--color-text);
             margin-bottom: 2.2rem;
             text-align: center;
             letter-spacing: 1.2px;
-            text-shadow: 0 2px 8px #23294644;
+            text-shadow: none;
             transition: color 0.3s;
         }
 
@@ -358,13 +359,19 @@
         .skill-card {
             background: var(--color-card);
             border-radius: 14px;
-            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            box-shadow: 0 2px 12px 0 var(--color-shadow);
             padding: 1.1rem 1rem 0.9rem 1rem;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             align-items: flex-start;
-            border: 1.5px solid var(--color-border);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            box-shadow: 0 4px 16px 0 var(--color-shadow);
+            transform: translateY(-2px);
         }
 
         .skill-name {
@@ -373,6 +380,7 @@
             display: flex;
             align-items: center;
             gap: 0.5em;
+            font-size: 0.95rem;
         }
 
         .icon {
@@ -392,7 +400,7 @@
 
         .skill-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--color-accent) 60%, var(--color-accent2) 100%);
+            background: var(--color-accent);
             border-radius: 4px;
             transition: width 1s cubic-bezier(.4, 2, .6, 1);
         }
@@ -406,33 +414,34 @@
         .project-card {
             background: var(--color-card);
             border-radius: 14px;
-            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            box-shadow: 0 2px 12px 0 var(--color-shadow);
             padding: 1.2rem 1rem 1rem 1rem;
             display: flex;
             flex-direction: column;
             gap: 0.7rem;
             align-items: flex-start;
-            transition: box-shadow 0.2s, transform 0.2s;
-            border: 1.5px solid var(--color-border);
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-border);
         }
 
         .project-card:hover {
-            box-shadow: 0 6px 32px 0 #7f9cf544;
-            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 4px 16px 0 var(--color-shadow);
+            transform: translateY(-4px);
         }
 
         .project-title {
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--color-accent2);
+            color: var(--color-accent);
             margin-bottom: 0.2em;
         }
 
         .project-desc {
-            color: var(--color-text);
+            color: var(--color-text-light);
             font-size: 1rem;
             margin-bottom: 0.2em;
             opacity: 0.92;
+            line-height: 1.5;
         }
 
         .project-link {
@@ -634,23 +643,21 @@
         .about-book-card {
             background: var(--color-card);
             border-radius: 12px;
-            box-shadow: 0 2px 16px 0 var(--color-shadow);
+            box-shadow: 0 2px 12px 0 var(--color-shadow);
             padding: 1.2rem 1.1rem;
             min-width: 220px;
             max-width: 320px;
             flex: 1 1 220px;
             opacity: 0;
-            transform: perspective(600px) rotateY(60deg) scale(0.96) translateY(40px);
-            box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.10);
-            transition: opacity 0.7s cubic-bezier(.4, 2, .6, 1),
-                transform 0.7s cubic-bezier(.4, 2, .6, 1),
-                box-shadow 0.7s cubic-bezier(.4, 2, .6, 1);
+            transform: translateY(20px);
+            border: 1px solid var(--color-border);
+            transition: all 0.6s cubic-bezier(.4, 2, .6, 1);
         }
 
         .about-book-card p {
             margin: 0;
             color: var(--color-text);
-            font-size: 1.05rem;
+            font-size: 1rem;
             line-height: 1.6;
         }
 
@@ -661,8 +668,13 @@
 
         .book-animate.visible {
             opacity: 1;
-            transform: perspective(600px) rotateY(0deg) scale(1) translateY(0);
-            box-shadow: 0 4px 24px 0 rgba(44, 62, 80, 0.18);
+            transform: translateY(0);
+            box-shadow: 0 2px 12px 0 var(--color-shadow);
+        }
+
+        .book-animate.visible:hover {
+            box-shadow: 0 4px 16px 0 var(--color-shadow);
+            transform: translateY(-4px);
         }
 
         .book-delay-1 {
@@ -853,10 +865,10 @@
         .hero-title {
             font-size: 2.8rem;
             font-weight: 800;
-            color: var(--color-accent2);
+            color: var(--color-text);
             margin-bottom: 0.7rem;
             letter-spacing: 1.2px;
-            text-shadow: 0 2px 8px #23294644;
+            text-shadow: none;
             transition: color 0.3s, font-size 0.3s;
         }
 
@@ -900,4 +912,102 @@
   border-radius: 10px; /* minimal rounded corners */
   border: 3px solid #7572b1; /* border color */
   transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+/* Tech Badges in Hero */
+.hero-tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: 1.5rem 0 2rem 0;
+}
+
+.tech-badge {
+    background: rgba(79, 70, 229, 0.12);
+    backdrop-filter: blur(10px);
+    color: var(--color-accent);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(79, 70, 229, 0.25);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+}
+
+html.dark .tech-badge {
+    background: rgba(127, 156, 245, 0.12);
+    color: var(--color-accent);
+    border: 1px solid rgba(127, 156, 245, 0.25);
+    box-shadow: 0 4px 12px rgba(127, 156, 245, 0.15);
+}
+
+.tech-badge:hover {
+    background: rgba(79, 70, 229, 0.2);
+    border-color: rgba(79, 70, 229, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.2);
+}
+
+html.dark .tech-badge:hover {
+    background: rgba(127, 156, 245, 0.18);
+    border-color: rgba(127, 156, 245, 0.5);
+    box-shadow: 0 6px 16px rgba(127, 156, 245, 0.25);
+}
+
+/* Enhance hero section with glassmorphism */
+.hero {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+html.dark .hero {
+    background: rgba(36, 40, 62, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(127, 156, 245, 0.15);
+}
+
+/* Enhanced header glassmorphism */
+.site-header {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+html.dark .site-header {
+    background: rgba(24, 28, 47, 0.5);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(127, 156, 245, 0.1);
+}
+
+/* Soft shadows enhancement */
+.project-card,
+.skill-card,
+.about-book-card {
+    box-shadow: 0 8px 32px 0 rgba(79, 70, 229, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.dark .project-card,
+html.dark .skill-card,
+html.dark .about-book-card {
+    box-shadow: 0 8px 32px 0 rgba(127, 156, 245, 0.1);
+}
+
+.project-card:hover,
+.skill-card:hover {
+    box-shadow: 0 12px 48px 0 rgba(79, 70, 229, 0.15);
+    transform: translateY(-6px);
+}
+
+html.dark .project-card:hover,
+html.dark .skill-card:hover {
+    box-shadow: 0 12px 48px 0 rgba(127, 156, 245, 0.2);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition-property: background-color, border-color, box-shadow, transform, color;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }

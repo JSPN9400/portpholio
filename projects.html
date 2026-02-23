@@ -3,62 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Projects</title>
+  <title>Projects | Jaishankar Prasad Nirala</title>
   <link rel="stylesheet" href="assets/css/project.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <script src="assets/js/project.js" defer></script>
 </head>
 <body>
   <!-- Navbar -->
   <header class="navbar">
-    <h1 class="logo">My Portfolio</h1>
-    <nav>
+    <div class="logo-area">
+      <span class="logo-initials">J.S.P.N.</span>
+      <span class="site-title">Projects</span>
+    </div>
+    <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="projects.html" class="active">Projects</a>
       <a href="index.html#contact">Contact</a>
-
     </nav>
-    <button id="theme-toggle">🌙</button>
+    <button id="theme-toggle" class="theme-btn">🌙</button>
   </header>
 
   <!-- Projects Section -->
   <section class="projects-section">
-    <h2>🚀 My Projects</h2>
-    <p class="subtitle">Here are some of the works I’ve done with code, data & AI.</p>
+    <h2 class="section-heading">Featured Projects</h2>
+    <p class="section-subtitle">Building scalable backend systems, intelligent automations, and data-driven solutions.</p>
 
     <div class="projects-grid">
-      <!-- Example Project 1 -->
-      <div class="project-card">
-        <h3>🔹 Personal AI Assistant (Shikha)</h3>
-        <p>A voice + GUI based Windows assistant built with Ollama R1, TTS, and automation features.</p>
+      <!-- Featured Project -->
+      <div class="project-card featured">
+        <div class="featured-badge">Featured</div>
+        <h3 class="project-title">School Management System (FastAPI ERP Backend)</h3>
+        <p class="project-description">A comprehensive backend system for managing school operations including student records, fee management, attendance tracking, and automated report generation using FastAPI and SQL databases.</p>
+        <div class="project-tech">
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">SQL</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">Automation</span>
+        </div>
         <div class="project-links">
-          <a href="https://github.com/yourgithub/shikha" target="_blank">GitHub</a>
-          <a href="https://yourliveurl.com/shikha" target="_blank">Live Demo</a>
+          <a href="https://github.com/JSPN9400" target="_blank" class="project-link">View Code</a>
+          <a href="https://github.com/JSPN9400" target="_blank" class="project-link">Documentation</a>
         </div>
       </div>
 
-      <!-- Example Project 2 -->
+      <!-- Project 1 -->
       <div class="project-card">
-        <h3>🔹 NLP for Sanskrit Texts</h3>
-        <p>An NLP system based on Paninian grammar to interpret Vedic Sanskrit texts accurately.</p>
+        <h3 class="project-title">Personal AI Assistant (Shikha)</h3>
+        <p class="project-description">A voice and GUI-based Windows desktop assistant featuring advanced AI, TTS, and intelligent automation capabilities.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Ollama R1</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">TTS/STT</span>
+          <span class="tech-tag">Automation</span>
+        </div>
         <div class="project-links">
-          <a href="https://github.com/yourgithub/sanskrit-nlp" target="_blank">GitHub</a>
+          <a href="https://github.com/JSPN9400/shikha" target="_blank" class="project-link">View Code</a>
+          <a href="https://github.com/JSPN9400/shikha" target="_blank" class="project-link">Live Demo</a>
         </div>
       </div>
 
-      <!-- Example Project 3 -->
+      <!-- Project 2 -->
       <div class="project-card">
-        <h3>🔹 ABAAS (AI Based Account Analysis System)</h3>
-        <p>A financial analysis tool that integrates Vyapar + Google Sheets to track and analyze business accounts.</p>
+        <h3 class="project-title">NLP for Sanskrit Texts</h3>
+        <p class="project-description">An advanced NLP system based on Paninian grammar to interpret and analyze ancient Vedic Sanskrit texts with linguistic accuracy.</p>
+        <div class="project-tech">
+          <span class="tech-tag">NLP</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Linguistics</span>
+          <span class="tech-tag">NLTK</span>
+        </div>
         <div class="project-links">
-          <a href="https://github.com/yourgithub/abaas" target="_blank">GitHub</a>
+          <a href="https://github.com/JSPN9400/sanskrit-nlp" target="_blank" class="project-link">View Code</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <h3 class="project-title">ABAAS (AI Based Account Analysis System)</h3>
+        <p class="project-description">An intelligent financial analysis platform integrating Vyapar and Google Sheets for comprehensive business account tracking and analytics.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">Finance</span>
+          <span class="tech-tag">Automation</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/JSPN9400/abaas" target="_blank" class="project-link">View Code</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
-    <p>© 2025 Jaishankar Prasad Nirala | Built with ❤️</p>
+  <footer class="footer">
+    <p>© 2025 Jaishankar Prasad Nirala | Built with <span class="heart">❤️</span></p>
+    <p class="footer-social">
+      <a href="https://github.com/JSPN9400" target="_blank">GitHub</a> • 
+      <a href="https://linkedin.com/in/jaishankar-prasad-nirala-440a44243" target="_blank">LinkedIn</a> • 
+      <a href="mailto:nirla9400@gmail.com">Email</a>
+    </p>
   </footer>
 </body>
 </html>
