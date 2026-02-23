@@ -9,9 +9,9 @@ Built with plain **HTML**, **CSS**, and **JavaScript**.
 ### Home page
 - Hero section with professional positioning and CTA buttons
 - About section
-- Skills section with animated cards and progress bars
-- KPI section with counters
-- Contact form UI with validation states
+- Skills section with impact-focused cards
+- Contact section with direct professional links (Email, LinkedIn, Instagram, GitHub)
+- Resume quick actions: View Resume and Download Resume buttons
 
 ### Navigation
 - Sticky navbar
@@ -28,14 +28,13 @@ Built with plain **HTML**, **CSS**, and **JavaScript**.
 ### Extra pages
 - `projects.html` for project showcase
 - `writing.html` for articles/poems
-- `resume.html` for resume view
+- `resume.html` for in-browser resume view + direct PDF download
 - `admin.html` for local content management
 
 ## Important Notes
 
-- Contact form currently uses Formspree endpoint placeholder in `index.html`:
-  - `https://formspree.io/f/YOUR_FORM_ID`
-- Replace `YOUR_FORM_ID` with your real Formspree form id to accept submissions.
+- Contact is intentionally kept simple with direct links for faster recruiter response.
+- Resume file path used by the site: `assets/others/resume.pdf`
 
 ## Project Structure
 
@@ -91,6 +90,6 @@ portpholio/
 **Jaishankar Prasad Nirala**  
 Data Analyst
 
-- Email: `nirla9400@gmail.com`
+- Email: `nirala9400@gmail.com`
 - GitHub: `https://github.com/JSPN9400`
 - LinkedIn: `https://www.linkedin.com/in/jaishankar-prasad-nirala-440a44243/`

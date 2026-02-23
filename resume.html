@@ -1,692 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaishankar Prasad Nirala - Resume</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            /* Light theme variables */
-            --bg-light: #f8f9fa;
-            --card-light: #ffffff;
-            --text-light: #232946;
-            --accent-light: #4f46e5;
-            --secondary-light: #7c3aed;
-            --border-light: #e0e7ff;
-            --shadow-light: rgba(44, 62, 80, 0.1);
-            
-            /* Dark theme variables */
-            --bg-dark: #121826; 
-            --card-dark: #1e293b;
-            --text-dark: #e9ecef;
-            --accent-dark: #818cf8;
-            --secondary-dark: #a78bfa;
-            --border-dark: #334155;
-            --shadow-dark: rgba(0, 0, 0, 0.3);
-            
-            /* Common variables */
-            --transition: all 0.4s ease;
-            --border-radius: 16px;
-            --spacing: 2rem;
-            --section-spacing: 2.5rem;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: var(--transition);
-        }
-
-        body {
-            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
-            background: var(--bg-light);
-            color: var(--text-light);
-            line-height: 1.6;
-            transition: background-color 0.5s ease;
-        }
-
-        body.dark-mode {
-            background: var(--bg-dark);
-            color: var(--text-dark);
-        }
-
-        .resume-container {
-            max-width: 900px;
-            margin: 2.5rem auto;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: var(--border-radius);
-            box-shadow: 0 8px 32px var(--shadow-light);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dark-mode .resume-container {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 8px 32px var(--shadow-dark);
-            border: 1px solid rgba(129, 140, 248, 0.15);
-        }
-
-        /* Header styling with profile picture */
-        .resume-header {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-            margin-bottom: var(--section-spacing);
-            position: relative;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-light);
-        }
-        .profile-picture 
-        {
-         width: 100px; /* adjust size */
-        height: 100px;
-        border-radius: 50%;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #f0f0f0; /* fallback bg */
-        }
-        .profile-picture img 
-        {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        }
-
-
-        .dark-mode .resume-header {
-            border-bottom: 1px solid var(--border-dark);
-        }
-
-        .profile-picture {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid var(--accent-light);
-            box-shadow: 0 8px 32px rgba(79, 70, 229, 0.25);
-            flex-shrink: 0;
-            position: relative;
-            background: linear-gradient(45deg, #7c3aed, #4f46e5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .profile-picture {
-            border: 4px solid var(--accent-dark);
-            box-shadow: 0 8px 32px rgba(129, 140, 248, 0.25);
-        }
-
-        .profile-picture:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 12px 48px rgba(79, 70, 229, 0.35);
-        }
-
-        .dark-mode .profile-picture:hover {
-            box-shadow: 0 12px 48px rgba(129, 140, 248, 0.35);
-        }
-
-        .profile-picture .initials {
-            color: white;
-            font-size: 3.5rem;
-            font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .header-content {
-            flex-grow: 1;
-        }
-
-        .resume-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0 0 0.5rem 0;
-            color: var(--accent-light);
-            letter-spacing: -0.5px;
-        }
-
-        .dark-mode .resume-header h1 {
-            color: var(--accent-dark);
-        }
-
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            margin-bottom: 0.8rem;
-            font-size: 1.05rem;
-            color: var(--text-light);
-        }
-
-        .dark-mode .contact-info {
-            color: var(--text-dark);
-        }
-
-        .contact-info i {
-            margin-right: 0.5rem;
-            color: var(--accent-light);
-        }
-
-        .dark-mode .contact-info i {
-            color: var(--accent-dark);
-        }
-
-        .links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .links a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--secondary-light);
-            font-weight: 600;
-            transition: transform 0.3s ease;
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            background: rgba(124, 58, 237, 0.1);
-        }
-
-        .dark-mode .links a {
-            color: var(--secondary-dark);
-            background: rgba(167, 139, 250, 0.1);
-        }
-
-        .links a:hover {
-            transform: translateY(-3px);
-            color: var(--accent-light);
-            background: rgba(79, 70, 229, 0.15);
-        }
-
-        .dark-mode .links a:hover {
-            color: var(--accent-dark);
-            background: rgba(129, 140, 248, 0.2);
-        }
-
-        .links a i {
-            margin-right: 0.5rem;
-        }
-
-        /* Theme toggle button */
-        .theme-toggle {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: var(--accent-light);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
-            z-index: 10;
-        }
-
-        .dark-mode .theme-toggle {
-            background: var(--accent-dark);
-            box-shadow: 0 4px 10px rgba(129, 140, 248, 0.3);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
-
-        /* Section styling with timeline effect */
-        .resume-section {
-            margin-bottom: var(--section-spacing);
-            position: relative;
-            padding-left: 2rem;
-            padding: 1.5rem 1.5rem 1.5rem 2rem;
-        }
-
-        .resume-section::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--accent-light) 0%, var(--secondary-light) 100%);
-            border-radius: 3px;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .dark-mode .resume-section::before {
-            background: linear-gradient(180deg, var(--accent-dark) 0%, var(--secondary-dark) 100%);
-        }
-
-        .resume-section:hover::before {
-            box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
-        }
-
-        .dark-mode .resume-section:hover::before {
-            box-shadow: 0 0 20px rgba(129, 140, 248, 0.4);
-        }
-
-        .resume-section h2 {
-            font-size: 1.4rem;
-            color: var(--accent-light);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid var(--border-light);
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            letter-spacing: 0.5px;
-        }
-
-        .dark-mode .resume-section h2 {
-            color: var(--accent-dark);
-            border-bottom: 2px solid var(--border-dark);
-        }
-
-        .resume-section h2 i {
-            margin-right: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        .resume-section p {
-            margin-bottom: 1rem;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0.8rem 0;
-        }
-
-        li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.8rem;
-            position: relative;
-        }
-
-        li:before {
-            content: "•";
-            color: var(--accent-light);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .dark-mode li:before {
-            color: var(--accent-dark);
-        }
-
-        .project-title, .job-title, .edu-title {
-            font-weight: 700;
-            color: var(--text-light);
-            font-size: 1.1rem;
-            display: block;
-            margin-bottom: 0.3rem;
-            transition: all 0.3s ease;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .dark-mode .project-title, 
-        .dark-mode .job-title, 
-        .dark-mode .edu-title {
-            color: var(--text-dark);
-        }
-
-        .resume-section:hover .project-title,
-        .resume-section:hover .job-title,
-        .resume-section:hover .edu-title {
-            color: var(--accent-light);
-            border-bottom: 2px solid var(--accent-light);
-        }
-
-        .dark-mode .resume-section:hover .project-title,
-        .dark-mode .resume-section:hover .job-title,
-        .dark-mode .resume-section:hover .edu-title {
-            color: var(--accent-dark);
-            border-bottom: 2px solid var(--accent-dark);
-        }
-
-        .date {
-            font-style: italic;
-            color: var(--text-light);
-            opacity: 0.8;
-            font-size: 0.95rem;
-            margin-left: 0.5rem;
-            font-weight: 400;
-        }
-
-        .dark-mode .date {
-            color: var(--text-dark);
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .tech-item {
-            background: rgba(79, 70, 229, 0.12);
-            color: var(--accent-light);
-            padding: 0.4rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid rgba(79, 70, 229, 0.25);
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .dark-mode .tech-item {
-            background: rgba(129, 140, 248, 0.12);
-            color: var(--accent-dark);
-            border: 1px solid rgba(129, 140, 248, 0.25);
-        }
-
-        .tech-item:hover {
-            background: rgba(79, 70, 229, 0.2);
-            border-color: rgba(79, 70, 229, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
-        }
-
-        .dark-mode .tech-item:hover {
-            background: rgba(129, 140, 248, 0.2);
-            border-color: rgba(129, 140, 248, 0.5);
-            box-shadow: 0 4px 12px rgba(129, 140, 248, 0.2);
-        }
-
-        .skill-bars {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .skill-bar {
-            margin-bottom: 1.2rem;
-        }
-
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.3rem;
-            font-size: 0.95rem;
-        }
-
-        .skill-progress {
-            height: 8px;
-            background: var(--border-light);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .dark-mode .skill-progress {
-            background: var(--border-dark);
-        }
-
-        .skill-progress-inner {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-light) 0%, var(--secondary-light) 100%);
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dark-mode .skill-progress-inner {
-            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--secondary-dark) 100%);
-        }
-
-        .skill-progress-inner::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        /* Animation for skill bars */
-        @keyframes fillProgress {
-            from { width: 0; }
-            to { width: var(--progress); }
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .skill-progress-inner {
-            animation: fillProgress 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        /* Footer styling */
-        .resume-footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-light);
-            color: var(--text-light);
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        .dark-mode .resume-footer {
-            border-top: 1px solid var(--border-dark);
-            color: var(--text-dark);
-        }
-
-        /* GitHub ribbon */
-        .github-ribbon {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 150px;
-            height: 150px;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .github-ribbon a {
-            position: absolute;
-            top: 45px;
-            right: -45px;
-            transform: rotate(45deg);
-            width: 200px;
-            background: #333;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            font-weight: bold;
-            padding: 5px 0;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        
-        .github-ribbon a:hover {
-            background: #555;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .resume-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 1.5rem;
-            }
-            
-            .profile-picture {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .contact-info {
-                justify-content: center;
-            }
-            
-            .links {
-                justify-content: center;
-            }
-            
-            .theme-toggle {
-                top: 1rem;
-                right: 1rem;
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-            
-            .resume-container {
-                padding: 1.8rem;
-                margin: 1.5rem;
-            }
-            
-            .resume-section {
-                padding-left: 1rem;
-            }
-            
-            .github-ribbon {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .github-ribbon a {
-                top: 35px;
-                right: -35px;
-                width: 170px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .resume-header h1 {
-                font-size: 2rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
-            }
-            
-            .skill-bars {
-                grid-template-columns: 1fr;
-            }
-            
-            .github-ribbon {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .github-ribbon a {
-                top: 30px;
-                right: -30px;
-                width: 140px;
-                font-size: 0.7rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume | Jaishankar Prasad Nirala</title>
+  <meta name="description" content="Resume of Jaishankar Prasad Nirala - Data Analyst, MIS and Business Reporting.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/script.js" defer></script>
 </head>
-<body>
-    <!-- GitHub Ribbon -->
-    <!-- <div class="github-ribbon">
-        <a href="https://github.com/JSPN9400" target="_blank">
-            <i class="fab fa-github"></i> GitHub
-        </a>
-    </div> -->
-    
-    <div class="resume-container">
-        <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
-        </button>
+<body data-page="resume">
+  <header class="site-header">
+    <div class="container nav-container">
+      <a class="brand" href="index.html" aria-label="Go to homepage">
+        <span class="brand-mark">JSPN</span>
+        <span class="brand-text">Jaishankar Prasad Nirala</span>
+      </a>
 
-        <div style="width:100%;height:calc(100vh - 120px);">
-            <iframe src="assets/others/resume.pdf" style="width:100%;height:100%;border:none;" title="Resume PDF"></iframe>
-        </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-        <div class="resume-footer" style="margin-top:0.6rem;">
-            <div style="margin-bottom:0.5rem;">
-                <a href="assets/others/resume.pdf" target="_blank" download style="text-decoration:none;color:inherit;font-weight:700;">
-                    <i class="fas fa-file-download"></i> Download Resume (PDF)
-                </a>
-            </div>
-            <div>Embedded PDF viewer — if you want this converted to HTML content, tell me and I'll extract and update the page.</div>
-        </div>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html#home">Home</a>
+        <a class="nav-link" href="index.html#about">About</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="writing.html">Writing</a>
+        <a class="nav-link" href="resume.html">Resume</a>
+        <a class="nav-link" href="index.html#contact">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
+        <span id="theme-toggle-icon">Moon</span>
+      </button>
     </div>
+  </header>
 
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        const icon = themeToggle.querySelector('i');
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-        
-        // Initialize animations
-        document.addEventListener('DOMContentLoaded', () => {
-            // Add subtle animation to profile picture
-            const profilePic = document.querySelector('.profile-picture');
-            profilePic.style.transform = 'scale(0.95)';
-            profilePic.style.opacity = '0';
-            
-            setTimeout(() => {
-                profilePic.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
-                profilePic.style.transform = 'scale(1)';
-                profilePic.style.opacity = '1';
-            }, 300);
-            
-            // Add animations to sections
-            const sections = document.querySelectorAll('.resume-section');
-            sections.forEach((section, index) => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    section.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
-                    section.style.transform = 'translateY(0)';
-                    section.style.opacity = '1';
-                }, 500 + (index * 150));
-            });
-        });
-    </script>
+  <main>
+    <section class="section">
+      <div class="container section-head reveal">
+        <p class="eyebrow">Resume</p>
+        <h1>Professional Resume</h1>
+        <p>View in browser or download directly as PDF.</p>
+        <div class="hero-actions" style="margin-top:1rem;">
+          <a class="btn btn-primary" href="assets/others/resume.pdf" target="_blank" rel="noreferrer">View Resume PDF</a>
+          <a class="btn btn-secondary" href="assets/others/resume.pdf" download>Download Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" style="padding-top:0;">
+      <div class="container reveal">
+        <div class="resume-frame-wrap">
+          <iframe
+            class="resume-frame"
+            src="assets/others/resume.pdf"
+            title="Jaishankar Prasad Nirala Resume PDF"
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>(c) 2026 Jaishankar Prasad Nirala. Data Analyst Portfolio.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="writing.html">Writing</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

@@ -1,466 +1,287 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Jaishankar Prasad Nirala | Portfolio</title>
-<!-- SEO Meta Tags -->
-<meta content="Portfolio of Jaishankar Prasad Nirala, Data Analyst &amp; Automation Specialist. Explore projects, skills, and contact information." name="description"/>
-<meta content="Jaishankar Prasad Nirala, Data Analyst, Automation, Power BI, Python, Portfolio, Dashboard, Finance, Business Analytics" name="keywords"/>
-<meta content="Jaishankar Prasad Nirala" name="author"/>
-<meta content="Jaishankar Prasad Nirala | Portfolio" property="og:title"/>
-<meta content="Portfolio of Jaishankar Prasad Nirala, Data Analyst &amp; Automation Specialist. Explore projects, skills, and contact information." property="og:description"/>
-<meta content="website" property="og:type"/>
-<meta content="https://yourdomain.com/" property="og:url"/>
-<meta content="https://yourdomain.com/IMG_20240728_093706662_HDR.jpg" property="og:image"/>
-<link href="https://yourdomain.com/" rel="canonical"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Montserrat:wght@700&amp;display=swap" rel="stylesheet"/>
-
-<!-- Decorative background shapes for large screens moved to body -->
-
- <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaishankar Prasad Nirala | Data Analyst Portfolio</title>
+  <meta name="description" content="Portfolio of Jaishankar Prasad Nirala, Data Analyst focused on KPI reporting, automation, and business reporting.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/script.js" defer></script>
 </head>
-<body>
-<div class="bg-shape bg-shape1"></div>
-<div class="bg-shape bg-shape2"></div>
-<header class="site-header">
-<div class="container nav-container">
-<div class="logo-area">
-<span class="logo-initials">J.S.P.N.</span>
-<span class="site-title">Jaishankar Prasad Nirala</span>
-</div>
+<body data-page="home">
+  <header class="site-header">
+    <div class="container nav-container">
+      <a class="brand" href="index.html" aria-label="Go to homepage">
+        <span class="brand-mark">JSPN</span>
+        <span class="brand-text">Jaishankar Prasad Nirala</span>
+      </a>
 
-<!-- Hamburger Menu Button -->
-<button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-<span class="hamburger-line"></span>
-<span class="hamburger-line"></span>
-<span class="hamburger-line"></span>
-</button>
-
-<nav aria-label="Main navigation" class="main-nav" id="mainNav">
-<a class="nav-link active" href="#home">Home</a>
-<a class="nav-link" href="#about">About</a>
-<a class="nav-link" href="#skills">Skills</a>
-<a class="nav-link" href="#contact">Contact</a>
-<a class="nav-link" href="writing.html">Writing</a>
-<a class="nav-link" href="projects.html">Projects</a>
-
-
-
-</nav>
-
-<button aria-label="Toggle dark/light mode" id="theme-toggle" style="margin-left:1.5rem;padding:0.4em 1em;border-radius:8px;border:none;background:var(--color-accent3);color:var(--color-accent);font-weight:600;cursor:pointer;transition:background 0.2s, color 0.2s;">
-<span id="theme-toggle-icon">🌙</span>
-</button>
-</div>
-
-</header>
-<main>
-<section class="hero" id="home">
-<div class="container hero-grid">
-<div class="hero-photo fadein-photo hero-animate hero-delay-1">
-<img alt="Jaishankar Prasad Nirala" class="profile-pic hero-large-pic animated-profile-pic" src="assets/others/IMG_20260103_113121168.jpg" alt ="profile" loading="lazy"/>
-</div>
-<div class="hero-content">
-<h1 class="hero-title animated-title hero-animate hero-delay-2">Data Analyst Solving Business Problems</h1>
-<p class="hero-tagline hero-animate hero-delay-3">
-  Transform raw data into actionable insights that drive strategic decisions and business growth.
-</p>
-<p class="hero-description hero-animate hero-delay-3">
-  Specialized in SQL, Python, and Power BI. I deliver structured analytics solutions for high-volume datasets and KPI reporting.
-</p>
-<div class="hero-tech-badges hero-animate hero-delay-3">
-<span class="tech-badge">SQL</span>
-<span class="tech-badge">Python</span>
-<span class="tech-badge">Power BI</span>
-<span class="tech-badge">Excel</span>
-<span class="tech-badge">Data Analysis</span>
-</div>
-<div class="hero-cta hero-animate hero-delay-4">
-<a class="cta-button cta-primary" href="projects.html">View Projects</a>
-<a class="cta-button cta-secondary" href="#contact">Hire Me</a>
-<a class="cta-button cta-secondary" href="resume.html">View Resume</a>
-<a class="cta-button cta-secondary" download="" href="assets/others/resume.pdf">Download Resume</a>
-</div>
-</div>
-</div>
-</section>
-<section class="about" id="about">
-<div class="container fadein-section">
-<h2 class="section-title">Professional Background</h2>
-<div class="about-books-row">
-<div class="about-book-card book-animate book-delay-1">
-<p>I am a Data Analyst with expertise in financial data operations, high-volume transaction processing, and KPI reporting. My focus is on extracting measurable business value through structured data analysis.</p>
-</div>
-<div class="about-book-card book-animate book-delay-2">
-<p>I work with SQL and Python to process and analyze large transactional datasets, identifying patterns that inform business strategy. I design Power BI dashboards that translate raw data into clear, decision-supporting metrics.</p>
-</div>
-<div class="about-book-card book-animate book-delay-3">
-<p>My approach emphasizes structured problem-solving: define the business question, execute precise queries, validate results, and communicate findings clearly. I prioritize accuracy and replicability in every analysis.</p>
-</div>
-<div class="about-book-card book-animate book-delay-4">
-<p>I have built reporting systems that track financial performance, revenue metrics, and operational KPIs. My experience spans data modeling, ETL processes, and developing frameworks that enable consistent insight generation.</p>
-</div>
-<div class="about-book-card book-animate book-delay-5">
-<p>Explore selected projects below.</p>
-</div>
-</div>
-</div>
-</section>
-<section class="skills fade-in-section" id="skills">
-<div class="container">
-<h2 class="section-title">Technical Skills</h2>
-<p class="section-subtitle">Professional expertise and proficiency levels</p>
-<div class="skills-grid">
-
-<!-- SQL -->
-<div class="skill-card skill-animate skill-delay-1">
-<div class="skill-header">
-<h3 class="skill-name">SQL</h3>
-<span class="skill-level-badge">Expert</span>
-</div>
-<p class="skill-description">Advanced query optimization, window functions, CTEs, and database design</p>
-<div class="skill-progress">
-<div class="skill-bar" style="width: 95%"></div>
-</div>
-<span class="skill-percentage">95%</span>
-</div>
-
-<!-- Python -->
-<div class="skill-card skill-animate skill-delay-2">
-<div class="skill-header">
-<h3 class="skill-name">Python</h3>
-<span class="skill-level-badge">Advanced</span>
-</div>
-<p class="skill-description">Pandas, NumPy, data analysis and automation scripting</p>
-<div class="skill-progress">
-<div class="skill-bar" style="width: 90%"></div>
-</div>
-<span class="skill-percentage">90%</span>
-</div>
-
-<!-- Power BI -->
-<div class="skill-card skill-animate skill-delay-3">
-<div class="skill-header">
-<h3 class="skill-name">Power BI</h3>
-<span class="skill-level-badge">Advanced</span>
-</div>
-<p class="skill-description">DAX calculations, complex dashboards, and KPI reporting</p>
-<div class="skill-progress">
-<div class="skill-bar" style="width: 85%"></div>
-</div>
-<span class="skill-percentage">85%</span>
-</div>
-
-<!-- Excel -->
-<div class="skill-card skill-animate skill-delay-4">
-<div class="skill-header">
-<h3 class="skill-name">Excel</h3>
-<span class="skill-level-badge">Advanced</span>
-</div>
-<p class="skill-description">Pivot tables, Power Query, VBA, advanced formulas</p>
-<div class="skill-progress">
-<div class="skill-bar" style="width: 88%"></div>
-</div>
-<span class="skill-percentage">88%</span>
-</div>
-
-<!-- Data Analysis -->
-<div class="skill-card skill-animate skill-delay-5">
-<div class="skill-header">
-<h3 class="skill-name">Data Analysis</h3>
-<span class="skill-level-badge">Expert</span>
-</div>
-<p class="skill-description">Statistical analysis, pattern recognition, insights generation</p>
-<div class="skill-progress">
-<div class="skill-bar" style="width: 92%"></div>
-</div>
-<span class="skill-percentage">92%</span>
-</div>
-
-<!-- KPI Reporting -->
-<div class="skill-card skill-animate skill-delay-6">
-<div class="skill-header">
-<h3 class="skill-name">KPI Reporting</h3>
-<span class="skill-level-badge">Expert</span>
-</div>
-<p class="skill-description">Financial metrics, performance dashboards, trend analysis</p>
-<div class="skill-progress">
-<div class="skill-bar" style="width: 93%"></div>
-</div>
-<span class="skill-percentage">93%</span>
-</div>
-
-<!-- Data Cleaning -->
-<div class="skill-card skill-animate skill-delay-7">
-<div class="skill-header">
-<h3 class="skill-name">Data Cleaning</h3>
-<span class="skill-level-badge">Advanced</span>
-</div>
-<p class="skill-description">Data validation, missing value handling, data quality assurance</p>
-<div class="skill-progress">
-<div class="skill-bar" style="width: 89%"></div>
-</div>
-<span class="skill-percentage">89%</span>
-</div>
-
-<!-- EDA -->
-<div class="skill-card skill-animate skill-delay-8">
-<div class="skill-header">
-<h3 class="skill-name">Exploratory Data Analysis</h3>
-<span class="skill-level-badge">Advanced</span>
-</div>
-<p class="skill-description">Statistical summaries, visualization, hypothesis testing</p>
-<div class="skill-progress">
-<div class="skill-bar" style="width: 87%"></div>
-</div>
-<span class="skill-percentage">87%</span>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- KPI Statistics Section -->
-<section class="kpi-section fade-in-section">
-  <div class="container">
-    <div class="kpi-header">
-      <h2 class="kpi-title">Impact By The Numbers</h2>
-      <p class="kpi-subtitle">Delivering measurable results through data-driven solutions</p>
-    </div>
-
-    <div class="kpi-grid">
-      <!-- KPI 1: Projects Completed -->
-      <div class="kpi-card kpi-animate kpi-delay-1">
-        <div class="kpi-icon-wrapper">
-          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 11l3 3L22 4"></path>
-            <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
-        <div class="kpi-content">
-          <h3 class="kpi-number" data-count="5">0</h3>
-          <p class="kpi-label">Projects Completed</p>
-          <p class="kpi-description">End-to-end data analysis and visualization solutions</p>
-        </div>
-      </div>
-
-      <!-- KPI 2: Dashboards Built -->
-      <div class="kpi-card kpi-animate kpi-delay-2">
-        <div class="kpi-icon-wrapper">
-          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-        </div>
-        <div class="kpi-content">
-          <h3 class="kpi-number" data-count="8">0</h3>
-          <p class="kpi-label">Dashboards Built</p>
-          <p class="kpi-description">Interactive Power BI & Tableau visualizations</p>
-        </div>
-      </div>
-
-      <!-- KPI 3: Process Automation -->
-      <div class="kpi-card kpi-animate kpi-delay-3">
-        <div class="kpi-icon-wrapper">
-          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"></path>
-            <path d="M12 6v6l4 2.5"></path>
-          </svg>
-        </div>
-        <div class="kpi-content">
-          <h3 class="kpi-number" data-count="40">0<span class="kpi-suffix">%</span></h3>
-          <p class="kpi-label">Automation Improvement</p>
-          <p class="kpi-description">Reduced manual work through Python scripting</p>
-        </div>
-      </div>
-
-      <!-- KPI 4: Years of Practice -->
-      <div class="kpi-card kpi-animate kpi-delay-4">
-        <div class="kpi-icon-wrapper">
-          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"></path>
-            <path d="M12 6v6l4 2"></path>
-          </svg>
-        </div>
-        <div class="kpi-content">
-          <h3 class="kpi-number" data-count="2">0</h3>
-          <p class="kpi-label">Years Learning & Practice</p>
-          <p class="kpi-description">Continuous skill development in data analytics</p>
-        </div>
-      </div>
-
-      <!-- KPI 5: SQL Queries Written -->
-      <div class="kpi-card kpi-animate kpi-delay-5">
-        <div class="kpi-icon-wrapper">
-          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="1"></circle>
-            <path d="M12 1v6m0 6v6"></path>
-            <path d="M4.22 4.22l4.24 4.24m3.08 3.08l4.24 4.24"></path>
-            <path d="M1 12h6m6 0h6"></path>
-            <path d="M4.22 19.78l4.24-4.24m3.08-3.08l4.24-4.24"></path>
-          </svg>
-        </div>
-        <div class="kpi-content">
-          <h3 class="kpi-number" data-count="500">0<span class="kpi-suffix">+</span></h3>
-          <p class="kpi-label">SQL Queries Written</p>
-          <p class="kpi-description">Complex window functions, CTEs, and optimizations</p>
-        </div>
-      </div>
-
-      <!-- KPI 6: Data Records Analyzed -->
-      <div class="kpi-card kpi-animate kpi-delay-6">
-        <div class="kpi-icon-wrapper">
-          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
-            <polyline points="12 12 20 7.5"></polyline>
-            <polyline points="12 12 12 21"></polyline>
-            <polyline points="12 12 4 7.5"></polyline>
-          </svg>
-        </div>
-        <div class="kpi-content">
-          <h3 class="kpi-number" data-count="500">0<span class="kpi-suffix">K+</span></h3>
-          <p class="kpi-label">Data Records Analyzed</p>
-          <p class="kpi-description">Large-scale datasets processed and visualized</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact Form Section -->
-<section class="contact-section fade-in-section" id="contact">
-  <div class="contact-container">
-    <div class="contact-header">
-      <h2 class="contact-title">Get In Touch</h2>
-      <p class="contact-subtitle">Have a question or project idea? Send me a message and I'll get back to you within 24 hours.</p>
-    </div>
-
-    <form id="contact-form" class="contact-form" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
-      <!-- Name Field -->
-      <div class="form-group">
-        <label for="name" class="form-label">Full Name</label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
-          class="form-input"
-          placeholder="John Doe"
-          required
-          aria-label="Full Name"
-        >
-        <span class="form-error" id="name-error"></span>
-      </div>
-
-      <!-- Email Field -->
-      <div class="form-group">
-        <label for="email" class="form-label">Email Address</label>
-        <input 
-          type="email" 
-          id="email" 
-          name="email" 
-          class="form-input"
-          placeholder="john@example.com"
-          required
-          aria-label="Email Address"
-        >
-        <span class="form-error" id="email-error"></span>
-      </div>
-
-      <!-- Message Field -->
-      <div class="form-group">
-        <label for="message" class="form-label">Message</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          class="form-textarea"
-          placeholder="Tell me about your project or inquiry..."
-          rows="5"
-          required
-          aria-label="Message"
-        ></textarea>
-        <span class="form-error" id="message-error"></span>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" class="submit-btn" id="submit-btn">
-        <span class="btn-text">Send Message</span>
-        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 2L11 13m11-11l-7 20-4-9-9-4 20-7z"></path>
-        </svg>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-    </form>
 
-    <!-- Success Message -->
-    <div id="success-message" class="success-message" style="display: none;">
-      <div class="success-content">
-        <svg class="success-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-        <div>
-          <h3 class="success-title">Message Sent!</h3>
-          <p class="success-text">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="writing.html">Writing</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
+        <span id="theme-toggle-icon">Moon</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-gradient"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Data Analyst | MIS | Business Reporting</p>
+          <h1>Turning messy operations data into clear decisions and measurable business impact.</h1>
+          <p class="hero-summary">
+            I build SQL, Python, and Power BI reporting systems that reduce manual work, improve KPI visibility, and support faster management decisions.
+          </p>
+          <p class="impact-line">
+            Impact snapshot: Automated recurring reporting workflows and reduced manual effort by up to <strong>40%</strong> in key tasks.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="projects.html">View Projects</a>
+            <a class="btn btn-secondary" href="#contact">Hire Me</a>
+            <a class="btn btn-secondary" href="resume.html">View Resume</a>
+            <a class="btn btn-secondary" href="assets/others/resume.pdf" download>Download Resume</a>
+          </div>
+        </div>
+        <div class="hero-media reveal">
+          <img src="assets/others/IMG_20260103_113121168.jpg" alt="Portrait of Jaishankar Prasad Nirala" class="profile-image" loading="lazy">
+          <div class="hero-metrics">
+            <article class="metric-card">
+              <h3>500K+</h3>
+              <p>Records analyzed across dashboards and reports</p>
+            </article>
+            <article class="metric-card">
+              <h3>8+</h3>
+              <p>Business dashboards delivered for KPI tracking</p>
+            </article>
+          </div>
         </div>
       </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">About</p>
+          <h2>Business-focused analytics execution</h2>
+          <p>Recruiter-friendly summary of how I contribute to operations, finance, and reporting teams.</p>
+        </div>
+        <div class="impact-list reveal">
+          <article class="impact-item">
+            <h3>Improved reporting speed</h3>
+            <p>Built structured SQL and Power BI reporting flows to reduce repetitive manual reporting cycles.</p>
+          </article>
+          <article class="impact-item">
+            <h3>Automation-first mindset</h3>
+            <p>Used Python automation for data cleanup and recurring updates, lowering error risk and turnaround time.</p>
+          </article>
+          <article class="impact-item">
+            <h3>KPI visibility for stakeholders</h3>
+            <p>Designed dashboards focused on finance and business KPIs so decision makers can act quickly.</p>
+          </article>
+          <article class="impact-item">
+            <h3>Operational efficiency gains</h3>
+            <p>Standardized data preparation and reporting templates to improve team consistency and throughput.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Capabilities</p>
+          <h2>Core strengths used to deliver outcomes</h2>
+        </div>
+        <div class="skills-grid reveal">
+          <article class="skill-card-strong">
+            <div class="skill-card-head">
+              <h3>SQL Analytics</h3>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <ul class="skill-points">
+              <li>Complex KPI queries with CTE and window functions.</li>
+              <li>Faster reporting cuts repetitive manual extraction work.</li>
+            </ul>
+            <p class="skill-proof">Used in multi-dashboard reporting pipelines.</p>
+          </article>
+
+          <article class="skill-card-strong">
+            <div class="skill-card-head">
+              <h3>Python Automation</h3>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <ul class="skill-points">
+              <li>Automated cleaning, validation, and recurring report prep.</li>
+              <li>Improves consistency and reduces avoidable reporting errors.</li>
+            </ul>
+            <p class="skill-proof">Contributed to up to 40% manual effort reduction.</p>
+          </article>
+
+          <article class="skill-card-strong">
+            <div class="skill-card-head">
+              <h3>Power BI Storytelling</h3>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <ul class="skill-points">
+              <li>Executive-ready dashboards for finance and operations KPIs.</li>
+              <li>Designed for faster decision review in management meetings.</li>
+            </ul>
+            <p class="skill-proof">Delivered 8+ dashboard views across use cases.</p>
+          </article>
+
+          <article class="skill-card-strong">
+            <div class="skill-card-head">
+              <h3>MIS Reporting</h3>
+              <span class="skill-level">Strong</span>
+            </div>
+            <ul class="skill-points">
+              <li>Built reusable templates for weekly and monthly reporting.</li>
+              <li>Improves stakeholder visibility on target vs actual performance.</li>
+            </ul>
+            <p class="skill-proof">Supports structured performance tracking cycles.</p>
+          </article>
+
+          <article class="skill-card-strong">
+            <div class="skill-card-head">
+              <h3>Excel + Power Query</h3>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <ul class="skill-points">
+              <li>Modeling, pivot analysis, and structured transformation flows.</li>
+              <li>Reliable operational reporting where spreadsheet workflows exist.</li>
+            </ul>
+            <p class="skill-proof">Improved speed and consistency in ad-hoc analysis.</p>
+          </article>
+
+          <article class="skill-card-strong">
+            <div class="skill-card-head">
+              <h3>Business Insight Delivery</h3>
+              <span class="skill-level">Strong</span>
+            </div>
+            <ul class="skill-points">
+              <li>Converts data outputs into clear actions for business teams.</li>
+              <li>Focus on impact: revenue, efficiency, and KPI movement.</li>
+            </ul>
+            <p class="skill-proof">Built for Data Analyst / MIS / Reporting roles.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proof">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Why Recruiters Shortlist</p>
+          <h2>What makes this portfolio relevant for Data Analyst hiring</h2>
+          <p>Top portfolios clearly show impact, business context, and execution reliability, not only tool names.</p>
+        </div>
+        <div class="proof-grid reveal">
+          <article class="proof-card">
+            <h3>Business Impact First</h3>
+            <p>Every project connects data work to measurable outcomes like reporting speed, KPI visibility, and process efficiency.</p>
+          </article>
+          <article class="proof-card">
+            <h3>Decision-Ready Reporting</h3>
+            <p>Dashboards and reports are structured for leaders to take action quickly, not just view charts.</p>
+          </article>
+          <article class="proof-card">
+            <h3>Automation Mindset</h3>
+            <p>Manual repetitive reporting is reduced through Python + SQL workflows for consistency and scale.</p>
+          </article>
+          <article class="proof-card">
+            <h3>Ownership and Delivery</h3>
+            <p>From problem framing to final insight communication, delivery is built as an end-to-end pipeline.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="workflow">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Execution Framework</p>
+          <h2>How I deliver analytics work in real teams</h2>
+        </div>
+        <div class="workflow-grid reveal">
+          <article class="workflow-step">
+            <span class="step-no">01</span>
+            <h3>Define Business Question</h3>
+            <p>Align KPIs and reporting objective with stakeholders before building.</p>
+          </article>
+          <article class="workflow-step">
+            <span class="step-no">02</span>
+            <h3>Prepare Reliable Data</h3>
+            <p>Clean, validate, and standardize source data to improve trust in metrics.</p>
+          </article>
+          <article class="workflow-step">
+            <span class="step-no">03</span>
+            <h3>Build Analysis Layer</h3>
+            <p>Create SQL/Python logic and visual model focused on decision use-cases.</p>
+          </article>
+          <article class="workflow-step">
+            <span class="step-no">04</span>
+            <h3>Communicate and Improve</h3>
+            <p>Present insights clearly, gather feedback, and iterate for adoption.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">Contact</p>
+          <h2>Let us connect for Data Analyst / MIS / Reporting opportunities.</h2>
+          <p>
+            I am open to full-time roles, internships, and project collaborations.
+            Reach me directly using the links below.
+          </p>
+          <ul class="contact-points">
+            <li>Email: <a href="mailto:nirla9400@gmail.com">nirla9400@gmail.com</a></li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/jaishankar-prasad-nirala-440a44243/" target="_blank" rel="noreferrer">Jaishankar Prasad Nirala</a></li>
+            <li>Instagram: <a href="https://www.instagram.com/jaisankar9400/" target="_blank" rel="noreferrer">@jaisankar9400</a></li>
+            <li>GitHub: <a href="https://github.com/JSPN9400" target="_blank" rel="noreferrer">JSPN9400</a></li>
+          </ul>
+        </div>
+
+        <div class="contact-links-card reveal">
+          <h3>Quick Connect</h3>
+          <a class="contact-link-item" href="mailto:nirla9400@gmail.com">Gmail</a>
+          <a class="contact-link-item" href="https://www.linkedin.com/in/jaishankar-prasad-nirala-440a44243/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="contact-link-item" href="https://www.instagram.com/jaisankar9400/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="contact-link-item" href="https://github.com/JSPN9400" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>(c) 2026 Jaishankar Prasad Nirala. Data Analyst Portfolio.</p>
+      <div class="footer-links">
+        <a href="projects.html">Projects</a>
+        <a href="writing.html">Writing</a>
+        <a href="resume.html">Resume</a>
+      </div>
     </div>
-
-    <!-- Error Message -->
-    <div id="error-message" class="error-message" style="display: none;">
-      <svg class="error-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="8" x2="12" y2="12"></line>
-        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-      </svg>
-      <p id="error-text">Something went wrong. Please try again.</p>
-    </div>
-  </div>
-</section>
-</main>
-<footer class="site-footer">
-<div class="container">
-<div class="footer-contact" id="footer-contact">
-<h2 class="footer-title">Contact</h2>
-<div class="footer-socials">
-<a aria-label="Email" class="footer-social-link" href="mailto:nirla9400@gmail.com" title="Email">
-<img alt="Email" class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gmail.svg"/>
-</a>
-<a aria-label="GitHub" class="footer-social-link" href="https://github.com/JSPN9400" target="_blank" title="GitHub">
-<img alt="GitHub" class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/>
-</a>
-<a aria-label="LinkedIn" class="footer-social-link" href="https://www.linkedin.com/in/jaishankar-prasad-nirala-440a44243/" target="_blank" title="LinkedIn">
-<img alt="LinkedIn" class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"/>
-</a>
-<a aria-label="Instagram" class="footer-social-link" href="https://www.instagram.com/jaisankar9400/" target="_blank" title="Instagram">
-<svg class="icon" fill="none" height="1.2em" viewbox="0 0 24 24" width="1.2em" xmlns="http://www.w3.org/2000/svg">
-<rect fill="#fff" height="24" rx="6" width="24"></rect>
-<path d="M12 7.2A4.8 4.8 0 1 0 12 16.8A4.8 4.8 0 1 0 12 7.2Z" stroke="#E4405F" stroke-width="1.5"></path>
-<circle cx="18.2" cy="5.8" fill="#E4405F" r="1.2"></circle>
-<rect height="17" rx="5.5" stroke="#E4405F" stroke-width="1.5" width="17" x="3.5" y="3.5"></rect>
-</svg>
-</a>
-<a aria-label="WhatsApp" class="footer-social-link" href="https://wa.me/+918084310066" target="_blank" title="WhatsApp">
-<svg class="icon" fill="none" height="1.2em" viewbox="0 0 24 24" width="1.2em" xmlns="http://www.w3.org/2000/svg">
-<rect fill="#fff" height="24" rx="6" width="24"></rect>
-<path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.09-1.33A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.61 0-3.13-.39-4.45-1.08l-.32-.17-3.02.79.8-2.95-.2-.33A7.96 7.96 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.29-5.1c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.51.12-.15.23-.58.75-.71.9-.13.15-.26.17-.49.06-.23-.12-.97-.36-1.85-1.13-.68-.6-1.14-1.34-1.28-1.57-.13-.23-.01-.35.1-.47.1-.1.23-.26.34-.39.11-.13.15-.23.23-.38.08-.15.04-.28-.02-.4-.06-.12-.51-1.23-.7-1.68-.18-.44-.37-.38-.51-.39-.13-.01-.28-.01-.43-.01-.15 0-.4.06-.61.28-.21.22-.8.78-.8 1.9 0 1.12.82 2.2.94 2.36.12.16 1.61 2.46 3.91 3.35.55.19.98.3 1.31.38.55.14 1.05.12 1.45.07.44-.06 1.36-.56 1.55-1.1.19-.54.19-1 .13-1.1-.06-.1-.21-.16-.44-.28z" fill="#25D366"></path>
-</svg>
-</a>
-</div>
-</div>
-<div class="footer-about">
-<strong>About this website:</strong> This is a modern, animated portfolio for Jaishankar Prasad Nirala,
-                built with HTML, CSS, and a touch of JavaScript. It features a dynamic hero, book-style About Me,
-                animated skills, and a modern contact section. <br/>
-<span style="color:#aaa; font-size:0.98em;">Last updated: July 26, 2025</span>
-</div>
-<p style="margin-top:1.2rem; color:#888; font-size:1rem;">© 2025 Jaishankar Prasad Nirala. All rights
-                reserved.</p>
-</div>
-</footer>
-
-
-
-<script src="assets/js/script.js"></script></body>
+  </footer>
+</body>
 </html>
+

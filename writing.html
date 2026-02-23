@@ -3,84 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Writing & Reflections | Jaishankar Prasad Nirala</title>
+  <title>Writing | Jaishankar Prasad Nirala</title>
+  <meta name="description" content="Writing and reflections by Jaishankar Prasad Nirala on analytics, reporting, and professional growth.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <script src="assets/js/script.js" defer></script>
+  <script src="assets/js/writing.js" defer></script>
 </head>
-<body>
+<body data-page="writing">
   <header class="site-header">
     <div class="container nav-container">
-      <div class="logo-area">
-        <span class="logo-initials">J.S.P.N.</span>
-        <span class="site-title">Jaishankar Prasad Nirala</span>
-      </div>
-      <nav aria-label="Main navigation" class="main-nav">
-        <a class="nav-link" href="index.html">Home</a>
+      <a class="brand" href="index.html" aria-label="Go to homepage">
+        <span class="brand-mark">JSPN</span>
+        <span class="brand-text">Jaishankar Prasad Nirala</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html#home">Home</a>
+        <a class="nav-link" href="index.html#about">About</a>
         <a class="nav-link" href="projects.html">Projects</a>
-        <a class="nav-link active" href="writing.html">Writing & Reflections</a>
-        <a class="nav-link" href="#contact">Contact</a>
+        <a class="nav-link" href="writing.html">Writing</a>
+        <a class="nav-link" href="index.html#contact">Contact</a>
       </nav>
-      <button aria-label="Toggle dark/light mode" id="theme-toggle" style="margin-left:1.5rem;padding:0.4em 1em;border-radius:8px;border:none;background:transparent;color:var(--color-accent);font-weight:600;cursor:pointer;transition:background 0.2s, color 0.2s;font-size:1.3rem;">
-        <span id="theme-toggle-icon">🌙</span>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
+        <span id="theme-toggle-icon">Moon</span>
       </button>
     </div>
   </header>
 
   <main>
-    <section class="writing-section">
+    <section class="section">
+      <div class="container section-head reveal">
+        <p class="eyebrow">Writing</p>
+        <h1>Notes on analytics, systems thinking, and execution quality</h1>
+        <p>Short-form writing focused on problem framing, reporting quality, and practical business analysis.</p>
+      </div>
+    </section>
+
+    <section class="section section-muted">
       <div class="container">
-        <div class="writing-intro">
-          <h1 class="section-title">Writing & Reflections</h1>
-          <p class="writing-subtitle">
-            Structured analytical reflections on society, environment, and human behavior.
-          </p>
+        <div id="blogArticlesContainer" class="blog-grid reveal">
+          <article class="blog-card">
+            <div class="blog-meta">
+              <span class="tag">Analytics</span>
+              <span class="date">February 2026</span>
+            </div>
+            <h2>From Raw Data to Decision Support: A Practical Workflow</h2>
+            <p>How to structure a repeatable analyst workflow that reduces rework and improves reporting confidence.</p>
+            <a class="read-more" href="#">Read More</a>
+          </article>
         </div>
-
-        <!-- Blog Articles Section -->
-        <section class="writing-category">
-          <h2 class="category-heading">Blog Articles</h2>
-          <div id="blogArticlesContainer">
-            <p class="empty-message">No articles published yet. <a href="admin.html" style="color: var(--color-accent); text-decoration: underline;">Add one in Admin</a></p>
-          </div>
-        </section>
-
-        <!-- Poems Section -->
-        <section class="writing-category">
-          <h2 class="category-heading">Poems</h2>
-          <div id="poemsContainer">
-            <p class="empty-message">No poems published yet. <a href="admin.html" style="color: var(--color-accent); text-decoration: underline;">Add one in Admin</a></p>
-          </div>
-        </section>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-contact" id="contact">
-        <h2 class="footer-title">Contact</h2>
-        <div class="footer-socials">
-          <a aria-label="Email" class="footer-social-link" href="mailto:nirla9400@gmail.com" title="Email">
-            <img alt="Email" class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gmail.svg"/>
-          </a>
-          <a aria-label="GitHub" class="footer-social-link" href="https://github.com/JSPN9400" target="_blank" title="GitHub">
-            <img alt="GitHub" class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/>
-          </a>
-          <a aria-label="LinkedIn" class="footer-social-link" href="https://www.linkedin.com/in/jaishankar-prasad-nirala-440a44243/" target="_blank" title="LinkedIn">
-            <img alt="LinkedIn" class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"/>
-          </a>
-        </div>
+    <div class="container footer-wrap">
+      <p>(c) 2026 Jaishankar Prasad Nirala. Data Analyst Portfolio.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html">Resume</a>
       </div>
-      <div class="footer-about">
-        <strong>About this website:</strong> This is a modern, minimalist portfolio for Jaishankar Prasad Nirala, built with HTML, CSS, and JavaScript. It features clean design, dark/light theme support, and professional content presentation.
-        <br/>
-        <span style="color:var(--color-text-light); font-size:0.98em;">Last updated: February 23, 2026</span>
-      </div>
-      <p style="margin-top:1.2rem; color:var(--color-text-light); font-size:1rem;">© 2026 Jaishankar Prasad Nirala. All rights reserved.</p>
     </div>
   </footer>
-  <script src="assets/js/script.js" defer></script>
-  <script src="assets/js/writing.js" defer></script>
 </body>
 </html>
+

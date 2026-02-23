@@ -1,77 +1,70 @@
-// Writing Page - Load Content from Admin
-// This script displays blog articles and poems added through the admin panel
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("blogArticlesContainer");
+  if (!container) return;
 
-document.addEventListener('DOMContentLoaded', function() {
-  const blogContainer = document.getElementById('blogArticlesContainer');
-  const poemsContainer = document.getElementById('poemsContainer');
-
-  // Get stored content from localStorage
-  function getStoredContent() {
-    const stored = localStorage.getItem('portfolioContent');
-    return stored ? JSON.parse(stored) : [];
-  }
-
-  // Load and display content
-  function loadContent() {
-    const allContent = getStoredContent();
-    
-    // Separate blog articles and poems
-    const blogs = allContent.filter(item => item.type === 'blog');
-    const poems = allContent.filter(item => item.type === 'poem');
-
-    // Display blog articles
-    if (blogs.length === 0) {
-      blogContainer.innerHTML = '<p class="empty-message">No articles published yet. Check back soon.</p>';
-    } else {
-      blogContainer.innerHTML = blogs.map(blog => `
-        <article class="writing-entry">
-          <div class="entry-header">
-            <h3 class="entry-title">${escapeHtml(blog.title)}</h3>
-            <p class="entry-date">${escapeHtml(blog.date)}</p>
-          </div>
-          <div class="entry-content">
-            ${blog.content.split('\n').map(paragraph => {
-              const trimmed = paragraph.trim();
-              return trimmed ? `<p>${escapeHtml(trimmed)}</p>` : '';
-            }).join('')}
-            <a href="#" class="read-more">Read Full Article →</a>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    // Display poems
-    if (poems.length === 0) {
-      poemsContainer.innerHTML = '<p class="empty-message">No poems published yet. Check back soon.</p>';
-    } else {
-      poemsContainer.innerHTML = poems.map(poem => `
-        <article class="writing-entry poem-entry">
-          <div class="entry-header">
-            <h3 class="entry-title">${escapeHtml(poem.title)}</h3>
-            <p class="entry-date">${escapeHtml(poem.date)}</p>
-          </div>
-          <div class="entry-content poem-content">
-            <p>
-              ${escapeHtml(poem.content).replace(/\n/g, '<br>')}
-            </p>
-          </div>
-        </article>
-      `).join('');
-    }
-  }
-
-  // Helper function to escape HTML and prevent XSS
   function escapeHtml(text) {
     const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
     };
-    return text.replace(/[&<>"']/g, m => map[m]);
+    return String(text).replace(/[&<>"']/g, (m) => map[m]);
   }
 
-  // Initial load
-  loadContent();
+  function excerpt(text, length = 180) {
+    const clean = String(text).replace(/\s+/g, " ").trim();
+    if (clean.length <= length) return clean;
+    return clean.slice(0, length).trim() + "...";
+  }
+
+  function getContent() {
+    const raw = localStorage.getItem("portfolioContent");
+    if (!raw) return [];
+    try {
+      return JSON.parse(raw);
+    } catch (error) {
+      return [];
+    }
+  }
+
+  const blogs = getContent()
+    .filter((item) => item.type === "blog")
+    .sort((a, b) => new Date(b.date || "") - new Date(a.date || ""));
+
+  if (blogs.length === 0) {
+    container.innerHTML = `
+      <article class="blog-card">
+        <div class="blog-meta">
+          <span class="tag">Update</span>
+          <span class="date">No posts yet</span>
+        </div>
+        <h2>Articles will appear here</h2>
+        <p>Add writing from <a class="read-more" href="admin.html">admin panel</a> to populate this page.</p>
+      </article>
+    `;
+    return;
+  }
+
+  container.innerHTML = blogs
+    .map((blog) => {
+      const title = escapeHtml(blog.title || "Untitled");
+      const date = escapeHtml(blog.date || "No date");
+      const summary = escapeHtml(excerpt(blog.content || ""));
+      const category = escapeHtml(blog.category || "Business Analytics");
+
+      return `
+        <article class="blog-card">
+          <div class="blog-meta">
+            <span class="tag">${category}</span>
+            <span class="date">${date}</span>
+          </div>
+          <h2>${title}</h2>
+          <p>${summary}</p>
+          <a class="read-more" href="#">Read More</a>
+        </article>
+      `;
+    })
+    .join("");
 });

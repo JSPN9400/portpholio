@@ -4,398 +4,110 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects | Jaishankar Prasad Nirala</title>
-  <link rel="stylesheet" href="assets/css/project.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-  <script src="assets/js/project.js" defer></script>
+  <meta name="description" content="Case-study style data analytics projects by Jaishankar Prasad Nirala.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/script.js" defer></script>
 </head>
-<body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo-area">
-      <span class="logo-initials">J.S.P.N.</span>
-      <span class="site-title">Projects</span>
+<body data-page="projects">
+  <header class="site-header">
+    <div class="container nav-container">
+      <a class="brand" href="index.html" aria-label="Go to homepage">
+        <span class="brand-mark">JSPN</span>
+        <span class="brand-text">Jaishankar Prasad Nirala</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html#home">Home</a>
+        <a class="nav-link" href="index.html#about">About</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="writing.html">Writing</a>
+        <a class="nav-link" href="index.html#contact">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
+        <span id="theme-toggle-icon">Moon</span>
+      </button>
     </div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="projects.html" class="active">Projects</a>
-      <a href="writing.html">Writing & Reflections</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-    <button id="theme-toggle" class="theme-btn">🌙</button>
   </header>
 
-  <!-- Projects Section -->
-  <section class="projects-section">
-    <h2 class="section-heading">Featured Projects</h2>
-    <p class="section-subtitle">Data analysis, KPI reporting, and business intelligence solutions.</p>
-
-    <div class="projects-container">
-      <!-- Project 1: Sales Analytics Dashboard -->
-      <div class="project-card">
-        <div class="card-image-wrapper">
-          <img src="https://via.placeholder.com/400x240/0f172a/60a5fa?text=Sales+Analytics" alt="Sales Analytics Dashboard" class="card-image">
-          <div class="card-badge">Featured</div>
-        </div>
-        
-        <div class="card-content">
-          <h3 class="card-title">Urban Air Quality & Pollution Trend Analysis</h3>
-          
-          <p class="card-description">
-            Comprehensive analysis of pollution trends across 50K+ environmental records to identify seasonal spikes and high-risk regions in major Indian cities.
-          </p>
-          
-          <div class="card-tools">
-            <span class="tool-badge">SQL</span>
-            <span class="tool-badge">Python</span>
-            <span class="tool-badge">Power BI</span>
-          </div>
-          
-          <div class="card-results">
-            <div class="result-item">
-              <span class="result-label">Cities Analyzed:</span>
-              <span class="result-value">15+ major cities</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Data Points:</span>
-              <span class="result-value">50K+ records</span>
-            </div>
-          </div>
-          
-          <div class="card-actions">
-            <a href="#" class="card-btn btn-github">
-              <span>View Code</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-              </svg>
-            </a>
-            <a href="#" class="card-btn btn-demo">
-              <span>Dashboard</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </div>
+  <main>
+    <section class="section project-hero">
+      <div class="container section-head reveal">
+        <p class="eyebrow">Case Studies</p>
+        <h1>Projects that link data work to business outcomes</h1>
+        <p>Each project below follows a practical structure: problem, solution, tools, measurable result, and delivery artifact.</p>
       </div>
+    </section>
 
-      <!-- Project 2: Sales Dashboard -->
-      <div class="project-card">
-        <div class="card-image-wrapper">
-          <img src="https://via.placeholder.com/400x240/0f172a/a78bfa?text=Sales+Dashboard" alt="Sales Dashboard" class="card-image">
-          <div class="card-badge">Completed</div>
-        </div>
-        
-        <div class="card-content">
-          <h3 class="card-title">Sales Dashboard & Revenue Analytics</h3>
-          
-          <p class="card-description">
-            Interactive dashboard analyzing 2+ years of sales data with customer segmentation, revenue trends, and regional performance breakdown.
-          </p>
-          
-          <div class="card-tools">
-            <span class="tool-badge">SQL</span>
-            <span class="tool-badge">Python</span>
-            <span class="tool-badge">Power BI</span>
-          </div>
-          
-          <div class="card-results">
-            <div class="result-item">
-              <span class="result-label">Revenue Growth:</span>
-              <span class="result-value">↑ 23% quarterly</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Time Saved:</span>
-              <span class="result-value">8 hrs/week</span>
+    <section class="section">
+      <div class="container case-grid">
+        <article class="case-card reveal">
+          <div class="case-media">Screenshot Placeholder - Air Quality Dashboard</div>
+          <div class="case-body">
+            <h2>Urban Air Quality Trend Analysis</h2>
+            <div class="case-row"><strong>Problem:</strong> Environmental teams lacked city-level AQI trend visibility for seasonal planning.</div>
+            <div class="case-row"><strong>Solution:</strong> Built a structured analytics pipeline and dashboard for AQI trend, city ranking, and seasonal risk analysis.</div>
+            <div class="case-row"><strong>Tools:</strong> SQL, Python, Power BI</div>
+            <div class="case-row"><strong>Result:</strong> Analyzed <strong>50K+</strong> records across <strong>15+</strong> cities and improved decision visibility for peak-risk months.</div>
+            <div class="case-actions">
+              <a class="btn btn-secondary" href="https://github.com/JSPN9400" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn btn-primary" href="#" aria-disabled="true">Demo</a>
             </div>
           </div>
-          
-          <div class="card-actions">
-            <a href="#" class="card-btn btn-github">
-              <span>View Code</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-              </svg>
-            </a>
-            <a href="#" class="card-btn btn-demo">
-              <span>Dashboard</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
+        </article>
+
+        <article class="case-card reveal">
+          <div class="case-media">Screenshot Placeholder - Sales KPI Dashboard</div>
+          <div class="case-body">
+            <h2>Sales and Revenue KPI Dashboard</h2>
+            <div class="case-row"><strong>Problem:</strong> Management reports were manually prepared and delayed weekly decision cycles.</div>
+            <div class="case-row"><strong>Solution:</strong> Implemented automated KPI reporting for region, trend, and segment-level performance.</div>
+            <div class="case-row"><strong>Tools:</strong> SQL, Python, Power BI, Excel</div>
+            <div class="case-row"><strong>Result:</strong> Reduced manual reporting effort by <strong>8+ hours per week</strong> and improved review speed for stakeholders.</div>
+            <div class="case-actions">
+              <a class="btn btn-secondary" href="https://github.com/JSPN9400" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn btn-primary" href="#" aria-disabled="true">Demo</a>
+            </div>
           </div>
-        </div>
+        </article>
+
+        <article class="case-card reveal">
+          <div class="case-media">Screenshot Placeholder - Customer Segmentation Report</div>
+          <div class="case-body">
+            <h2>Customer Segmentation and Retention Analysis</h2>
+            <div class="case-row"><strong>Problem:</strong> Marketing teams lacked clear segmentation to prioritize high-value customer groups.</div>
+            <div class="case-row"><strong>Solution:</strong> Built RFM-based segmentation model and reporting view for campaign targeting.</div>
+            <div class="case-row"><strong>Tools:</strong> Python, SQL, Tableau/Power BI</div>
+            <div class="case-row"><strong>Result:</strong> Identified <strong>5</strong> high-value segments and supported strategies that delivered up to <strong>18%</strong> improvement in campaign ROI.</div>
+            <div class="case-actions">
+              <a class="btn btn-secondary" href="https://github.com/JSPN9400" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn btn-primary" href="#" aria-disabled="true">Demo</a>
+            </div>
+          </div>
+        </article>
       </div>
+    </section>
+  </main>
 
-      <!-- Project 3: Customer Segmentation -->
-      <div class="project-card">
-        <div class="card-image-wrapper">
-          <img src="https://via.placeholder.com/400x240/0f172a/f87171?text=Customer+Segmentation" alt="Customer Segmentation" class="card-image">
-          <div class="card-badge">Active</div>
-        </div>
-        
-        <div class="card-content">
-          <h3 class="card-title">Customer Segmentation & RFM Analysis</h3>
-          
-          <p class="card-description">
-            RFM and clustering analysis on 50K+ customer records to develop targeted marketing strategies and identify high-value segments.
-          </p>
-          
-          <div class="card-tools">
-            <span class="tool-badge">Python</span>
-            <span class="tool-badge">SQL</span>
-            <span class="tool-badge">Tableau</span>
-          </div>
-          
-          <div class="card-results">
-            <div class="result-item">
-              <span class="result-label">Segments Created:</span>
-              <span class="result-value">5 high-value clusters</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Conversion Lift:</span>
-              <span class="result-value">↑ 18% ROI</span>
-            </div>
-          </div>
-          
-          <div class="card-actions">
-            <a href="#" class="card-btn btn-github">
-              <span>View Code</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-              </svg>
-            </a>
-            <a href="#" class="card-btn btn-demo">
-              <span>Dashboard</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 4: Predictive Forecasting -->
-      <div class="project-card">
-        <div class="card-image-wrapper">
-          <img src="https://via.placeholder.com/400x240/0f172a/34d399?text=Demand+Forecasting" alt="Predictive Forecasting" class="card-image">
-          <div class="card-badge">Featured</div>
-        </div>
-        
-        <div class="card-content">
-          <h3 class="card-title">Predictive Demand Forecasting</h3>
-          
-          <p class="card-description">
-            ML-powered model predicting quarterly demand with 94% accuracy to enable better inventory planning and reduce overstock costs.
-          </p>
-          
-          <div class="card-tools">
-            <span class="tool-badge">Python</span>
-            <span class="tool-badge">ML</span>
-            <span class="tool-badge">Power BI</span>
-          </div>
-          
-          <div class="card-results">
-            <div class="result-item">
-              <span class="result-label">Model Accuracy:</span>
-              <span class="result-value">94% MAPE</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Cost Savings:</span>
-              <span class="result-value">$250K annually</span>
-            </div>
-          </div>
-          
-          <div class="card-actions">
-            <a href="#" class="card-btn btn-github">
-              <span>View Code</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-              </svg>
-            </a>
-            <a href="#" class="card-btn btn-demo">
-              <span>Dashboard</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </div>
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>(c) 2026 Jaishankar Prasad Nirala. Data Analyst Portfolio.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="writing.html">Writing</a>
+        <a href="resume.html">Resume</a>
       </div>
     </div>
-  </section>
-
-  <!-- Old detailed project section kept for reference -->
-  <section class="projects-section" style="display: none;">
-    <h2 class="section-heading">Detailed Project Breakdown</h2>
-    
-    <div class="projects-grid">
-      <!-- Project 1: Urban Air Quality -->
-      <div class="project-card featured">
-        <div class="featured-badge">Featured</div>
-        <h3 class="project-title">Urban Air Quality & Pollution Trend Analysis (India)</h3>
-        <p class="project-description">Comprehensive analysis of pollution trends across major Indian cities to identify seasonal spikes and high-risk regions using 50,000+ environmental records.</p>
-        <div class="project-tech">
-          <span class="tech-tag">SQL</span>
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Power BI</span>
-          <span class="tech-tag">Data Analysis</span>
-          <span class="tech-tag">Window Functions</span>
-        </div>
-        <div class="project-details">
-          <h4>Problem Statement</h4>
-          <p>Analyse pollution trends across major Indian cities to identify seasonal spikes and high-risk regions.</p>
-          
-          <h4>Dataset Overview</h4>
-          <ul>
-            <li>50,000+ records across major cities</li>
-            <li>Columns: City, Date, AQI, PM2.5, PM10, Temperature, Humidity</li>
-          </ul>
-          
-          <h4>Data Cleaning & Feature Engineering</h4>
-          <ul>
-            <li>Removed duplicates and inconsistencies</li>
-            <li>Handled missing AQI values using imputation</li>
-            <li>Created Month and Season columns for temporal analysis</li>
-            <li>Standardised pollutant metrics for cross-city comparison</li>
-          </ul>
-          
-          <h4>SQL Analysis Techniques</h4>
-          <ul>
-            <li>Ranked cities by average AQI using window functions</li>
-            <li>Calculated yearly AQI growth trends</li>
-            <li>Compared seasonal pollution levels across regions</li>
-            <li>Applied PARTITION BY and ROW_NUMBER() for advanced ranking</li>
-          </ul>
-          
-          <div class="sql-block">
-            <div class="sql-label">Sample SQL Query</div>
-            <code>SELECT city, ROUND(AVG(aqi), 2) AS avg_aqi,
-       ROW_NUMBER() OVER (ORDER BY AVG(aqi) DESC) AS rank
-FROM pollution_data
-GROUP BY city
-ORDER BY avg_aqi DESC;</code>
-          </div>
-          
-          <h4>Dashboard Overview</h4>
-          <ul>
-            <li>KPI cards displaying Average AQI and Highest Polluted City</li>
-            <li>Monthly trend line chart for pollution progression</li>
-            <li>City comparison visuals and regional analysis</li>
-            <li>Seasonal comparison breakdown by pollutant type</li>
-          </ul>
-          
-          <h4>Key Insights</h4>
-          <ul>
-            <li>Winter months show significant AQI spikes in northern cities</li>
-            <li>PM2.5 contributes the highest pollution levels year-round</li>
-            <li>Certain industrial cities consistently rank high in annual averages</li>
-            <li>Correlation identified between temperature and pollution levels</li>
-          </ul>
-          
-          <h4>Business Recommendation</h4>
-          <p>Strengthen seasonal pollution monitoring systems and implement targeted emission control strategies during high-risk periods.</p>
-        </div>
-        <div class="project-links">
-          <a href="#" class="project-link">View Analysis</a>
-          <a href="#" class="project-link">Dashboard</a>
-        </div>
-      </div>
-
-      <!-- Project 2: E-Commerce Sales -->
-      <div class="project-card featured">
-        <div class="featured-badge">Featured</div>
-        <h3 class="project-title">E-Commerce Sales & Customer Retention Analysis</h3>
-        <p class="project-description">Revenue and customer retention pattern analysis across 100,000+ transactions to identify growth opportunities and reduce churn risk.</p>
-        <div class="project-tech">
-          <span class="tech-tag">SQL</span>
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Power BI</span>
-          <span class="tech-tag">Data Analysis</span>
-          <span class="tech-tag">Subqueries</span>
-        </div>
-        <div class="project-details">
-          <h4>Business Problem</h4>
-          <p>Analyse revenue trends and customer retention patterns to improve profitability and identify high-value customer segments.</p>
-          
-          <h4>Dataset Information</h4>
-          <ul>
-            <li>100,000+ transaction records spanning 24 months</li>
-            <li>Columns: Order_ID, Customer_ID, Order_Date, Revenue, Cost, Region</li>
-          </ul>
-          
-          <h4>KPIs Calculated</h4>
-          <ul>
-            <li>Total Revenue and Period-over-Period Growth</li>
-            <li>Profit Margin by region and customer segment</li>
-            <li>Month-over-Month (MoM) Growth Percentage</li>
-            <li>Average Order Value (AOV) trends</li>
-            <li>Customer Retention Rate by cohort</li>
-          </ul>
-          
-          <h4>SQL Techniques Used</h4>
-          <ul>
-            <li>Complex JOINs for customer and order data consolidation</li>
-            <li>Aggregations with GROUP BY and HAVING clauses</li>
-            <li>Subqueries for cohort analysis and retention calculation</li>
-            <li>Window Functions (ROW_NUMBER, RANK, LAG) for trend analysis</li>
-            <li>LAG() function for month-over-month growth calculation</li>
-          </ul>
-          
-          <div class="sql-block">
-            <div class="sql-label">Sample SQL Query</div>
-            <code>SELECT DATE_TRUNC('month', order_date) AS month,
-       SUM(revenue - cost) AS profit,
-       LAG(SUM(revenue - cost)) OVER (ORDER BY DATE_TRUNC('month', order_date)) AS prev_profit,
-       ROUND(((SUM(revenue - cost) - LAG(SUM(revenue - cost)) OVER (ORDER BY DATE_TRUNC('month', order_date))) / LAG(SUM(revenue - cost)) OVER (ORDER BY DATE_TRUNC('month', order_date)) * 100), 2) AS mom_growth
-FROM orders
-GROUP BY DATE_TRUNC('month', order_date)
-ORDER BY month;</code>
-          </div>
-          
-          <h4>Dashboard Overview</h4>
-          <ul>
-            <li>Revenue trend chart showing monthly progression</li>
-            <li>Customer segmentation analysis by AOV and purchase frequency</li>
-            <li>Regional performance breakdown with profit margins</li>
-            <li>KPI summary cards for executive overview</li>
-            <li>Retention cohort heatmap</li>
-          </ul>
-          
-          <h4>Key Insights</h4>
-          <ul>
-            <li>Revenue growth varies significantly by region (15-40% range)</li>
-            <li>Top 20% of customers contribute 65% of total revenue</li>
-            <li>Specific customer segments show early churn risk patterns</li>
-            <li>Seasonal trends influence regional performance differently</li>
-          </ul>
-          
-          <h4>Business Recommendation</h4>
-          <p>Implement targeted retention campaigns for high-value segments and region-based marketing strategies to capitalize on growth opportunities.</p>
-        </div>
-        <div class="project-links">
-          <a href="#" class="project-link">View Analysis</a>
-          <a href="#" class="project-link">Dashboard</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2025 Jaishankar Prasad Nirala | Built with <span class="heart">❤️</span></p>
-    <p class="footer-social">
-      <a href="https://github.com/JSPN9400" target="_blank">GitHub</a> • 
-      <a href="https://linkedin.com/in/jaishankar-prasad-nirala-440a44243" target="_blank">LinkedIn</a> • 
-      <a href="mailto:nirla9400@gmail.com">Email</a>
-    </p>
   </footer>
 </body>
 </html>
+
