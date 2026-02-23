@@ -12,7 +12,7 @@ You can change these anytime in the admin panel!
 
 ## 🚀 How to Access Admin Portal
 
-1. **Go to:** `https://yourusername.github.io/yourrepo/admin.html`
+1. **Go to:** `https://jspn9400.github.io/portpholio/admin.html`
 2. **Enter your ID:** `jspn`
 3. **Enter your Password:** `jspn_14102002`
 4. **Click "Login"**

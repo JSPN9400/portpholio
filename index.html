@@ -20,6 +20,7 @@
 <!-- Decorative background shapes for large screens moved to body -->
 
  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
 <body>
 <div class="bg-shape bg-shape1"></div>
 <div class="bg-shape bg-shape2"></div>
@@ -30,7 +31,14 @@
 <span class="site-title">Jaishankar Prasad Nirala</span>
 </div>
 
-<nav aria-label="Main navigation" class="main-nav">
+<!-- Hamburger Menu Button -->
+<button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+<span class="hamburger-line"></span>
+<span class="hamburger-line"></span>
+<span class="hamburger-line"></span>
+</button>
+
+<nav aria-label="Main navigation" class="main-nav" id="mainNav">
 <a class="nav-link active" href="index.html">Home</a>
 <a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="writing.html">Writing & Reflections</a>
@@ -50,25 +58,25 @@
 <img alt="Jaishankar Prasad Nirala" class="profile-pic hero-large-pic animated-profile-pic" src="assets/others/IMG_20260103_113121168.jpg" alt ="profile" loading="lazy"/>
 </div>
 <div class="hero-content">
-<h1 class="hero-title animated-title hero-animate hero-delay-2">Data Analyst | SQL | Python | Power BI | Business Insights</h1>
-<p class="hero-subtitle hero-animate hero-delay-3">
-Experienced in financial data operations, KPI reporting, and structured analytics on high-volume datasets.
+<h1 class="hero-title animated-title hero-animate hero-delay-2">Data Analyst Solving Business Problems</h1>
+<p class="hero-tagline hero-animate hero-delay-3">
+  Transform raw data into actionable insights that drive strategic decisions and business growth.
 </p>
-<p class="hero-description hero-animate hero-delay-3" style="margin-top: 0.8rem; color: var(--color-text-light); font-size: 0.95rem; line-height: 1.6;">
-I build structured data solutions using SQL, Python, Power BI, and Excel to transform raw data into actionable business insights.
+<p class="hero-description hero-animate hero-delay-3">
+  Specialized in SQL, Python, and Power BI. I deliver structured analytics solutions for high-volume datasets and KPI reporting.
 </p>
 <div class="hero-tech-badges hero-animate hero-delay-3">
-<span class="tech-badge">Python</span>
 <span class="tech-badge">SQL</span>
+<span class="tech-badge">Python</span>
 <span class="tech-badge">Power BI</span>
 <span class="tech-badge">Excel</span>
 <span class="tech-badge">Data Analysis</span>
-<span class="tech-badge">KPI Reporting</span>
 </div>
-<div class="hero-actions hero-animate hero-delay-4">
-<a class="btn btn-primary btn-animate" href="projects.html" tabindex="0">View Projects</a>
-<a class="btn btn-secondary btn-animate" href="resume.html" tabindex="0">View Resume</a>
-<a class="btn btn-secondary btn-animate" download="" href="assets/others/resume.pdf" tabindex="0">Download Resume</a>
+<div class="hero-cta hero-animate hero-delay-4">
+<a class="cta-button cta-primary" href="projects.html">View Projects</a>
+<a class="cta-button cta-secondary" href="#contact">Hire Me</a>
+<a class="cta-button cta-secondary" href="resume.html">View Resume</a>
+<a class="cta-button cta-secondary" download="" href="assets/others/resume.pdf">Download Resume</a>
 </div>
 </div>
 </div>
@@ -95,30 +103,315 @@ I build structured data solutions using SQL, Python, Power BI, and Excel to tran
 </div>
 </div>
 </section>
-<section class="skills">
-<div class="container fadein-section">
-<h2 class="section-title">Skills</h2>
+<section class="skills fade-in-section">
+<div class="container">
+<h2 class="section-title">Technical Skills</h2>
+<p class="section-subtitle">Professional expertise and proficiency levels</p>
 <div class="skills-grid">
-<div class="skill-card">
-<h3 class="skill-category">Technical Skills</h3>
-<ul class="skill-list">
-<li><strong>Python</strong> - Pandas, NumPy</li>
-<li><strong>SQL</strong> - Joins, Aggregations, Subqueries, Window Functions, LAG</li>
-<li><strong>Power BI</strong> - DAX, KPI Dashboards</li>
-<li><strong>Excel</strong> - Pivot Tables, Power Query</li>
-<li><strong>Data Cleaning</strong></li>
-<li><strong>Exploratory Data Analysis</strong></li>
-<li><strong>KPI Reporting</strong></li>
-</ul>
+
+<!-- SQL -->
+<div class="skill-card skill-animate skill-delay-1">
+<div class="skill-header">
+<h3 class="skill-name">SQL</h3>
+<span class="skill-level-badge">Expert</span>
 </div>
+<p class="skill-description">Advanced query optimization, window functions, CTEs, and database design</p>
+<div class="skill-progress">
+<div class="skill-bar" style="width: 95%"></div>
 </div>
+<span class="skill-percentage">95%</span>
 </div>
 
-<section class="contact" id="contact">
-<!-- Contact section moved to footer -->
+<!-- Python -->
+<div class="skill-card skill-animate skill-delay-2">
+<div class="skill-header">
+<h3 class="skill-name">Python</h3>
+<span class="skill-level-badge">Advanced</span>
+</div>
+<p class="skill-description">Pandas, NumPy, data analysis and automation scripting</p>
+<div class="skill-progress">
+<div class="skill-bar" style="width: 90%"></div>
+</div>
+<span class="skill-percentage">90%</span>
+</div>
 
-<!-- index.html -->
-<section id="contact"></section>
+<!-- Power BI -->
+<div class="skill-card skill-animate skill-delay-3">
+<div class="skill-header">
+<h3 class="skill-name">Power BI</h3>
+<span class="skill-level-badge">Advanced</span>
+</div>
+<p class="skill-description">DAX calculations, complex dashboards, and KPI reporting</p>
+<div class="skill-progress">
+<div class="skill-bar" style="width: 85%"></div>
+</div>
+<span class="skill-percentage">85%</span>
+</div>
+
+<!-- Excel -->
+<div class="skill-card skill-animate skill-delay-4">
+<div class="skill-header">
+<h3 class="skill-name">Excel</h3>
+<span class="skill-level-badge">Advanced</span>
+</div>
+<p class="skill-description">Pivot tables, Power Query, VBA, advanced formulas</p>
+<div class="skill-progress">
+<div class="skill-bar" style="width: 88%"></div>
+</div>
+<span class="skill-percentage">88%</span>
+</div>
+
+<!-- Data Analysis -->
+<div class="skill-card skill-animate skill-delay-5">
+<div class="skill-header">
+<h3 class="skill-name">Data Analysis</h3>
+<span class="skill-level-badge">Expert</span>
+</div>
+<p class="skill-description">Statistical analysis, pattern recognition, insights generation</p>
+<div class="skill-progress">
+<div class="skill-bar" style="width: 92%"></div>
+</div>
+<span class="skill-percentage">92%</span>
+</div>
+
+<!-- KPI Reporting -->
+<div class="skill-card skill-animate skill-delay-6">
+<div class="skill-header">
+<h3 class="skill-name">KPI Reporting</h3>
+<span class="skill-level-badge">Expert</span>
+</div>
+<p class="skill-description">Financial metrics, performance dashboards, trend analysis</p>
+<div class="skill-progress">
+<div class="skill-bar" style="width: 93%"></div>
+</div>
+<span class="skill-percentage">93%</span>
+</div>
+
+<!-- Data Cleaning -->
+<div class="skill-card skill-animate skill-delay-7">
+<div class="skill-header">
+<h3 class="skill-name">Data Cleaning</h3>
+<span class="skill-level-badge">Advanced</span>
+</div>
+<p class="skill-description">Data validation, missing value handling, data quality assurance</p>
+<div class="skill-progress">
+<div class="skill-bar" style="width: 89%"></div>
+</div>
+<span class="skill-percentage">89%</span>
+</div>
+
+<!-- EDA -->
+<div class="skill-card skill-animate skill-delay-8">
+<div class="skill-header">
+<h3 class="skill-name">Exploratory Data Analysis</h3>
+<span class="skill-level-badge">Advanced</span>
+</div>
+<p class="skill-description">Statistical summaries, visualization, hypothesis testing</p>
+<div class="skill-progress">
+<div class="skill-bar" style="width: 87%"></div>
+</div>
+<span class="skill-percentage">87%</span>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- KPI Statistics Section -->
+<section class="kpi-section fade-in-section">
+  <div class="container">
+    <div class="kpi-header">
+      <h2 class="kpi-title">Impact By The Numbers</h2>
+      <p class="kpi-subtitle">Delivering measurable results through data-driven solutions</p>
+    </div>
+
+    <div class="kpi-grid">
+      <!-- KPI 1: Projects Completed -->
+      <div class="kpi-card kpi-animate kpi-delay-1">
+        <div class="kpi-icon-wrapper">
+          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4"></path>
+            <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <h3 class="kpi-number" data-count="5">0</h3>
+          <p class="kpi-label">Projects Completed</p>
+          <p class="kpi-description">End-to-end data analysis and visualization solutions</p>
+        </div>
+      </div>
+
+      <!-- KPI 2: Dashboards Built -->
+      <div class="kpi-card kpi-animate kpi-delay-2">
+        <div class="kpi-icon-wrapper">
+          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <h3 class="kpi-number" data-count="8">0</h3>
+          <p class="kpi-label">Dashboards Built</p>
+          <p class="kpi-description">Interactive Power BI & Tableau visualizations</p>
+        </div>
+      </div>
+
+      <!-- KPI 3: Process Automation -->
+      <div class="kpi-card kpi-animate kpi-delay-3">
+        <div class="kpi-icon-wrapper">
+          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"></path>
+            <path d="M12 6v6l4 2.5"></path>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <h3 class="kpi-number" data-count="40">0<span class="kpi-suffix">%</span></h3>
+          <p class="kpi-label">Automation Improvement</p>
+          <p class="kpi-description">Reduced manual work through Python scripting</p>
+        </div>
+      </div>
+
+      <!-- KPI 4: Years of Practice -->
+      <div class="kpi-card kpi-animate kpi-delay-4">
+        <div class="kpi-icon-wrapper">
+          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"></path>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <h3 class="kpi-number" data-count="2">0</h3>
+          <p class="kpi-label">Years Learning & Practice</p>
+          <p class="kpi-description">Continuous skill development in data analytics</p>
+        </div>
+      </div>
+
+      <!-- KPI 5: SQL Queries Written -->
+      <div class="kpi-card kpi-animate kpi-delay-5">
+        <div class="kpi-icon-wrapper">
+          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="1"></circle>
+            <path d="M12 1v6m0 6v6"></path>
+            <path d="M4.22 4.22l4.24 4.24m3.08 3.08l4.24 4.24"></path>
+            <path d="M1 12h6m6 0h6"></path>
+            <path d="M4.22 19.78l4.24-4.24m3.08-3.08l4.24-4.24"></path>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <h3 class="kpi-number" data-count="500">0<span class="kpi-suffix">+</span></h3>
+          <p class="kpi-label">SQL Queries Written</p>
+          <p class="kpi-description">Complex window functions, CTEs, and optimizations</p>
+        </div>
+      </div>
+
+      <!-- KPI 6: Data Records Analyzed -->
+      <div class="kpi-card kpi-animate kpi-delay-6">
+        <div class="kpi-icon-wrapper">
+          <svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
+            <polyline points="12 12 20 7.5"></polyline>
+            <polyline points="12 12 12 21"></polyline>
+            <polyline points="12 12 4 7.5"></polyline>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <h3 class="kpi-number" data-count="500">0<span class="kpi-suffix">K+</span></h3>
+          <p class="kpi-label">Data Records Analyzed</p>
+          <p class="kpi-description">Large-scale datasets processed and visualized</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-section fade-in-section" id="contact">
+  <div class="contact-container">
+    <div class="contact-header">
+      <h2 class="contact-title">Get In Touch</h2>
+      <p class="contact-subtitle">Have a question or project idea? Send me a message and I'll get back to you within 24 hours.</p>
+    </div>
+
+    <form id="contact-form" class="contact-form" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name" class="form-label">Full Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          class="form-input"
+          placeholder="John Doe"
+          required
+          aria-label="Full Name"
+        >
+        <span class="form-error" id="name-error"></span>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          class="form-input"
+          placeholder="john@example.com"
+          required
+          aria-label="Email Address"
+        >
+        <span class="form-error" id="email-error"></span>
+      </div>
+
+      <!-- Message Field -->
+      <div class="form-group">
+        <label for="message" class="form-label">Message</label>
+        <textarea 
+          id="message" 
+          name="message" 
+          class="form-textarea"
+          placeholder="Tell me about your project or inquiry..."
+          rows="5"
+          required
+          aria-label="Message"
+        ></textarea>
+        <span class="form-error" id="message-error"></span>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn" id="submit-btn">
+        <span class="btn-text">Send Message</span>
+        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 2L11 13m11-11l-7 20-4-9-9-4 20-7z"></path>
+        </svg>
+      </button>
+    </form>
+
+    <!-- Success Message -->
+    <div id="success-message" class="success-message" style="display: none;">
+      <div class="success-content">
+        <svg class="success-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <div>
+          <h3 class="success-title">Message Sent!</h3>
+          <p class="success-text">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="error-message" style="display: none;">
+      <svg class="error-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <p id="error-text">Something went wrong. Please try again.</p>
+    </div>
+  </div>
 </section>
 </main>
 <footer class="site-footer">
