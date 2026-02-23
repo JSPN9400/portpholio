@@ -26,70 +26,135 @@
   <!-- Projects Section -->
   <section class="projects-section">
     <h2 class="section-heading">Featured Projects</h2>
-    <p class="section-subtitle">Building scalable backend systems, intelligent automations, and data-driven solutions.</p>
+    <p class="section-subtitle">Data analysis, KPI reporting, and business intelligence solutions.</p>
 
     <div class="projects-grid">
-      <!-- Featured Project -->
+      <!-- Project 1: Urban Air Quality -->
       <div class="project-card featured">
         <div class="featured-badge">Featured</div>
-        <h3 class="project-title">School Management System (FastAPI ERP Backend)</h3>
-        <p class="project-description">A comprehensive backend system for managing school operations including student records, fee management, attendance tracking, and automated report generation using FastAPI and SQL databases.</p>
+        <h3 class="project-title">Urban Air Quality & Pollution Trend Analysis (India)</h3>
+        <p class="project-description">Comprehensive analysis of pollution trends across major Indian cities to identify seasonal spikes and high-risk regions using 50,000+ environmental records.</p>
         <div class="project-tech">
-          <span class="tech-tag">FastAPI</span>
-          <span class="tech-tag">Python</span>
           <span class="tech-tag">SQL</span>
-          <span class="tech-tag">REST API</span>
-          <span class="tech-tag">Automation</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Power BI</span>
+          <span class="tech-tag">Data Analysis</span>
+          <span class="tech-tag">Window Functions</span>
+        </div>
+        <div class="project-details">
+          <h4>Problem Statement</h4>
+          <p>Analyse pollution trends across major Indian cities to identify seasonal spikes and high-risk regions.</p>
+          
+          <h4>Dataset Overview</h4>
+          <ul>
+            <li>50,000+ records across major cities</li>
+            <li>Columns: City, Date, AQI, PM2.5, PM10, Temperature, Humidity</li>
+          </ul>
+          
+          <h4>Data Cleaning & Feature Engineering</h4>
+          <ul>
+            <li>Removed duplicates and inconsistencies</li>
+            <li>Handled missing AQI values using imputation</li>
+            <li>Created Month and Season columns for temporal analysis</li>
+            <li>Standardised pollutant metrics for cross-city comparison</li>
+          </ul>
+          
+          <h4>SQL Analysis Techniques</h4>
+          <ul>
+            <li>Ranked cities by average AQI using window functions</li>
+            <li>Calculated yearly AQI growth trends</li>
+            <li>Compared seasonal pollution levels across regions</li>
+            <li>Applied PARTITION BY and ROW_NUMBER() for advanced ranking</li>
+          </ul>
+          
+          <h4>Dashboard Overview</h4>
+          <ul>
+            <li>KPI cards displaying Average AQI and Highest Polluted City</li>
+            <li>Monthly trend line chart for pollution progression</li>
+            <li>City comparison visuals and regional analysis</li>
+            <li>Seasonal comparison breakdown by pollutant type</li>
+          </ul>
+          
+          <h4>Key Insights</h4>
+          <ul>
+            <li>Winter months show significant AQI spikes in northern cities</li>
+            <li>PM2.5 contributes the highest pollution levels year-round</li>
+            <li>Certain industrial cities consistently rank high in annual averages</li>
+            <li>Correlation identified between temperature and pollution levels</li>
+          </ul>
+          
+          <h4>Business Recommendation</h4>
+          <p>Strengthen seasonal pollution monitoring systems and implement targeted emission control strategies during high-risk periods.</p>
         </div>
         <div class="project-links">
-          <a href="https://github.com/JSPN9400" target="_blank" class="project-link">View Code</a>
-          <a href="https://github.com/JSPN9400" target="_blank" class="project-link">Documentation</a>
+          <a href="#" class="project-link">View Analysis</a>
+          <a href="#" class="project-link">Dashboard</a>
         </div>
       </div>
 
-      <!-- Project 1 -->
-      <div class="project-card">
-        <h3 class="project-title">Personal AI Assistant (Shikha)</h3>
-        <p class="project-description">A voice and GUI-based Windows desktop assistant featuring advanced AI, TTS, and intelligent automation capabilities.</p>
+      <!-- Project 2: E-Commerce Sales -->
+      <div class="project-card featured">
+        <div class="featured-badge">Featured</div>
+        <h3 class="project-title">E-Commerce Sales & Customer Retention Analysis</h3>
+        <p class="project-description">Revenue and customer retention pattern analysis across 100,000+ transactions to identify growth opportunities and reduce churn risk.</p>
         <div class="project-tech">
-          <span class="tech-tag">Ollama R1</span>
+          <span class="tech-tag">SQL</span>
           <span class="tech-tag">Python</span>
-          <span class="tech-tag">TTS/STT</span>
-          <span class="tech-tag">Automation</span>
+          <span class="tech-tag">Power BI</span>
+          <span class="tech-tag">Data Analysis</span>
+          <span class="tech-tag">Subqueries</span>
+        </div>
+        <div class="project-details">
+          <h4>Business Problem</h4>
+          <p>Analyse revenue trends and customer retention patterns to improve profitability and identify high-value customer segments.</p>
+          
+          <h4>Dataset Information</h4>
+          <ul>
+            <li>100,000+ transaction records spanning 24 months</li>
+            <li>Columns: Order_ID, Customer_ID, Order_Date, Revenue, Cost, Region</li>
+          </ul>
+          
+          <h4>KPIs Calculated</h4>
+          <ul>
+            <li>Total Revenue and Period-over-Period Growth</li>
+            <li>Profit Margin by region and customer segment</li>
+            <li>Month-over-Month (MoM) Growth Percentage</li>
+            <li>Average Order Value (AOV) trends</li>
+            <li>Customer Retention Rate by cohort</li>
+          </ul>
+          
+          <h4>SQL Techniques Used</h4>
+          <ul>
+            <li>Complex JOINs for customer and order data consolidation</li>
+            <li>Aggregations with GROUP BY and HAVING clauses</li>
+            <li>Subqueries for cohort analysis and retention calculation</li>
+            <li>Window Functions (ROW_NUMBER, RANK, LAG) for trend analysis</li>
+            <li>LAG() function for month-over-month growth calculation</li>
+          </ul>
+          
+          <h4>Dashboard Overview</h4>
+          <ul>
+            <li>Revenue trend chart showing monthly progression</li>
+            <li>Customer segmentation analysis by AOV and purchase frequency</li>
+            <li>Regional performance breakdown with profit margins</li>
+            <li>KPI summary cards for executive overview</li>
+            <li>Retention cohort heatmap</li>
+          </ul>
+          
+          <h4>Key Insights</h4>
+          <ul>
+            <li>Revenue growth varies significantly by region (15-40% range)</li>
+            <li>Top 20% of customers contribute 65% of total revenue</li>
+            <li>Specific customer segments show early churn risk patterns</li>
+            <li>Seasonal trends influence regional performance differently</li>
+          </ul>
+          
+          <h4>Business Recommendation</h4>
+          <p>Implement targeted retention campaigns for high-value segments and region-based marketing strategies to capitalize on growth opportunities.</p>
         </div>
         <div class="project-links">
-          <a href="https://github.com/JSPN9400/shikha" target="_blank" class="project-link">View Code</a>
-          <a href="https://github.com/JSPN9400/shikha" target="_blank" class="project-link">Live Demo</a>
-        </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="project-card">
-        <h3 class="project-title">NLP for Sanskrit Texts</h3>
-        <p class="project-description">An advanced NLP system based on Paninian grammar to interpret and analyze ancient Vedic Sanskrit texts with linguistic accuracy.</p>
-        <div class="project-tech">
-          <span class="tech-tag">NLP</span>
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Linguistics</span>
-          <span class="tech-tag">NLTK</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/JSPN9400/sanskrit-nlp" target="_blank" class="project-link">View Code</a>
-        </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="project-card">
-        <h3 class="project-title">ABAAS (AI Based Account Analysis System)</h3>
-        <p class="project-description">An intelligent financial analysis platform integrating Vyapar and Google Sheets for comprehensive business account tracking and analytics.</p>
-        <div class="project-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Pandas</span>
-          <span class="tech-tag">Finance</span>
-          <span class="tech-tag">Automation</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/JSPN9400/abaas" target="_blank" class="project-link">View Code</a>
+          <a href="#" class="project-link">View Analysis</a>
+          <a href="#" class="project-link">Dashboard</a>
         </div>
       </div>
     </div>
