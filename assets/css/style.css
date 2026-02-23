@@ -294,10 +294,16 @@ html.light .brand-mark {
   font-size: clamp(2rem, 5vw, 3.4rem);
   margin-bottom: 1rem;
   max-width: 15ch;
-  background: linear-gradient(135deg, var(--text) 0%, color-mix(in srgb, var(--accent) 55%, var(--text)) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--text);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-copy h1 {
+    background: linear-gradient(135deg, var(--text) 0%, color-mix(in srgb, var(--accent) 55%, var(--text)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 .hero-summary {
@@ -999,5 +1005,25 @@ html.light .brand-mark {
 
   .resume-frame {
     min-height: 68vh;
+  }
+}
+
+/* Browser fallback when color-mix is not supported */
+@supports not (color: color-mix(in srgb, #000 50%, #fff 50%)) {
+  .site-header.scrolled {
+    background: rgba(6, 10, 18, 0.92);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(63, 123, 255, 0.14);
+  }
+
+  .skill-card-strong:hover,
+  .impact-item:hover,
+  .proof-card:hover,
+  .case-card:hover,
+  .contact-link-item:hover {
+    border-color: var(--accent);
   }
 }
