@@ -802,14 +802,6 @@
             margin-bottom: 0;
         }
 
-        .skill-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--color-accent3);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
         .skill-bar-fill {
             height: 100%;
             background: var(--color-accent);
@@ -1377,7 +1369,7 @@
                 font-size: 2rem;
             }
         }
-.hero-large-pic {
+.hero-photo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1389,7 +1381,7 @@
   height: 320px;
   object-fit: cover;
   border-radius: 10px;  /* minimal rounded corners */
-  border: 3px ; /* border ko change karenge color ke hisab se */
+  border: 3px solid transparent;
   transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
