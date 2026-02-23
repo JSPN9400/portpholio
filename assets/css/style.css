@@ -236,7 +236,7 @@
             border-radius: 12px;
             padding: 0.2em 0.6em;
             margin-right: 0.5em;
-            background: linear-gradient(120deg, var(--color-accent) 60%, var(--color-accent2) 100%);
+            background: var(--color-accent);
             box-shadow: 0 2px 8px 0 rgba(91, 143, 184, 0.15);
             transition: box-shadow 0.2s, border-color 0.2s;
         }

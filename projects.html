@@ -68,6 +68,15 @@
             <li>Applied PARTITION BY and ROW_NUMBER() for advanced ranking</li>
           </ul>
           
+          <div class="sql-block">
+            <div class="sql-label">Sample SQL Query</div>
+            <code>SELECT city, ROUND(AVG(aqi), 2) AS avg_aqi,
+       ROW_NUMBER() OVER (ORDER BY AVG(aqi) DESC) AS rank
+FROM pollution_data
+GROUP BY city
+ORDER BY avg_aqi DESC;</code>
+          </div>
+          
           <h4>Dashboard Overview</h4>
           <ul>
             <li>KPI cards displaying Average AQI and Highest Polluted City</li>
@@ -132,6 +141,17 @@
             <li>Window Functions (ROW_NUMBER, RANK, LAG) for trend analysis</li>
             <li>LAG() function for month-over-month growth calculation</li>
           </ul>
+          
+          <div class="sql-block">
+            <div class="sql-label">Sample SQL Query</div>
+            <code>SELECT DATE_TRUNC('month', order_date) AS month,
+       SUM(revenue - cost) AS profit,
+       LAG(SUM(revenue - cost)) OVER (ORDER BY DATE_TRUNC('month', order_date)) AS prev_profit,
+       ROUND(((SUM(revenue - cost) - LAG(SUM(revenue - cost)) OVER (ORDER BY DATE_TRUNC('month', order_date))) / LAG(SUM(revenue - cost)) OVER (ORDER BY DATE_TRUNC('month', order_date)) * 100), 2) AS mom_growth
+FROM orders
+GROUP BY DATE_TRUNC('month', order_date)
+ORDER BY month;</code>
+          </div>
           
           <h4>Dashboard Overview</h4>
           <ul>
