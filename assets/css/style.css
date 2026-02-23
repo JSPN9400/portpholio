@@ -1365,7 +1365,11 @@
             font-weight: 600;
             margin-bottom: 1.2rem;
             line-height: 1.5;
-            transition: color 0.3s, font-size 0.3s;
+        }
+        
+        .hero-tagline:hover {
+            color: var(--color-accent2);
+            font-size: 1.3rem;
         }
 
         @media (max-width: 700px) {
