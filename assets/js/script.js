@@ -33,6 +33,57 @@
             });
         }
 
+        // Sticky/active navbar behavior for section-based links
+        function initNavbarBehavior() {
+            const header = document.querySelector('.site-header');
+            const navLinks = document.querySelectorAll('.main-nav .nav-link[href^="#"]');
+            if (!header || navLinks.length === 0) return;
+
+            const targets = Array.from(navLinks)
+                .map(link => {
+                    const href = link.getAttribute('href');
+                    if (!href || href === '#') return null;
+                    const section = document.querySelector(href);
+                    return section ? { link, section } : null;
+                })
+                .filter(Boolean);
+
+            function updateHeaderState() {
+                if (window.scrollY > 12) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+
+            function updateActiveLink() {
+                const headerHeight = header.offsetHeight;
+                const scrollPosition = window.scrollY + headerHeight + 24;
+
+                let current = null;
+                targets.forEach(item => {
+                    if (item.section.offsetTop <= scrollPosition) {
+                        current = item;
+                    }
+                });
+
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (current) {
+                    current.link.classList.add('active');
+                } else if (targets[0]) {
+                    targets[0].link.classList.add('active');
+                }
+            }
+
+            window.addEventListener('scroll', function () {
+                updateHeaderState();
+                updateActiveLink();
+            });
+
+            updateHeaderState();
+            updateActiveLink();
+        }
+
         // Contact Form Handler with Formspree
         function initContactForm() {
             const form = document.getElementById('contact-form');
@@ -332,7 +383,10 @@
             
             // Initialize hamburger menu
             initHamburgerMenu();
-            
+
+            // Initialize navbar sticky/active behavior
+            initNavbarBehavior();
+             
             // Initialize contact form
             initContactForm();
         });
