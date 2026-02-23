@@ -1104,6 +1104,145 @@ html.dark .site-header {
     margin-bottom: 0;
 }
 
+/* Writing Categories */
+.writing-category {
+    margin-bottom: 4rem;
+}
+
+.category-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-border);
+}
+
+html.dark .category-heading {
+    color: var(--color-accent2);
+    border-bottom-color: rgba(95, 163, 208, 0.2);
+}
+
+/* Writing Entries */
+.writing-entry {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+html.dark .writing-entry {
+    border-color: rgba(95, 163, 208, 0.15);
+}
+
+.writing-entry:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.entry-header {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
+}
+
+html.dark .entry-header {
+    border-bottom-color: rgba(95, 163, 208, 0.1);
+}
+
+.entry-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+}
+
+html.dark .entry-title {
+    color: var(--color-accent2);
+}
+
+.entry-date {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin: 0;
+    font-weight: 500;
+}
+
+.entry-content {
+    color: var(--color-text-light);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.entry-content p {
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+}
+
+.entry-content p:last-of-type {
+    margin-bottom: 1.5rem;
+}
+
+.read-more {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 0.95rem;
+}
+
+html.dark .read-more {
+    color: var(--color-accent2);
+}
+
+.read-more:hover {
+    color: var(--color-accent2);
+}
+
+html.dark .read-more:hover {
+    color: var(--color-accent);
+}
+
+/* Poem Entry Styling */
+.poem-entry {
+    background: var(--color-bg-alt);
+}
+
+.poem-content {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--color-text-light);
+    white-space: pre-wrap;
+}
+
+.poem-content p {
+    margin-bottom: 1.5rem;
+}
+
+.poem-content p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Empty State Message */
+.empty-message {
+    color: var(--color-text-light);
+    font-size: 1rem;
+    text-align: center;
+    padding: 2rem;
+    background: var(--color-card);
+    border: 1px dashed var(--color-border);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+html.dark .empty-message {
+    border-color: rgba(95, 163, 208, 0.2);
+}
+
 .article-list {
     list-style: none;
     padding: 0;
