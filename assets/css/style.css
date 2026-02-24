@@ -810,12 +810,34 @@ html.light .brand-mark {
   color: var(--text-muted);
 }
 
+.blog-subheading {
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+}
+
+.blog-content {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.blog-content-poem {
+  white-space: normal;
+  font-style: italic;
+}
+
 .read-more {
   display: inline-block;
   margin-top: 0.75rem;
   color: var(--accent);
   font-weight: 700;
   font-size: 0.87rem;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .site-footer {

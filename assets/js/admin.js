@@ -1,176 +1,291 @@
 // Admin Panel - Content Management
-// This script handles adding, displaying, and deleting content
+// Handles add, edit, delete, backup, and restore for writing content.
 
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('contentForm');
-  const contentListContainer = document.getElementById('contentListContainer');
-  const successMessage = document.getElementById('successMessage');
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contentForm");
+  const contentListContainer = document.getElementById("contentListContainer");
+  const successMessage = document.getElementById("successMessage");
   const contentTypeInputs = document.querySelectorAll('input[name="contentType"]');
   const contentLabel = document.querySelector('label[for="content"]');
-  const poemHint = document.getElementById('poemHint');
+  const poemHint = document.getElementById("poemHint");
+  const submitBtn = document.getElementById("submitBtn");
+  const cancelEditBtn = document.getElementById("cancelEditBtn");
+  const editingIndexInput = document.getElementById("editingIndex");
 
-  // Update content type label when radio button changes
-  contentTypeInputs.forEach(input => {
-    input.addEventListener('change', function() {
-      if (this.value === 'poem') {
-        contentLabel.textContent = 'Poem';
-        document.getElementById('content').placeholder = 'Write your poem here (each line will be preserved)...';
-        poemHint.style.display = 'block';
-      } else {
-        contentLabel.textContent = 'Content';
-        document.getElementById('content').placeholder = 'Write your blog article here...';
-        poemHint.style.display = 'none';
-      }
+  function escapeHtml(text) {
+    const map = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" };
+    return String(text).replace(/[&<>"']/g, (m) => map[m]);
+  }
+
+  function updateTypeUI(type) {
+    if (type === "poem") {
+      contentLabel.textContent = "Poem";
+      document.getElementById("content").placeholder = "Write your poem here (line breaks are preserved)...";
+      poemHint.style.display = "block";
+    } else {
+      contentLabel.textContent = "Content";
+      document.getElementById("content").placeholder = "Write your blog article here...";
+      poemHint.style.display = "none";
+    }
+  }
+
+  contentTypeInputs.forEach((input) => {
+    input.addEventListener("change", function () {
+      updateTypeUI(this.value);
     });
   });
 
-  // Load and display existing content
+  function getStoredContent() {
+    const stored = localStorage.getItem("portfolioContent");
+    if (!stored) return [];
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) return parsed;
+      if (parsed && Array.isArray(parsed.content)) return parsed.content;
+      return [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveContent(contentArray) {
+    localStorage.setItem("portfolioContent", JSON.stringify(contentArray));
+  }
+
+  function normalizeContent(contentArray) {
+    let hasChanges = false;
+    const normalized = contentArray.map((item, index) => {
+      const next = { ...item };
+      if (!next.id) {
+        next.id = `content-${Date.now()}-${index}`;
+        hasChanges = true;
+      }
+      if (!Object.prototype.hasOwnProperty.call(next, "subheading")) {
+        next.subheading = "";
+        hasChanges = true;
+      }
+      if (!Object.prototype.hasOwnProperty.call(next, "category")) {
+        next.category = next.type === "poem" ? "Poetry" : "Thoughts and Society";
+        hasChanges = true;
+      }
+      return next;
+    });
+
+    if (hasChanges) saveContent(normalized);
+    return normalized;
+  }
+
+  function resetEditState() {
+    editingIndexInput.value = "";
+    if (submitBtn) submitBtn.textContent = "Add Content";
+    if (cancelEditBtn) cancelEditBtn.style.display = "none";
+    successMessage.classList.remove("show");
+  }
+
   function loadContent() {
-    const content = getStoredContent();
-    
+    const content = normalizeContent(getStoredContent());
+
     if (content.length === 0) {
-      contentListContainer.innerHTML = '<div class="empty-content-list">No content added yet. Fill out the form above to get started!</div>';
+      contentListContainer.innerHTML =
+        '<div class="empty-content-list">No content added yet. Fill out the form above to get started.</div>';
       return;
     }
 
-    // Sort by date (newest first)
-    content.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+    const sorted = [...content].sort((a, b) => new Date(b.dateAdded || 0) - new Date(a.dateAdded || 0));
 
-    contentListContainer.innerHTML = content.map((item, index) => `
-      <div class="content-item">
-        <div class="content-item-info">
-          <h3>
-            <span class="content-type-badge ${item.type === 'blog' ? 'badge-blog' : 'badge-poem'}">
-              ${item.type === 'blog' ? '📝 Article' : '✨ Poem'}
-            </span>
-            ${item.title}
-          </h3>
-          <p>📅 ${item.date}</p>
-        </div>
-        <button class="btn-delete" onclick="deleteContent(${index})">Delete</button>
-      </div>
-    `).join('');
+    contentListContainer.innerHTML = sorted
+      .map((item) => {
+        const badgeLabel = item.type === "poem" ? "Poem" : "Article";
+        const subtitleLine = item.subheading
+          ? `<p style="margin-top:0.3rem;">${escapeHtml(item.subheading)}</p>`
+          : "";
+
+        return `
+          <div class="content-item">
+            <div class="content-item-info">
+              <h3>
+                <span class="content-type-badge ${item.type === "blog" ? "badge-blog" : "badge-poem"}">
+                  ${badgeLabel}
+                </span>
+                ${escapeHtml(item.title || "Untitled")}
+              </h3>
+              ${subtitleLine}
+              <p>${escapeHtml(item.date || "No date")} | ${escapeHtml(item.category || "")}</p>
+            </div>
+            <div class="content-actions">
+              <button class="btn-edit" onclick="editContent('${item.id}')">Edit</button>
+              <button class="btn-delete" onclick="deleteContent('${item.id}')">Delete</button>
+            </div>
+          </div>
+        `;
+      })
+      .join("");
   }
 
-  // Get stored content from localStorage
-  function getStoredContent() {
-    const stored = localStorage.getItem('portfolioContent');
-    return stored ? JSON.parse(stored) : [];
+  function showSuccess(message) {
+    successMessage.textContent = message;
+    successMessage.classList.add("show");
+    setTimeout(() => {
+      successMessage.classList.remove("show");
+    }, 3500);
   }
 
-  // Save content to localStorage
-  function saveContent(contentArray) {
-    localStorage.setItem('portfolioContent', JSON.stringify(contentArray));
-  }
-
-  // Handle form submission
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
     const contentType = document.querySelector('input[name="contentType"]:checked').value;
-    const title = document.getElementById('title').value.trim();
-    const date = document.getElementById('date').value.trim();
-    const content = document.getElementById('content').value.trim();
+    const title = document.getElementById("title").value.trim();
+    const subheading = document.getElementById("subheading").value.trim();
+    const category = document.getElementById("category").value.trim();
+    const date = document.getElementById("date").value.trim();
+    const content = document.getElementById("content").value.trim();
+    const editingId = editingIndexInput.value;
 
-    // Validate inputs
     if (!title || !date || !content) {
-      alert('Please fill out all fields');
+      alert("Please fill out title, date, and content.");
       return;
     }
 
-    // Create new content object
-    const newContent = {
+    const allContent = normalizeContent(getStoredContent());
+    const payload = {
       type: contentType,
-      title: title,
-      date: date,
-      content: content,
-      dateAdded: new Date().toISOString()
+      title,
+      subheading,
+      category: category || (contentType === "poem" ? "Poetry" : "Thoughts and Society"),
+      date,
+      content,
     };
 
-    // Add to storage
-    const allContent = getStoredContent();
-    allContent.push(newContent);
+    if (editingId) {
+      const idx = allContent.findIndex((item) => item.id === editingId);
+      if (idx !== -1) {
+        allContent[idx] = {
+          ...allContent[idx],
+          ...payload,
+          dateUpdated: new Date().toISOString(),
+        };
+      }
+      showSuccess("Content updated successfully.");
+    } else {
+      allContent.push({
+        id: `content-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        ...payload,
+        dateAdded: new Date().toISOString(),
+      });
+      showSuccess("Content added successfully.");
+    }
+
     saveContent(allContent);
-
-    // Show success message
-    successMessage.classList.add('show');
-    setTimeout(() => {
-      successMessage.classList.remove('show');
-    }, 4000);
-
-    // Reset form
     form.reset();
-    document.getElementById('typeBlog').checked = true;
-    contentLabel.textContent = 'Content';
-    document.getElementById('content').placeholder = 'Write your blog article here...';
-    poemHint.style.display = 'none';
-
-    // Reload content list
+    document.getElementById("typeBlog").checked = true;
+    updateTypeUI("blog");
+    resetEditState();
     loadContent();
   });
 
-  // Make deleteContent function global
-  window.deleteContent = function(index) {
-    if (confirm('Are you sure you want to delete this content?')) {
-      const allContent = getStoredContent();
-      allContent.splice(index, 1);
-      saveContent(allContent);
-      loadContent();
+  if (cancelEditBtn) {
+    cancelEditBtn.addEventListener("click", () => {
+      form.reset();
+      document.getElementById("typeBlog").checked = true;
+      updateTypeUI("blog");
+      resetEditState();
+    });
+  }
+
+  form.addEventListener("reset", () => {
+    setTimeout(() => {
+      resetEditState();
+      document.getElementById("typeBlog").checked = true;
+      updateTypeUI("blog");
+    }, 0);
+  });
+
+  window.editContent = function (id) {
+    const allContent = normalizeContent(getStoredContent());
+    const item = allContent.find((entry) => entry.id === id);
+    if (!item) return;
+
+    const typeInput = document.getElementById(item.type === "poem" ? "typePoem" : "typeBlog");
+    if (typeInput) typeInput.checked = true;
+    updateTypeUI(item.type);
+
+    document.getElementById("title").value = item.title || "";
+    document.getElementById("subheading").value = item.subheading || "";
+    document.getElementById("category").value = item.category || "";
+    document.getElementById("date").value = item.date || "";
+    document.getElementById("content").value = item.content || "";
+    editingIndexInput.value = id;
+
+    if (submitBtn) submitBtn.textContent = "Update Content";
+    if (cancelEditBtn) cancelEditBtn.style.display = "inline-block";
+
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  window.deleteContent = function (id) {
+    if (!confirm("Are you sure you want to delete this content?")) return;
+
+    const allContent = normalizeContent(getStoredContent());
+    const filtered = allContent.filter((item) => item.id !== id);
+    saveContent(filtered);
+
+    if (editingIndexInput.value === id) {
+      form.reset();
+      document.getElementById("typeBlog").checked = true;
+      updateTypeUI("blog");
+      resetEditState();
     }
+
+    loadContent();
   };
 
-  // Download backup as JSON
-  window.downloadBackup = function() {
-    const content = getStoredContent();
+  window.downloadBackup = function () {
+    const content = normalizeContent(getStoredContent());
     const backup = {
-      version: '1.0',
+      version: "2.0",
       exportDate: new Date().toISOString(),
-      content: content
+      content,
     };
-    
+
     const json = JSON.stringify(backup, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
+    const blob = new Blob([json], { type: "application/json" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `portfolio-backup-${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `portfolio-backup-${new Date().toISOString().split("T")[0]}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
     URL.revokeObjectURL(url);
-    
-    alert('✅ Backup downloaded successfully!');
+    alert("Backup downloaded successfully.");
   };
 
-  // Upload backup from JSON
-  window.uploadBackup = function(event) {
+  window.uploadBackup = function (event) {
     const file = event.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       try {
         const backup = JSON.parse(e.target.result);
         if (backup.content && Array.isArray(backup.content)) {
-          const confirmed = confirm('This will replace all current content. Continue?');
-          if (confirmed) {
-            saveContent(backup.content);
+          if (confirm("This will replace all current content. Continue?")) {
+            saveContent(normalizeContent(backup.content));
             loadContent();
-            alert('✅ Backup restored successfully!');
+            alert("Backup restored successfully.");
           }
         } else {
-          alert('❌ Invalid backup file format');
+          alert("Invalid backup file format.");
         }
       } catch (err) {
-        alert('❌ Error reading backup file');
+        alert("Error reading backup file.");
       }
     };
     reader.readAsText(file);
-    
-    // Reset input
-    event.target.value = '';
+    event.target.value = "";
   };
 
-  // Initial load
+  updateTypeUI("blog");
+  resetEditState();
   loadContent();
 });

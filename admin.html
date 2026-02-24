@@ -195,6 +195,35 @@
       background: #ee5a52;
     }
 
+    .btn-edit {
+      background: #3f7bff;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .btn-edit:hover {
+      background: #2e5fd6;
+    }
+
+    .content-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .field-help {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+    }
+
     .empty-content-list {
       text-align: center;
       padding: 2rem;
@@ -274,6 +303,19 @@
       color: var(--color-accent2);
       border-bottom-color: rgba(95, 163, 208, 0.2);
     }
+
+    @media (max-width: 760px) {
+      .content-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+      }
+
+      .content-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
@@ -332,7 +374,7 @@
       </div>
 
       <div class="success-message" id="successMessage">
-        ✅ Content added successfully! Visit <a href="writing.html" style="color: white; text-decoration: underline;">Writing & Reflections</a> to see it.
+        Content saved successfully. Visit <a href="writing.html" style="color: white; text-decoration: underline;">Writing</a> to see it.
       </div>
 
       <!-- Add Content Form -->
@@ -360,6 +402,17 @@
         </div>
 
         <div class="form-group">
+          <label for="subheading">Subheading</label>
+          <input type="text" id="subheading" name="subheading" placeholder="Add a short subheading (optional)">
+          <p class="field-help">This appears below the title for better reader flow.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input type="text" id="category" name="category" placeholder="e.g., Self, Politics, Environment, Data, Poem">
+        </div>
+
+        <div class="form-group">
           <label for="date">Date</label>
           <input type="text" id="date" name="date" placeholder="e.g., March 2024" value="February 2026" required>
         </div>
@@ -375,8 +428,11 @@
           </p>
         </div>
 
+        <input type="hidden" id="editingIndex" value="">
+
         <div class="button-group">
-          <button type="submit" class="btn btn-primary">Add Content</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Add Content</button>
+          <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display: none;">Cancel Edit</button>
           <button type="reset" class="btn btn-secondary">Clear Form</button>
         </div>
       </form>
@@ -431,8 +487,8 @@
   </footer>
   </div><!-- End adminContent -->
 
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/admin.js"></script>
+  <script src="assets/js/script.js?v=20260224.2"></script>
+  <script src="assets/js/admin.js?v=20260224.2"></script>
   <script>
     // Admin Credentials - Change anytime!
     // Default: ID: jspn | Password: jspn_14102002
