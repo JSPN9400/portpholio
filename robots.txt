@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jspn9400.github.io/portpholio/sitemap.xml
