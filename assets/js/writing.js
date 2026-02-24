@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const localPosts = readLocalContent();
   const sharedPosts = await readSharedContent();
-  const activeSource = localPosts.length > 0 ? localPosts : sharedPosts;
+  const activeSource = sharedPosts.length > 0 ? sharedPosts : localPosts;
   const posts = normalizeItems(activeSource);
 
   if (posts.length === 0) {
@@ -129,3 +129,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 });
+
