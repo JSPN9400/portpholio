@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("blogArticlesContainer");
   if (!container) return;
 
@@ -13,11 +13,24 @@ document.addEventListener("DOMContentLoaded", () => {
     return String(text).replace(/[&<>"']/g, (m) => map[m]);
   }
 
-  function getContent() {
+  function readLocalContent() {
     const raw = localStorage.getItem("portfolioContent");
     if (!raw) return [];
     try {
       const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) return parsed;
+      if (parsed && Array.isArray(parsed.content)) return parsed.content;
+      return [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async function readSharedContent() {
+    try {
+      const response = await fetch("assets/data/writing.json?v=20260224.4", { cache: "no-store" });
+      if (!response.ok) return [];
+      const parsed = await response.json();
       if (Array.isArray(parsed)) return parsed;
       if (parsed && Array.isArray(parsed.content)) return parsed.content;
       return [];
@@ -46,7 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return clean.slice(0, length).trim() + "...";
   }
 
-  const posts = normalizeItems(getContent());
+  const localPosts = readLocalContent();
+  const sharedPosts = await readSharedContent();
+  const activeSource = localPosts.length > 0 ? localPosts : sharedPosts;
+  const posts = normalizeItems(activeSource);
 
   if (posts.length === 0) {
     container.innerHTML = `
@@ -56,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="date">No posts yet</span>
         </div>
         <h2>New posts will appear here</h2>
-        <p>Add writing from <a class="read-more" href="admin.html">admin panel</a> on thoughts, society, poetry, politics, environment, or data topics.</p>
+        <p>Add writing in <code>assets/data/writing.json</code> and publish the site. You can still draft locally from <a class="read-more" href="admin.html">admin panel</a>.</p>
       </article>
     `;
     return;

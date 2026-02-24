@@ -1,0 +1,12 @@
+[
+  {
+    "id": "sample-post-1",
+    "type": "blog",
+    "title": "Welcome to Writing",
+    "subheading": "Shared content now comes from a tracked JSON file",
+    "date": "February 2026",
+    "category": "Updates",
+    "content": "This writing page now supports shared, device-independent posts using assets/data/writing.json. Add or edit entries in that file and deploy/push your changes so all visitors can see the same content.",
+    "dateAdded": "2026-02-24T00:00:00.000Z"
+  }
+]
