@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="tag">Update</span>
           <span class="date">No posts yet</span>
         </div>
-        <h2>Articles will appear here</h2>
-        <p>Add writing from <a class="read-more" href="admin.html">admin panel</a> to populate this page.</p>
+        <h2>New posts will appear here</h2>
+        <p>Add writing from <a class="read-more" href="admin.html">admin panel</a> on thoughts, society, poetry, politics, environment, or data topics.</p>
       </article>
     `;
     return;
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const title = escapeHtml(blog.title || "Untitled");
       const date = escapeHtml(blog.date || "No date");
       const summary = escapeHtml(excerpt(blog.content || ""));
-      const category = escapeHtml(blog.category || "Business Analytics");
+      const category = escapeHtml(blog.category || "Thoughts and Society");
 
       return `
         <article class="blog-card">

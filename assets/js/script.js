@@ -90,17 +90,37 @@ function initActiveLinks() {
   if (items.length === 0) return;
 
   function setActiveByScroll() {
-    const y = window.scrollY + 120;
+    const header = document.querySelector(".site-header");
+    const headerHeight = header ? header.offsetHeight : 72;
+    const probeY = headerHeight + window.innerHeight * 0.35;
+    const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
     let current = items[0];
-    items.forEach((item) => {
-      if (item.section.offsetTop <= y) current = item;
-    });
+    let bestDistance = Number.POSITIVE_INFINITY;
+
+    if (isNearBottom) {
+      current = items[items.length - 1];
+    } else {
+      items.forEach((item) => {
+        const rect = item.section.getBoundingClientRect();
+        const containsProbe = rect.top <= probeY && rect.bottom > probeY;
+        if (containsProbe) current = item;
+
+        const distance = Math.abs(rect.top - headerHeight);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          if (!containsProbe) current = item;
+        }
+      });
+    }
+
     sectionLinks.forEach((link) => link.classList.remove("active"));
     current.link.classList.add("active");
   }
 
   setActiveByScroll();
   window.addEventListener("scroll", setActiveByScroll);
+  window.addEventListener("resize", setActiveByScroll);
 }
 
 function initSmoothScroll() {
