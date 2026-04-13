@@ -716,6 +716,14 @@ function createPdf(formData, selected) {
   return doc;
 }
 
+const GOOGLE_SHEETS_ENDPOINT = "https://script.google.com/macros/s/YOUR_DEPLOY_ID/exec";
+
+function formatServiceList(selected) {
+  return selected
+    .map((item) => `${item.category}: ${item.name} (${formatCurrency(item.price)})`)
+    .join("; ");
+}
+
 function buildWhatsappLink(formData, selected) {
   const total = selected.reduce((sum, item) => sum + item.price, 0);
   const lines = [
@@ -732,6 +740,46 @@ function buildWhatsappLink(formData, selected) {
   return `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
 }
 
+function isSheetsEndpointConfigured() {
+  return GOOGLE_SHEETS_ENDPOINT && !GOOGLE_SHEETS_ENDPOINT.includes("YOUR_DEPLOY_ID");
+}
+
+async function submitEnquiryToGoogleSheets(formData, selected) {
+  if (!isSheetsEndpointConfigured()) {
+    throw new Error(
+      "Google Sheets endpoint is not configured. Replace YOUR_DEPLOY_ID in assets/js/freelance.js with your Apps Script deploy ID."
+    );
+  }
+
+  const payload = {
+    name: formData.clientName || "",
+    businessType: formData.businessType || "",
+    contact: formData.clientContact || "",
+    services: formatServiceList(selected),
+    total: selected.reduce((sum, item) => sum + item.price, 0),
+    notes: formData.requirementNotes || "",
+    source: "Website enquiry form",
+  };
+
+  const response = await fetch(GOOGLE_SHEETS_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Google Sheets submission failed: ${response.status} ${response.statusText} - ${text}`);
+  }
+
+  const result = await response.json();
+  if (!result.success) {
+    throw new Error(result.error || "Google Sheets submission returned failure.");
+  }
+}
+
 function initQuotationForm() {
   const form = document.getElementById("quote-form");
   const message = document.getElementById("quote-message");
@@ -742,7 +790,7 @@ function initQuotationForm() {
 
   if (!form || !message || !actions || !downloadButton || !whatsappLink) return;
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     message.className = "form-note";
     message.textContent = "";
@@ -760,13 +808,15 @@ function initQuotationForm() {
       latestPdf = createPdf(formData, selected);
       latestFileName = createQuotationFileName(formData.clientName);
 
+      await submitEnquiryToGoogleSheets(formData, selected);
+
       const whatsappHref = buildWhatsappLink(formData, selected);
       whatsappLink.href = whatsappHref;
       if (stickyWhatsapp) stickyWhatsapp.href = whatsappHref;
 
       actions.hidden = false;
       message.classList.add("success");
-      message.textContent = "Quotation is ready. Download the PDF or send the summary through WhatsApp.";
+      message.textContent = "Quotation is ready and enquiry was saved. Download the PDF or send the summary through WhatsApp.";
       latestPdf.save(latestFileName);
     } catch (error) {
       message.classList.add("error");
