@@ -347,9 +347,9 @@ function createPdf(formData, selected) {
   addSectionTitle("Payment & Agreement Terms");
   addBullet("25% advance payment is required to start the project.");
   addBullet("Remaining payment will be completed in agreed milestones.");
-  addBullet("For projects below Rs. 50,000: Work will proceed based on mutual agreement without formal MoU.");
+  addBullet("For projects below \u20B950,000: Work will proceed based on mutual agreement without formal MoU.");
   addBullet("Assurance: This does not affect service quality. A proper bill and signed document will be provided, clearly mentioning all requirements and deliverables.");
-  addBullet("For projects above Rs. 50,000: A formal MoU (agreement) will be created to ensure transparency and commitment.");
+  addBullet("For projects above \u20B950,000: A formal MoU (agreement) will be created to ensure transparency and commitment.");
 
   ensurePdfSpace(20);
   doc.setFont("helvetica", "bold");
