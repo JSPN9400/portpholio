@@ -18,10 +18,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css?v=20260224.3">
-  <link rel="stylesheet" href="assets/css/freelance.css?v=20260413.2">
+  <link rel="stylesheet" href="assets/css/freelance.css?v=20260413.3">
   <script src="assets/js/script.js?v=20260224.3" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-  <script src="assets/js/freelance.js?v=20260413.2" defer></script>
+  <script src="assets/js/freelance.js?v=20260413.3" defer></script>
 </head>
 <body data-page="freelance">
   <header class="site-header">
@@ -52,14 +52,21 @@
 
   <main>
     <section class="freelance-hero">
+      <div class="hero-particles" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <div class="container freelance-hero-grid">
         <div class="freelance-hero-copy reveal">
-          <p class="eyebrow">Freelance & Services</p>
-          <h1>Build your growth system and get an instant quotation.</h1>
-          <p>Select the services your business needs, see the total update in real time, and download a polished PDF proposal made for your requirement.</p>
+          <p class="eyebrow">Digital Growth Systems</p>
+          <h1>I Build Systems That Grow Your Business</h1>
+          <p>Websites, Data, SEO & Automation - all in one premium execution system for serious business growth.</p>
           <div class="service-hero-actions">
-            <a class="btn btn-primary" href="#pricing-catalog">View Pricing</a>
-            <a class="btn btn-secondary" href="#enquiry-form">Generate Quote</a>
+            <a class="btn btn-primary" href="#pricing-catalog">Build Your Solution</a>
+            <a class="btn btn-secondary" href="#enquiry-form">Get Instant Proposal</a>
           </div>
         </div>
         <div class="proposal-visual reveal" id="proposal-visual" aria-label="Dynamic proposal preview">
@@ -81,9 +88,26 @@
     <section class="section service-builder" id="pricing-catalog">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Pricing Catalog</p>
-          <h2>Select services and calculate your total</h2>
-          <p>Transparent packages for websites, dashboards, marketing, ads, and automation.</p>
+          <p class="eyebrow">Services</p>
+          <h2>Solutions designed to move revenue, visibility, and operations.</h2>
+          <p>Choose the systems you need. The builder turns your selection into a live price and a proposal-ready scope.</p>
+        </div>
+        <div class="builder-steps reveal" aria-label="Quotation builder steps">
+          <article>
+            <span>01</span>
+            <strong>Select Services</strong>
+            <p>Pick the growth systems your business needs.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <strong>See Price</strong>
+            <p>Your total updates instantly as you build.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <strong>Get Proposal</strong>
+            <p>Download a premium quotation PDF in seconds.</p>
+          </article>
         </div>
         <div class="builder-layout">
           <div class="catalog-grid reveal" id="catalog-grid" aria-label="Service pricing catalog"></div>
@@ -115,7 +139,7 @@
 
         <div class="trust-engine reveal" aria-label="Client trust summary">
           <article>
-            <span id="average-rating">★ 4.8/5</span>
+            <span id="average-rating">&#9733; 4.8/5</span>
             <p>Average Rating</p>
           </article>
           <article>
@@ -175,9 +199,9 @@
     <section class="section quote-form-section" id="enquiry-form">
       <div class="container form-grid">
         <div class="form-copy reveal">
-          <p class="eyebrow">Client Details</p>
-          <h2>Generate your personalized quotation PDF</h2>
-          <p>Add your contact details and requirement notes. After submit, download the quotation instantly or send the details through WhatsApp.</p>
+          <p class="eyebrow">Contact / Action</p>
+          <h2>Start Your Project Today</h2>
+          <p>Tell me what you want to build. I will turn your selected services into a clean, professional proposal you can review instantly.</p>
           <div class="design-logic" id="design-logic">
             <h3>Quotation Design Logic</h3>
             <p id="design-logic-text">Your on-page preview will update after service selection. The PDF stays clean, professional, and client-focused.</p>
@@ -202,7 +226,7 @@
           <label for="requirement-notes">Requirement Notes
             <textarea id="requirement-notes" name="requirementNotes" rows="5" placeholder="Tell me about your project, business goal, pages, reports, campaigns, or automation idea."></textarea>
           </label>
-          <button class="btn btn-primary" type="submit">Create Quotation PDF</button>
+          <button class="btn btn-primary" type="submit">Get Instant Proposal</button>
           <p class="form-note" id="quote-message" role="status"></p>
           <div class="quote-actions" id="quote-actions" hidden>
             <button class="btn btn-secondary" type="button" id="download-quote">Download PDF</button>

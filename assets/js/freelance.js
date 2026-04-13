@@ -2,6 +2,8 @@ const serviceCatalog = [
   {
     category: "Website Development",
     type: "website",
+    icon: "W",
+    benefit: "Conversion-ready websites that make your business look premium and trustworthy.",
     services: [
       { name: "Basic", price: 5999 },
       { name: "Advanced", price: 9999 },
@@ -11,6 +13,8 @@ const serviceCatalog = [
   {
     category: "Data Analysis & Dashboard",
     type: "data",
+    icon: "D",
+    benefit: "Dashboards and reports that turn messy data into faster decisions.",
     services: [
       { name: "Basic", price: 3999 },
       { name: "Dashboard", price: 7999 },
@@ -20,6 +24,8 @@ const serviceCatalog = [
   {
     category: "SEO & Marketing",
     type: "marketing",
+    icon: "S",
+    benefit: "SEO that brings real leads, visibility, and stronger local discovery.",
     services: [
       { name: "Basic", price: 2999 },
       { name: "Local", price: 4999 },
@@ -29,6 +35,8 @@ const serviceCatalog = [
   {
     category: "Ads Management",
     type: "marketing",
+    icon: "A",
+    benefit: "Campaign systems built for qualified enquiries, not empty clicks.",
     services: [
       { name: "Google Ads", price: 3999 },
       { name: "Meta Ads", price: 3999 },
@@ -38,6 +46,8 @@ const serviceCatalog = [
   {
     category: "Automation Tools",
     type: "automation",
+    icon: "M",
+    benefit: "Automation flows that reduce manual work and capture leads faster.",
     services: [
       { name: "WhatsApp", price: 2999 },
       { name: "Lead System", price: 4999 },
@@ -197,7 +207,7 @@ function formatRelativeTime(dateValue) {
 
 function renderStars(rating) {
   const value = Math.max(1, Math.min(5, Number(rating) || 5));
-  return "★".repeat(value) + "☆".repeat(5 - value);
+  return "&#9733;".repeat(value) + "&#9734;".repeat(5 - value);
 }
 
 function getInitials(name) {
@@ -207,6 +217,11 @@ function getInitials(name) {
     .slice(0, 2)
     .map((part) => part.charAt(0).toUpperCase())
     .join("");
+}
+
+function renderStarsHtml(rating) {
+  const value = Math.max(1, Math.min(5, Number(rating) || 5));
+  return "&#9733;".repeat(value) + "&#9734;".repeat(5 - value);
 }
 
 function getSelectedServices() {
@@ -289,7 +304,13 @@ function renderCatalog() {
 
       return `
         <article class="service-category" data-review-context="${group.type}">
-          <h3>${group.category}</h3>
+          <div class="service-category-head">
+            <span class="service-icon">${group.icon}</span>
+            <div>
+              <h3>${group.category}</h3>
+              <p>${group.benefit}</p>
+            </div>
+          </div>
           <div class="service-list">${options}</div>
         </article>
       `;
@@ -367,7 +388,7 @@ function renderReviews() {
     ? allReviews.reduce((sum, review) => sum + Number(review.rating), 0) / allReviews.length
     : 0;
 
-  if (averageRating) averageRating.textContent = `★ ${Math.max(4.8, average).toFixed(1)}/5`;
+  if (averageRating) averageRating.innerHTML = `&#9733; ${Math.max(4.8, average).toFixed(1)}/5`;
   if (totalClients) totalClients.textContent = `${Math.max(20, allReviews.length)}+`;
   if (filterNote) {
     filterNote.textContent = matchingReviews.length
@@ -389,7 +410,7 @@ function renderReviews() {
             </div>
             <span class="review-time">${formatRelativeTime(review.date)}</span>
           </div>
-          <span class="review-stars" aria-label="${Number(review.rating)} out of 5 stars">${renderStars(review.rating)}</span>
+          <span class="review-stars" aria-label="${Number(review.rating)} out of 5 stars">${renderStarsHtml(review.rating)}</span>
           <p class="review-text">&ldquo;${escapeHtml(review.reviewText)}&rdquo;</p>
           <div class="review-card-meta">
             <span>${contexts.length ? "Matched to your interest" : "Top client experience"}</span>
@@ -445,6 +466,24 @@ function initReviewForm() {
     message.className = "form-note success";
     message.textContent = "Thank you. Your review has been added to the client experience engine.";
     renderReviews();
+  });
+}
+
+function initHeroParallax() {
+  const hero = document.querySelector(".freelance-hero");
+  const visual = document.querySelector(".proposal-visual");
+  if (!hero || !visual) return;
+
+  hero.addEventListener("pointermove", (event) => {
+    if (window.matchMedia("(max-width: 980px)").matches) return;
+    const rect = hero.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    visual.style.transform = `perspective(1200px) rotateY(${-7 + x * 5}deg) rotateX(${y * -4}deg) translate3d(${x * 10}px, ${y * 10}px, 0)`;
+  });
+
+  hero.addEventListener("pointerleave", () => {
+    visual.style.transform = "";
   });
 }
 
@@ -728,6 +767,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCatalog();
   initReviewContextObserver();
   initReviewForm();
+  initHeroParallax();
   updateSummary();
   initQuotationForm();
 });
