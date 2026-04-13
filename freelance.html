@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20260224.3">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260413.3">
   <link rel="stylesheet" href="assets/css/freelance.css?v=20260413.3">
   <script src="assets/js/script.js?v=20260224.3" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
@@ -36,13 +36,13 @@
         <span></span>
       </button>
       <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-        <a class="nav-link" href="index.html#home">Home</a>
-        <a class="nav-link" href="index.html#about">About</a>
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#about">About</a>
         <a class="nav-link" href="projects.html">Projects</a>
-        <a class="nav-link" href="freelance.html">Services</a>
+        <a class="nav-link" href="#pricing-catalog">Services</a>
         <a class="nav-link" href="writing.html">Writing</a>
         <a class="nav-link" href="resume.html">Resume</a>
-        <a class="nav-link" href="index.html#contact">Contact</a>
+        <a class="nav-link" href="#enquiry-form">Contact</a>
       </nav>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
         <span id="theme-toggle-icon">Moon</span>
@@ -51,7 +51,7 @@
   </header>
 
   <main>
-    <section class="freelance-hero">
+    <section class="freelance-hero" id="home">
       <div class="hero-particles" aria-hidden="true">
         <span></span>
         <span></span>
@@ -85,11 +85,38 @@
       </div>
     </section>
 
+    <section class="section system-story-section" id="about">
+      <div class="container system-story-grid">
+        <div class="section-head reveal">
+          <p class="eyebrow">About / What I Do</p>
+          <h2>I solve the invisible business problems that slow growth.</h2>
+          <p>Most small businesses do not fail because they lack effort. They lose momentum because their website, data, marketing, and follow-up systems are disconnected.</p>
+        </div>
+        <div class="story-cards reveal">
+          <article>
+            <span>01</span>
+            <h3>I think in systems, not tasks.</h3>
+            <p>A website should support leads. A dashboard should support decisions. Automation should support speed. Every service connects to a business outcome.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>I build for clarity and conversion.</h3>
+            <p>The goal is not just a digital asset. The goal is a working growth engine your business can actually use.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>I make execution feel simple.</h3>
+            <p>You select what you need, see the cost instantly, and get a proposal that turns the idea into a clear next step.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section service-builder" id="pricing-catalog">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Services</p>
-          <h2>Solutions designed to move revenue, visibility, and operations.</h2>
+          <p class="eyebrow">Services / Quotation Builder</p>
+          <h2>Build Your Custom Business Solution</h2>
           <p>Choose the systems you need. The builder turns your selection into a live price and a proposal-ready scope.</p>
         </div>
         <div class="builder-steps reveal" aria-label="Quotation builder steps">
