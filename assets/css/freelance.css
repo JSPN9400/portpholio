@@ -1,0 +1,362 @@
+.freelance-hero {
+  padding: 5.5rem 0 4.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  background:
+    linear-gradient(135deg, rgba(6, 18, 37, 0.98), rgba(10, 34, 64, 0.9)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 64px);
+}
+
+.freelance-hero-grid,
+.builder-layout,
+.form-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.freelance-hero-grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  align-items: center;
+}
+
+.freelance-hero-copy h1 {
+  max-width: 740px;
+  margin-bottom: 1rem;
+  font-size: 3.25rem;
+}
+
+.freelance-hero-copy p:not(.eyebrow) {
+  max-width: 690px;
+  color: var(--text-muted);
+}
+
+.service-hero-actions,
+.quote-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.35rem;
+}
+
+.proposal-visual,
+.quote-summary,
+.service-category,
+.client-form,
+.design-logic {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+.proposal-visual {
+  overflow: hidden;
+  padding: 1rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.proposal-visual.analytics {
+  border-color: #35d6a3;
+}
+
+.proposal-visual.tech {
+  border-color: #76a9ff;
+}
+
+.proposal-visual.growth {
+  border-color: #a7df62;
+}
+
+.proposal-visual.mixed {
+  border-color: #54d7e6;
+}
+
+.proposal-visual:hover,
+.service-category:hover {
+  transform: translateY(-3px);
+}
+
+.proposal-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.proposal-visual img {
+  width: 100%;
+  max-height: 270px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.proposal-blocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.proposal-blocks span {
+  min-height: 58px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 18%, transparent), transparent);
+}
+
+.proposal-visual p {
+  color: var(--text-muted);
+}
+
+.builder-layout {
+  grid-template-columns: minmax(0, 1fr) 340px;
+  align-items: start;
+  margin-top: 2rem;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.service-category {
+  padding: 1rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.service-category h3 {
+  margin-bottom: 0.85rem;
+  font-size: 1.15rem;
+}
+
+.service-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.service-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg-muted) 72%, transparent);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.service-option:hover,
+.service-option:has(input:checked) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg-muted));
+}
+
+.service-option input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.service-name {
+  font-weight: 700;
+}
+
+.service-price {
+  color: var(--accent-alt);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.quote-summary {
+  position: sticky;
+  top: 92px;
+  padding: 1rem;
+}
+
+.summary-head {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-head h2 {
+  font-size: 2.2rem;
+}
+
+.selected-services {
+  display: grid;
+  gap: 0.65rem;
+  min-height: 128px;
+  padding: 1rem 0;
+}
+
+.selected-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.empty-state {
+  color: var(--text-muted);
+}
+
+.summary-total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  font-size: 1.05rem;
+}
+
+.summary-cta {
+  width: 100%;
+  justify-content: center;
+}
+
+.form-grid {
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
+  align-items: start;
+}
+
+.form-copy h2 {
+  margin-bottom: 1rem;
+  font-size: 2.4rem;
+}
+
+.form-copy > p,
+.design-logic p {
+  color: var(--text-muted);
+}
+
+.design-logic {
+  margin-top: 1.4rem;
+  padding: 1rem;
+}
+
+.design-logic h3 {
+  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
+}
+
+.client-form {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.client-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.client-form input,
+.client-form select,
+.client-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 72%, var(--surface));
+  color: var(--text);
+  font: inherit;
+  padding: 0.82rem 0.9rem;
+}
+
+.client-form textarea {
+  resize: vertical;
+}
+
+.client-form input:focus,
+.client-form select:focus,
+.client-form textarea:focus {
+  outline: 2px solid color-mix(in srgb, var(--accent) 75%, transparent);
+  outline-offset: 2px;
+}
+
+.form-note {
+  color: var(--text-muted);
+}
+
+.form-note.success {
+  color: #50d890;
+}
+
+.form-note.error {
+  color: #ff8f8f;
+}
+
+.whatsapp-float {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 1rem;
+  border-radius: 8px;
+  background: #1fa855;
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 12px 24px rgba(4, 16, 36, 0.35);
+}
+
+html.light .freelance-hero {
+  background:
+    linear-gradient(135deg, #f4f8ff, #dfefff),
+    repeating-linear-gradient(90deg, rgba(10, 42, 80, 0.08) 0 1px, transparent 1px 64px);
+}
+
+html.light .client-form input,
+html.light .client-form select,
+html.light .client-form textarea {
+  background: #ffffff;
+}
+
+@media (max-width: 980px) {
+  .freelance-hero-grid,
+  .builder-layout,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .freelance-hero {
+    padding: 4.5rem 0 3.25rem;
+  }
+
+  .freelance-hero-copy h1 {
+    font-size: 2.35rem;
+  }
+
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-option {
+    grid-template-columns: auto 1fr;
+  }
+
+  .service-price {
+    grid-column: 2;
+  }
+
+  .form-copy h2 {
+    font-size: 2rem;
+  }
+}

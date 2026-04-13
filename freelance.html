@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freelance Services & Quotation | Jaishankar Prasad Nirala</title>
+  <meta name="description" content="Select website, analytics, SEO, ads, and automation services to generate a personalized quotation PDF instantly.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#061225">
+  <link rel="canonical" href="https://jspn9400.github.io/portpholio/freelance.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JSPN Portfolio">
+  <meta property="og:title" content="Freelance Services & Quotation">
+  <meta property="og:description" content="Choose services, calculate total cost, and download a personalized quotation PDF.">
+  <meta property="og:url" content="https://jspn9400.github.io/portpholio/freelance.html">
+  <meta property="og:image" content="https://jspn9400.github.io/portpholio/assets/others/img%20of%20dashboard.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260224.3">
+  <link rel="stylesheet" href="assets/css/freelance.css?v=20260413.1">
+  <script src="assets/js/script.js?v=20260224.3" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <script src="assets/js/freelance.js?v=20260413.1" defer></script>
+</head>
+<body data-page="freelance">
+  <header class="site-header">
+    <div class="container nav-container">
+      <a class="brand" href="index.html" aria-label="Go to homepage">
+        <span class="brand-mark">JSPN</span>
+        <span class="brand-text">Jaishankar Prasad Nirala</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html#home">Home</a>
+        <a class="nav-link" href="index.html#about">About</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="freelance.html">Services</a>
+        <a class="nav-link" href="writing.html">Writing</a>
+        <a class="nav-link" href="resume.html">Resume</a>
+        <a class="nav-link" href="index.html#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
+        <span id="theme-toggle-icon">Moon</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="freelance-hero">
+      <div class="container freelance-hero-grid">
+        <div class="freelance-hero-copy reveal">
+          <p class="eyebrow">Freelance & Services</p>
+          <h1>Build your growth system and get an instant quotation.</h1>
+          <p>Select the services your business needs, see the total update in real time, and download a polished PDF proposal made for your requirement.</p>
+          <div class="service-hero-actions">
+            <a class="btn btn-primary" href="#pricing-catalog">View Pricing</a>
+            <a class="btn btn-secondary" href="#enquiry-form">Generate Quote</a>
+          </div>
+        </div>
+        <div class="proposal-visual reveal" id="proposal-visual" aria-label="Dynamic proposal preview">
+          <div class="proposal-topline">
+            <span id="proposal-style-label">Smart Business Proposal</span>
+            <span>Flexible scope</span>
+          </div>
+          <img src="assets/others/img of dashboard.png" alt="Business dashboard preview for service proposals" loading="lazy">
+          <div class="proposal-blocks" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p id="proposal-style-copy">Choose services to shape the on-page proposal preview around your business goal.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section service-builder" id="pricing-catalog">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Pricing Catalog</p>
+          <h2>Select services and calculate your total</h2>
+          <p>Transparent packages for websites, dashboards, marketing, ads, and automation.</p>
+        </div>
+        <div class="builder-layout">
+          <div class="catalog-grid reveal" id="catalog-grid" aria-label="Service pricing catalog"></div>
+          <aside class="quote-summary reveal" aria-label="Selected services summary">
+            <div class="summary-head">
+              <p class="eyebrow">Live Summary</p>
+              <h2 id="summary-total">&#8377;0</h2>
+            </div>
+            <div id="selected-services" class="selected-services">
+              <p class="empty-state">No services selected yet.</p>
+            </div>
+            <div class="summary-total-row">
+              <span>Total Cost</span>
+              <strong id="summary-total-bottom">&#8377;0</strong>
+            </div>
+            <a class="btn btn-primary summary-cta" href="#enquiry-form">Continue to Enquiry</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section quote-form-section" id="enquiry-form">
+      <div class="container form-grid">
+        <div class="form-copy reveal">
+          <p class="eyebrow">Client Details</p>
+          <h2>Generate your personalized quotation PDF</h2>
+          <p>Add your contact details and requirement notes. After submit, download the quotation instantly or send the details through WhatsApp.</p>
+          <div class="design-logic" id="design-logic">
+            <h3>Quotation Design Logic</h3>
+            <p id="design-logic-text">Your on-page preview will update after service selection. The PDF stays clean, professional, and client-focused.</p>
+          </div>
+        </div>
+        <form class="client-form reveal" id="quote-form">
+          <label for="client-name">Name
+            <input type="text" id="client-name" name="clientName" placeholder="Your full name" required>
+          </label>
+          <label for="business-type">Business Type
+            <select id="business-type" name="businessType" required>
+              <option value="">Select business type</option>
+              <option value="Shop">Shop</option>
+              <option value="School">School</option>
+              <option value="Startup">Startup</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label for="client-contact">Phone / Email
+            <input type="text" id="client-contact" name="clientContact" placeholder="Phone number or email" required>
+          </label>
+          <label for="requirement-notes">Requirement Notes
+            <textarea id="requirement-notes" name="requirementNotes" rows="5" placeholder="Tell me about your project, business goal, pages, reports, campaigns, or automation idea."></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Create Quotation PDF</button>
+          <p class="form-note" id="quote-message" role="status"></p>
+          <div class="quote-actions" id="quote-actions" hidden>
+            <button class="btn btn-secondary" type="button" id="download-quote">Download PDF</button>
+            <a class="btn btn-secondary" id="send-whatsapp" href="#" target="_blank" rel="noreferrer">Send via WhatsApp</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <a class="whatsapp-float" id="sticky-whatsapp" href="https://wa.me/?text=Hi%20Jaishankar%2C%20I%20want%20to%20discuss%20a%20freelance%20service%20quotation." target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">WhatsApp</a>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>(c) 2026 Jaishankar Prasad Nirala. Freelance Services.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html">Resume</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

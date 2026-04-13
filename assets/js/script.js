@@ -61,6 +61,7 @@ function initActiveLinks() {
   const pageMap = {
     home: "index.html",
     projects: "projects.html",
+    freelance: "freelance.html",
     writing: "writing.html",
     resume: "resume.html",
   };
