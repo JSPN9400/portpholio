@@ -3,11 +3,20 @@ const SHEET_NAME = "Enquiries";
 const NOTIFY_EMAIL = "balajico93@gmail.com";
 
 function doPost(e) {
+  const response = {
+    success: false,
+    error: null,
+  };
+
   try {
     const payload = JSON.parse(e.postData.contents || "{}");
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
+    
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(SHEET_NAME);
+    
     if (!sheet) {
-      throw new Error(`Sheet not found: ${SHEET_NAME}`);
+      response.error = `Sheet "${SHEET_NAME}" not found. Check your sheet tab name.`;
+      return createResponse(response, 400);
     }
 
     const row = [
@@ -24,15 +33,37 @@ function doPost(e) {
 
     sendNotificationEmail(payload);
 
-    return ContentService.createTextOutput(JSON.stringify({ success: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    response.success = true;
+    return createResponse(response, 200);
   } catch (error) {
-    return ContentService.createTextOutput(JSON.stringify({ success: false, error: String(error) }))
-      .setMimeType(ContentService.MimeType.JSON);
+    response.error = error.toString();
+    return createResponse(response, 500);
   }
 }
 
-function sendNotificationEmail(payload) {
+function createResponse(data, code) {
+  const output = ContentService.createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+  
+  // Add CORS headers for web app
+  output.setHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  });
+  
+  return output;
+}
+
+function doOptions(e) {
+  return ContentService.createTextOutput('')
+    .setMimeType(ContentService.MimeType.TEXT)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    });
+}
   const subject = `New client enquiry from ${payload.name || "Unknown"}`;
   const body = [
     `Name: ${payload.name || "-"}`,
@@ -47,3 +78,4 @@ function sendNotificationEmail(payload) {
 
   MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
 }
+
