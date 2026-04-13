@@ -59,6 +59,8 @@ const serviceCatalog = [
 const defaultReviews = [
   {
     clientName: "Rohit Kumar",
+    businessType: "Retail Shop",
+    role: "Owner",
     serviceType: "Website",
     rating: 5,
     reviewText: "The website looked professional and made our business easier to explain to new customers.",
@@ -66,6 +68,8 @@ const defaultReviews = [
   },
   {
     clientName: "Anjali Verma",
+    businessType: "Coaching Institute",
+    role: "Operations Lead",
     serviceType: "Data Analysis",
     rating: 5,
     reviewText: "Our monthly reporting became faster and clearer. The dashboard helped us see important numbers without confusion.",
@@ -73,6 +77,8 @@ const defaultReviews = [
   },
   {
     clientName: "Sahil Mehta",
+    businessType: "Local Service Business",
+    role: "Founder",
     serviceType: "SEO",
     rating: 5,
     reviewText: "The local SEO work improved our search visibility and brought more serious enquiries from nearby customers.",
@@ -80,6 +86,8 @@ const defaultReviews = [
   },
   {
     clientName: "Priya Singh",
+    businessType: "Online Store",
+    role: "Marketing Manager",
     serviceType: "Ads",
     rating: 4,
     reviewText: "The campaign structure was clean, tracked properly, and focused on leads instead of just clicks.",
@@ -87,6 +95,8 @@ const defaultReviews = [
   },
   {
     clientName: "Amit Raj",
+    businessType: "Real Estate Team",
+    role: "Sales Coordinator",
     serviceType: "Automation",
     rating: 5,
     reviewText: "The WhatsApp lead flow reduced manual follow-up and helped us respond faster to interested customers.",
@@ -94,6 +104,8 @@ const defaultReviews = [
   },
   {
     clientName: "Neha Sharma",
+    businessType: "Startup",
+    role: "Founder",
     serviceType: "Website",
     rating: 5,
     reviewText: "The site felt modern, loaded smoothly, and gave our startup a more trustworthy first impression.",
@@ -101,6 +113,8 @@ const defaultReviews = [
   },
   {
     clientName: "Vikash Gupta",
+    businessType: "Distribution Business",
+    role: "Manager",
     serviceType: "Data Analysis",
     rating: 4,
     reviewText: "The Excel and dashboard setup saved time in weekly reviews and made team performance easier to track.",
@@ -405,6 +419,7 @@ function renderReviews() {
               <span class="review-avatar">${escapeHtml(getInitials(review.clientName))}</span>
               <div>
                 <span class="review-client">${escapeHtml(review.clientName)}</span>
+                <span class="review-context">${escapeHtml(review.role || "Client")} - ${escapeHtml(review.businessType || "Business")}</span>
                 <span class="review-tag">${escapeHtml(review.serviceType)}</span>
               </div>
             </div>
@@ -451,6 +466,8 @@ function initReviewForm() {
     const formData = Object.fromEntries(new FormData(form).entries());
     const review = {
       clientName: formData.clientName,
+      businessType: "Client Submitted",
+      role: "Business Contact",
       serviceType: formData.serviceType,
       rating: Number(formData.rating),
       reviewText: formData.reviewText,

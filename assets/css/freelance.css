@@ -37,6 +37,26 @@
   margin-top: 1.35rem;
 }
 
+.urgency-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.urgency-strip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 0.72rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
 .proposal-visual,
 .quote-summary,
 .service-category,
@@ -363,6 +383,14 @@
   display: block;
   color: var(--text);
   font-weight: 800;
+}
+
+.review-context {
+  display: block;
+  margin: 0.12rem 0 0.42rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .review-identity {
@@ -855,6 +883,26 @@ body[data-page="freelance"] .btn-secondary {
   gap: 1rem;
 }
 
+.section-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 92% 20%, color-mix(in srgb, var(--accent-alt) 16%, transparent), transparent 14rem),
+    color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+.section-cta p {
+  color: var(--text);
+  font-weight: 800;
+}
+
 .story-cards article {
   position: relative;
   overflow: hidden;
@@ -1127,6 +1175,10 @@ body[data-page="freelance"] .btn-secondary {
   }
 
   .service-category-head {
+    display: grid;
+  }
+
+  .section-cta {
     display: grid;
   }
 }
