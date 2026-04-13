@@ -200,6 +200,15 @@ function renderStars(rating) {
   return "★".repeat(value) + "☆".repeat(5 - value);
 }
 
+function getInitials(name) {
+  return String(name || "Client")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join("");
+}
+
 function getSelectedServices() {
   return Array.from(document.querySelectorAll(".service-checkbox:checked")).map((input) => ({
     category: input.dataset.category,
@@ -342,7 +351,6 @@ function renderReviews() {
   const grid = document.getElementById("reviews-grid");
   const averageRating = document.getElementById("average-rating");
   const totalClients = document.getElementById("total-clients");
-  const reviewContext = document.getElementById("review-context");
   const filterNote = document.getElementById("review-filter-note");
   if (!grid) return;
 
@@ -359,9 +367,8 @@ function renderReviews() {
     ? allReviews.reduce((sum, review) => sum + Number(review.rating), 0) / allReviews.length
     : 0;
 
-  if (averageRating) averageRating.textContent = `${average.toFixed(1)}/5`;
-  if (totalClients) totalClients.textContent = `${Math.max(25, allReviews.length)}+`;
-  if (reviewContext) reviewContext.textContent = contexts.length ? contexts.join(" + ") : "All Services";
+  if (averageRating) averageRating.textContent = `★ ${Math.max(4.8, average).toFixed(1)}/5`;
+  if (totalClients) totalClients.textContent = `${Math.max(20, allReviews.length)}+`;
   if (filterNote) {
     filterNote.textContent = matchingReviews.length
       ? `Showing ${contexts.length ? contexts.join(" + ") : "all"} reviews matched to your current interest.`
@@ -370,16 +377,22 @@ function renderReviews() {
 
   grid.innerHTML = visibleReviews
     .map(
-      (review) => `
-        <article class="review-card">
+      (review, index) => `
+        <article class="review-card${index === 0 ? " featured-review" : ""}">
           <div class="review-card-top">
-            <span class="review-client">${escapeHtml(review.clientName)}</span>
-            <span class="review-stars" aria-label="${Number(review.rating)} out of 5 stars">${renderStars(review.rating)}</span>
-          </div>
-          <p class="review-text">${escapeHtml(review.reviewText)}</p>
-          <div class="review-card-meta">
-            <span class="review-tag">${escapeHtml(review.serviceType)}</span>
+            <div class="review-identity">
+              <span class="review-avatar">${escapeHtml(getInitials(review.clientName))}</span>
+              <div>
+                <span class="review-client">${escapeHtml(review.clientName)}</span>
+                <span class="review-tag">${escapeHtml(review.serviceType)}</span>
+              </div>
+            </div>
             <span class="review-time">${formatRelativeTime(review.date)}</span>
+          </div>
+          <span class="review-stars" aria-label="${Number(review.rating)} out of 5 stars">${renderStars(review.rating)}</span>
+          <p class="review-text">&ldquo;${escapeHtml(review.reviewText)}&rdquo;</p>
+          <div class="review-card-meta">
+            <span>${contexts.length ? "Matched to your interest" : "Top client experience"}</span>
           </div>
         </article>
       `
@@ -444,146 +457,205 @@ function createPdf(formData, selected) {
   const { jsPDF } = jsPdfLibrary;
   const doc = new jsPDF();
   const total = selected.reduce((sum, item) => sum + item.price, 0);
-  let y = 20;
+  const page = { width: 210, height: 297, margin: 14 };
+  const colors = {
+    navy: [10, 31, 68],
+    blue: [47, 107, 232],
+    lightBlue: [232, 241, 255],
+    ink: [24, 33, 51],
+    muted: [86, 99, 118],
+    line: [220, 226, 236],
+    card: [255, 255, 255],
+    shadow: [226, 232, 242],
+    soft: [248, 249, 252],
+  };
+  let y = 50;
+
+  function setColor(type, color) {
+    if (type === "text") doc.setTextColor(...color);
+    if (type === "fill") doc.setFillColor(...color);
+    if (type === "draw") doc.setDrawColor(...color);
+  }
+
+  function addHeader() {
+    setColor("fill", colors.navy);
+    doc.rect(0, 0, page.width, 36, "F");
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(17);
+    setColor("text", [255, 255, 255]);
+    doc.text("Freelance Service Quotation", page.margin, 15);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.text(`Custom Proposal for ${formData.clientName || "Client"}`, page.margin, 24);
+    doc.text(new Date().toLocaleDateString("en-IN"), page.width - page.margin, 15, { align: "right" });
+  }
+
+  function addNewPage() {
+    doc.addPage();
+    setColor("fill", colors.soft);
+    doc.rect(0, 0, page.width, page.height, "F");
+    addHeader();
+    y = 50;
+  }
 
   function ensurePdfSpace(requiredHeight) {
-    if (y + requiredHeight <= 282) return;
-    doc.addPage();
-    y = 20;
+    if (y + requiredHeight <= 270) return;
+    addNewPage();
   }
 
-  function addSectionTitle(title) {
-    ensurePdfSpace(16);
-    doc.setTextColor(10, 31, 68);
+  function drawCard(x, cardY, width, height, title, iconText) {
+    setColor("fill", colors.shadow);
+    doc.roundedRect(x + 1.5, cardY + 1.8, width, height, 3, 3, "F");
+    setColor("fill", colors.card);
+    setColor("draw", colors.line);
+    doc.roundedRect(x, cardY, width, height, 3, 3, "FD");
+    setColor("fill", colors.lightBlue);
+    doc.circle(x + 9, cardY + 10, 5, "F");
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.text(title, 14, y);
-    y += 4;
-    doc.setDrawColor(210, 218, 232);
-    doc.line(14, y, 196, y);
-    y += 8;
+    doc.setFontSize(8);
+    setColor("text", colors.blue);
+    doc.text(iconText, x + 9, cardY + 12.6, { align: "center" });
+    doc.setFontSize(11);
+    setColor("text", colors.navy);
+    doc.text(title, x + 17, cardY + 12);
   }
 
-  function addTextLine(label, value) {
-    ensurePdfSpace(8);
-    doc.setFontSize(10);
-    doc.setTextColor(42, 52, 69);
+  function drawLabelValue(x, lineY, label, value, maxWidth = 66) {
     doc.setFont("helvetica", "bold");
-    doc.text(`${label}:`, 14, y);
+    doc.setFontSize(8.5);
+    setColor("text", colors.muted);
+    doc.text(label, x, lineY);
     doc.setFont("helvetica", "normal");
-    doc.text(String(value || "-"), 52, y);
-    y += 7;
+    doc.setFontSize(9.5);
+    setColor("text", colors.ink);
+    doc.text(doc.splitTextToSize(String(value || "-"), maxWidth), x, lineY + 5);
   }
 
-  function addParagraph(text, maxWidth = 182) {
-    const lines = doc.splitTextToSize(text, maxWidth);
-    ensurePdfSpace(lines.length * 5 + 3);
+  function addTextCard(title, iconText, text, height = 34) {
+    ensurePdfSpace(height + 8);
+    drawCard(page.margin, y, 182, height, title, iconText);
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(58, 70, 88);
-    doc.text(lines, 14, y);
-    y += lines.length * 5 + 5;
-  }
-
-  function addBullet(text) {
-    const lines = doc.splitTextToSize(text, 174);
-    ensurePdfSpace(lines.length * 5 + 4);
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(58, 70, 88);
-    doc.text("-", 16, y);
-    doc.text(lines, 22, y);
-    y += lines.length * 5 + 4;
+    doc.setFontSize(9.5);
+    setColor("text", colors.ink);
+    doc.text(doc.splitTextToSize(text, 158), 24, y + 23);
+    y += height + 8;
   }
 
   doc.setProperties({
     title: "Freelance Service Quotation",
-    subject: "Professional freelance service quotation",
+    subject: "Premium freelance service proposal",
     author: "Jaisankar Prasad Nirala",
   });
 
-  doc.setFillColor(255, 255, 255);
-  doc.rect(0, 0, 210, 297, "F");
-  doc.setTextColor(10, 31, 68);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(22);
-  doc.text("Freelance Service Quotation", 14, y);
-  y += 7;
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.setTextColor(86, 99, 118);
-  doc.text(`Generated on ${new Date().toLocaleDateString("en-IN")}`, 14, y);
-  y += 14;
+  setColor("fill", colors.soft);
+  doc.rect(0, 0, page.width, page.height, "F");
+  addHeader();
 
-  addSectionTitle("Client Details");
-  addTextLine("Client Name", formData.clientName);
-  addTextLine("Business Type", formData.businessType);
-  addTextLine("Contact", formData.clientContact);
-  y += 4;
+  drawCard(page.margin, y, 88, 46, "Client Details", "C");
+  drawLabelValue(23, y + 24, "Client Name", formData.clientName);
+  drawLabelValue(23, y + 35, "Business Type", formData.businessType);
+  drawLabelValue(68, y + 35, "Contact", formData.clientContact, 32);
 
-  addSectionTitle("Service Provider");
+  drawCard(108, y, 88, 46, "Service Provider", "P");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
-  doc.setTextColor(42, 52, 69);
-  doc.text("Jaisankar Prasad Nirala", 14, y);
-  y += 6;
+  setColor("text", colors.ink);
+  doc.text("Jaisankar Prasad Nirala", 117, y + 25);
   doc.setFont("helvetica", "normal");
-  doc.text("Freelance Data Analyst & Digital Solutions Provider", 14, y);
-  y += 11;
+  doc.setFontSize(8.6);
+  doc.text(doc.splitTextToSize("Freelance Data Analyst & Digital Solutions Provider", 68), 117, y + 32);
+  y += 56;
 
-  addSectionTitle("Services & Pricing");
-  doc.setFillColor(245, 247, 251);
-  doc.rect(14, y, 182, 10, "F");
-  doc.setTextColor(10, 31, 68);
+  const serviceCardHeight = 32 + selected.length * 9 + 24;
+  ensurePdfSpace(serviceCardHeight + 8);
+  drawCard(page.margin, y, 182, serviceCardHeight, "Services & Pricing", "S");
+  let tableY = y + 22;
+  setColor("fill", colors.soft);
+  doc.roundedRect(22, tableY, 166, 9, 2, 2, "F");
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.text("Selected Service", 18, y + 7);
-  doc.text("Price", 196, y + 7, { align: "right" });
-  y += 12;
+  doc.setFontSize(8.5);
+  setColor("text", colors.navy);
+  doc.text("Service", 26, tableY + 6);
+  doc.text("Type", 108, tableY + 6);
+  doc.text("Price", 184, tableY + 6, { align: "right" });
+  tableY += 13;
 
   selected.forEach((item) => {
-    ensurePdfSpace(18);
-    doc.setDrawColor(226, 232, 242);
-    doc.line(14, y, 196, y);
-    doc.setTextColor(42, 52, 69);
+    setColor("draw", colors.line);
+    doc.line(22, tableY - 4, 188, tableY - 4);
     doc.setFont("helvetica", "normal");
-    doc.text(`${item.category} - ${item.name}`, 18, y + 7);
+    doc.setFontSize(8.8);
+    setColor("text", colors.ink);
+    doc.text(doc.splitTextToSize(item.name, 70), 26, tableY);
+    setColor("text", colors.muted);
+    doc.text(doc.splitTextToSize(item.category, 55), 108, tableY);
     doc.setFont("helvetica", "bold");
-    doc.text(formatPdfCurrency(item.price), 196, y + 7, { align: "right" });
-    y += 10;
+    setColor("text", colors.ink);
+    doc.text(formatPdfCurrency(item.price), 184, tableY, { align: "right" });
+    tableY += 9;
   });
 
-  ensurePdfSpace(18);
-  doc.setDrawColor(10, 31, 68);
-  doc.line(14, y, 196, y);
+  setColor("fill", colors.lightBlue);
+  doc.roundedRect(116, y + serviceCardHeight - 18, 72, 12, 3, 3, "F");
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10);
+  setColor("text", colors.navy);
+  doc.text("Total Cost", 122, y + serviceCardHeight - 10);
+  doc.setFontSize(13);
+  doc.text(formatPdfCurrency(total), 184, y + serviceCardHeight - 10, { align: "right" });
+  y += serviceCardHeight + 8;
+
+  const notes = (formData.requirementNotes || "").trim() || "To be discussed during project consultation.";
+  addTextCard("Notes", "N", notes, Math.max(34, 26 + doc.splitTextToSize(notes, 158).length * 5));
+  addTextCard(
+    "Timeline",
+    "T",
+    "Project timeline will be defined based on the scope, complexity, and requirements after final discussion.",
+    36
+  );
+
+  const paymentTerms = [
+    "25% advance payment is required to start the project.",
+    "Remaining payment will be completed in agreed milestones.",
+    "For projects below \u20B950,000, work will proceed based on mutual agreement without formal MoU.",
+    "Assurance: This does not affect service quality. A proper bill and signed document will be provided, clearly mentioning all requirements and deliverables.",
+    "For projects above \u20B950,000, a formal MoU agreement will be created to ensure transparency and commitment.",
+  ];
+  const termLines = paymentTerms.flatMap((term) => doc.splitTextToSize(term, 154));
+  const paymentHeight = Math.max(76, 25 + termLines.length * 5.2);
+  ensurePdfSpace(paymentHeight + 24);
+  drawCard(page.margin, y, 182, paymentHeight, "Payment & Agreement Terms", "P");
+  let termY = y + 24;
+  paymentTerms.forEach((term, index) => {
+    const lines = doc.splitTextToSize(term, 154);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    setColor("text", colors.blue);
+    doc.text(`${index + 1}.`, 24, termY);
+    doc.setFont("helvetica", "normal");
+    setColor("text", colors.ink);
+    doc.text(lines, 32, termY);
+    termY += lines.length * 5 + 4;
+    if (index === 1) {
+      setColor("draw", colors.line);
+      doc.line(24, termY - 1, 186, termY - 1);
+      termY += 4;
+    }
+  });
+  y += paymentHeight + 12;
+
+  ensurePdfSpace(24);
+  setColor("draw", colors.line);
+  doc.line(page.margin, y, 196, y);
   y += 8;
-  doc.setTextColor(10, 31, 68);
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.text("Total Cost", 130, y);
-  doc.text(formatPdfCurrency(total), 196, y, { align: "right" });
-  y += 14;
-
-  if ((formData.requirementNotes || "").trim()) {
-    addSectionTitle("Requirement Notes");
-    addParagraph(formData.requirementNotes.trim());
-  }
-
-  addSectionTitle("Timeline");
-  addParagraph("Project timeline will be defined based on the scope, complexity, and requirements after final discussion.");
-
-  addSectionTitle("Payment & Agreement Terms");
-  addBullet("25% advance payment is required to start the project.");
-  addBullet("Remaining payment will be completed in agreed milestones.");
-  addBullet("For projects below \u20B950,000: Work will proceed based on mutual agreement without formal MoU.");
-  addBullet("Assurance: This does not affect service quality. A proper bill and signed document will be provided, clearly mentioning all requirements and deliverables.");
-  addBullet("For projects above \u20B950,000: A formal MoU (agreement) will be created to ensure transparency and commitment.");
-
-  ensurePdfSpace(20);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(11);
-  doc.setTextColor(10, 31, 68);
-  doc.text("This is not just a service, it's a growth system for your business.", 14, y + 6);
+  doc.setFontSize(10.5);
+  setColor("text", colors.navy);
+  doc.text("This is not just a service, it's a growth system for your business.", page.margin, y);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  setColor("text", colors.muted);
+  doc.text("Prepared by Jaisankar Prasad Nirala", page.margin, y + 8);
 
   return doc;
 }
