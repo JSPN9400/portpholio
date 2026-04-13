@@ -1,6 +1,6 @@
 const SPREADSHEET_ID = "115JgfGs5chsEjDC3kGWg1G72hs8gBDEzwSQ2MElaIiU";
 const SHEET_NAME = "Enquiries";
-const NOTIFY_EMAIL = "your-email@example.com";
+const NOTIFY_EMAIL = "balajico93@gmail.com";
 
 function doPost(e) {
   try {
