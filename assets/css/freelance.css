@@ -227,8 +227,7 @@
 }
 
 .client-tells-section {
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--bg-muted) 86%, #0a1f44), var(--bg));
+  background: linear-gradient(180deg, transparent 0%, var(--bg-muted) 100%);
   color: var(--text);
 }
 
@@ -251,10 +250,10 @@
 .reviews-panel,
 .review-form,
 .review-card {
-  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: linear-gradient(160deg, var(--surface) 0%, var(--surface-soft) 100%);
-  box-shadow: 0 18px 40px rgba(2, 8, 24, 0.32);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  box-shadow: var(--shadow-soft);
 }
 
 .trust-engine article {
@@ -325,7 +324,7 @@
 .review-card:hover {
   transform: scale(1.02);
   border-color: var(--accent);
-  box-shadow: 0 22px 48px rgba(2, 8, 24, 0.42);
+  box-shadow: var(--shadow);
 }
 
 .review-card:nth-child(2) {
@@ -341,8 +340,9 @@
 }
 
 .featured-review {
-  border-color: color-mix(in srgb, var(--accent-alt) 68%, var(--border));
-  box-shadow: 0 22px 52px color-mix(in srgb, var(--accent) 20%, rgba(2, 8, 24, 0.34));
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 10%, var(--surface)) 0%, var(--surface) 100%);
+  box-shadow: var(--shadow);
 }
 
 @media (min-width: 981px) {
@@ -550,54 +550,6 @@ html.light .freelance-hero {
   background:
     linear-gradient(135deg, #f4f8ff, #dfefff),
     repeating-linear-gradient(90deg, rgba(10, 42, 80, 0.08) 0 1px, transparent 1px 64px);
-}
-
-html.light .client-tells-section {
-  background: #f8f9fc;
-  color: #172033;
-}
-
-html.light .client-tells-section .section-head h2 {
-  color: #0a1f44;
-}
-
-html.light .client-tells-section .section-head p:not(.eyebrow) {
-  color: #5c6880;
-}
-
-html.light .trust-engine article,
-html.light .reviews-panel,
-html.light .review-form,
-html.light .review-card {
-  border-color: #e3e8f2;
-  background: #ffffff;
-  box-shadow: 0 16px 34px rgba(13, 32, 66, 0.08);
-}
-
-html.light .trust-engine span {
-  color: #0a1f44;
-}
-
-html.light .trust-engine p,
-html.light .reviews-head p,
-html.light .review-time,
-html.light .review-card-meta {
-  color: #66738a;
-}
-
-html.light .review-client,
-html.light .review-form label {
-  color: #172033;
-}
-
-html.light .review-text {
-  color: #354158;
-}
-
-html.light .review-tag {
-  border-color: #dbe6ff;
-  color: #2f6be8;
-  background: #eef4ff;
 }
 
 html.light .client-form input,
