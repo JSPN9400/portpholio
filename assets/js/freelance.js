@@ -158,18 +158,14 @@ function getAllReviews() {
 }
 
 function reviewMatchesContext(review, context) {
-  if (!context) return true;
   if (context === "Marketing") return review.serviceType === "SEO" || review.serviceType === "Ads";
   return review.serviceType === context;
 }
 
-function getActiveReviewContext() {
-  const selectedTypes = new Set(getSelectedServices().map((item) => normalizeReviewContext(item.type)));
-  if (selectedTypes.has("Website")) return "Website";
-  if (selectedTypes.has("Data Analysis")) return "Data Analysis";
-  if (selectedTypes.has("Marketing")) return "Marketing";
-  if (selectedTypes.has("Automation")) return "Automation";
-  return viewedReviewContext;
+function getActiveReviewContexts() {
+  const selectedTypes = Array.from(new Set(getSelectedServices().map((item) => normalizeReviewContext(item.type))));
+  if (selectedTypes.length > 0) return selectedTypes;
+  return viewedReviewContext ? [viewedReviewContext] : [];
 }
 
 function formatRelativeTime(dateValue) {
@@ -351,8 +347,10 @@ function renderReviews() {
   if (!grid) return;
 
   const allReviews = getAllReviews();
-  const context = getActiveReviewContext();
-  const matchingReviews = context ? allReviews.filter((review) => reviewMatchesContext(review, context)) : allReviews;
+  const contexts = getActiveReviewContexts();
+  const matchingReviews = contexts.length
+    ? allReviews.filter((review) => contexts.some((context) => reviewMatchesContext(review, context)))
+    : allReviews;
   const visibleReviews = matchingReviews.length
     ? matchingReviews
     : [...allReviews].sort((a, b) => Number(b.rating) - Number(a.rating) || new Date(b.date) - new Date(a.date)).slice(0, 4);
@@ -363,10 +361,10 @@ function renderReviews() {
 
   if (averageRating) averageRating.textContent = `${average.toFixed(1)}/5`;
   if (totalClients) totalClients.textContent = `${Math.max(25, allReviews.length)}+`;
-  if (reviewContext) reviewContext.textContent = context || "All Services";
+  if (reviewContext) reviewContext.textContent = contexts.length ? contexts.join(" + ") : "All Services";
   if (filterNote) {
     filterNote.textContent = matchingReviews.length
-      ? `Showing ${context || "all"} reviews matched to your current interest.`
+      ? `Showing ${contexts.length ? contexts.join(" + ") : "all"} reviews matched to your current interest.`
       : "No exact match yet, so the top reviews are shown.";
   }
 
