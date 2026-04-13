@@ -46,8 +46,61 @@ const serviceCatalog = [
   },
 ];
 
+const defaultReviews = [
+  {
+    clientName: "Rohit Kumar",
+    serviceType: "Website",
+    rating: 5,
+    reviewText: "The website looked professional and made our business easier to explain to new customers.",
+    date: "2026-04-09T10:30:00.000Z",
+  },
+  {
+    clientName: "Anjali Verma",
+    serviceType: "Data Analysis",
+    rating: 5,
+    reviewText: "Our monthly reporting became faster and clearer. The dashboard helped us see important numbers without confusion.",
+    date: "2026-04-06T09:00:00.000Z",
+  },
+  {
+    clientName: "Sahil Mehta",
+    serviceType: "SEO",
+    rating: 5,
+    reviewText: "The local SEO work improved our search visibility and brought more serious enquiries from nearby customers.",
+    date: "2026-03-31T12:15:00.000Z",
+  },
+  {
+    clientName: "Priya Singh",
+    serviceType: "Ads",
+    rating: 4,
+    reviewText: "The campaign structure was clean, tracked properly, and focused on leads instead of just clicks.",
+    date: "2026-03-25T15:45:00.000Z",
+  },
+  {
+    clientName: "Amit Raj",
+    serviceType: "Automation",
+    rating: 5,
+    reviewText: "The WhatsApp lead flow reduced manual follow-up and helped us respond faster to interested customers.",
+    date: "2026-03-18T11:20:00.000Z",
+  },
+  {
+    clientName: "Neha Sharma",
+    serviceType: "Website",
+    rating: 5,
+    reviewText: "The site felt modern, loaded smoothly, and gave our startup a more trustworthy first impression.",
+    date: "2026-03-12T08:10:00.000Z",
+  },
+  {
+    clientName: "Vikash Gupta",
+    serviceType: "Data Analysis",
+    rating: 4,
+    reviewText: "The Excel and dashboard setup saved time in weekly reviews and made team performance easier to track.",
+    date: "2026-03-02T13:00:00.000Z",
+  },
+];
+
 let latestPdf = null;
 let latestFileName = "service-quotation.pdf";
+let viewedReviewContext = "";
 
 function formatCurrency(value) {
   return new Intl.NumberFormat("en-IN", {
@@ -68,6 +121,87 @@ function createQuotationFileName(clientName) {
     .replace(/^_+|_+$/g, "");
 
   return `Quotation_${safeName || "Client"}.pdf`;
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function normalizeReviewContext(value) {
+  if (value === "website") return "Website";
+  if (value === "data") return "Data Analysis";
+  if (value === "marketing") return "Marketing";
+  if (value === "automation") return "Automation";
+  return value || "";
+}
+
+function getReviewStorage() {
+  try {
+    const stored = JSON.parse(localStorage.getItem("clientReviews") || "[]");
+    return Array.isArray(stored) ? stored : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveReviewStorage(reviews) {
+  localStorage.setItem("clientReviews", JSON.stringify(reviews));
+}
+
+function getAllReviews() {
+  return [...defaultReviews, ...getReviewStorage()].sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+function reviewMatchesContext(review, context) {
+  if (!context) return true;
+  if (context === "Marketing") return review.serviceType === "SEO" || review.serviceType === "Ads";
+  return review.serviceType === context;
+}
+
+function getActiveReviewContext() {
+  const selectedTypes = new Set(getSelectedServices().map((item) => normalizeReviewContext(item.type)));
+  if (selectedTypes.has("Website")) return "Website";
+  if (selectedTypes.has("Data Analysis")) return "Data Analysis";
+  if (selectedTypes.has("Marketing")) return "Marketing";
+  if (selectedTypes.has("Automation")) return "Automation";
+  return viewedReviewContext;
+}
+
+function formatRelativeTime(dateValue) {
+  const timestamp = new Date(dateValue).getTime();
+  const diffMs = Date.now() - timestamp;
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+  const week = 7 * day;
+  const month = 30 * day;
+
+  if (diffMs < hour) return "Today";
+  if (diffMs < day) {
+    const hours = Math.max(1, Math.floor(diffMs / hour));
+    return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+  }
+  if (diffMs < week) {
+    const days = Math.max(1, Math.floor(diffMs / day));
+    return `${days} ${days === 1 ? "day" : "days"} ago`;
+  }
+  if (diffMs < month) {
+    const weeks = Math.max(1, Math.floor(diffMs / week));
+    return `${weeks} ${weeks === 1 ? "week" : "weeks"} ago`;
+  }
+
+  const months = Math.max(1, Math.floor(diffMs / month));
+  return `${months} ${months === 1 ? "month" : "months"} ago`;
+}
+
+function renderStars(rating) {
+  const value = Math.max(1, Math.min(5, Number(rating) || 5));
+  return "★".repeat(value) + "☆".repeat(5 - value);
 }
 
 function getSelectedServices() {
@@ -149,7 +283,7 @@ function renderCatalog() {
         .join("");
 
       return `
-        <article class="service-category">
+        <article class="service-category" data-review-context="${group.type}">
           <h3>${group.category}</h3>
           <div class="service-list">${options}</div>
         </article>
@@ -205,6 +339,102 @@ function updateSummary() {
   }
 
   updateProposalStyle(selected);
+  renderReviews();
+}
+
+function renderReviews() {
+  const grid = document.getElementById("reviews-grid");
+  const averageRating = document.getElementById("average-rating");
+  const totalClients = document.getElementById("total-clients");
+  const reviewContext = document.getElementById("review-context");
+  const filterNote = document.getElementById("review-filter-note");
+  if (!grid) return;
+
+  const allReviews = getAllReviews();
+  const context = getActiveReviewContext();
+  const matchingReviews = context ? allReviews.filter((review) => reviewMatchesContext(review, context)) : allReviews;
+  const visibleReviews = matchingReviews.length
+    ? matchingReviews
+    : [...allReviews].sort((a, b) => Number(b.rating) - Number(a.rating) || new Date(b.date) - new Date(a.date)).slice(0, 4);
+
+  const average = allReviews.length
+    ? allReviews.reduce((sum, review) => sum + Number(review.rating), 0) / allReviews.length
+    : 0;
+
+  if (averageRating) averageRating.textContent = `${average.toFixed(1)}/5`;
+  if (totalClients) totalClients.textContent = `${Math.max(25, allReviews.length)}+`;
+  if (reviewContext) reviewContext.textContent = context || "All Services";
+  if (filterNote) {
+    filterNote.textContent = matchingReviews.length
+      ? `Showing ${context || "all"} reviews matched to your current interest.`
+      : "No exact match yet, so the top reviews are shown.";
+  }
+
+  grid.innerHTML = visibleReviews
+    .map(
+      (review) => `
+        <article class="review-card">
+          <div class="review-card-top">
+            <span class="review-client">${escapeHtml(review.clientName)}</span>
+            <span class="review-stars" aria-label="${Number(review.rating)} out of 5 stars">${renderStars(review.rating)}</span>
+          </div>
+          <p class="review-text">${escapeHtml(review.reviewText)}</p>
+          <div class="review-card-meta">
+            <span class="review-tag">${escapeHtml(review.serviceType)}</span>
+            <span class="review-time">${formatRelativeTime(review.date)}</span>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function initReviewContextObserver() {
+  const categories = document.querySelectorAll(".service-category[data-review-context]");
+  if (!("IntersectionObserver" in window) || categories.length === 0) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible || getSelectedServices().length > 0) return;
+      viewedReviewContext = normalizeReviewContext(visible.target.dataset.reviewContext);
+      renderReviews();
+    },
+    { threshold: 0.45 }
+  );
+
+  categories.forEach((category) => observer.observe(category));
+}
+
+function initReviewForm() {
+  const form = document.getElementById("review-form");
+  const message = document.getElementById("review-message");
+  if (!form || !message) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = Object.fromEntries(new FormData(form).entries());
+    const review = {
+      clientName: formData.clientName,
+      serviceType: formData.serviceType,
+      rating: Number(formData.rating),
+      reviewText: formData.reviewText,
+      date: new Date().toISOString(),
+    };
+
+    const savedReviews = getReviewStorage();
+    savedReviews.push(review);
+    saveReviewStorage(savedReviews);
+
+    viewedReviewContext = review.serviceType === "SEO" || review.serviceType === "Ads" ? "Marketing" : review.serviceType;
+    form.reset();
+    message.className = "form-note success";
+    message.textContent = "Thank you. Your review has been added to the client experience engine.";
+    renderReviews();
+  });
 }
 
 function createPdf(formData, selected) {
@@ -426,6 +656,8 @@ function initQuotationForm() {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderCatalog();
+  initReviewContextObserver();
+  initReviewForm();
   updateSummary();
   initQuotationForm();
 });

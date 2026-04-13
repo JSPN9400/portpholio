@@ -105,6 +105,73 @@
       </div>
     </section>
 
+    <section class="section client-tells-section" id="client-tells">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Client Tells</p>
+          <h2>Client Tells - Real Experiences</h2>
+          <p>Real results from real clients</p>
+        </div>
+
+        <div class="trust-engine reveal" aria-label="Client trust summary">
+          <article>
+            <span id="average-rating">4.8/5</span>
+            <p>Average Rating</p>
+          </article>
+          <article>
+            <span id="total-clients">25+</span>
+            <p>Total Clients Served</p>
+          </article>
+          <article>
+            <span id="review-context">All Services</span>
+            <p>Smart Review Match</p>
+          </article>
+        </div>
+
+        <div class="reviews-layout">
+          <div class="reviews-panel reveal">
+            <div class="reviews-head">
+              <h3>Relevant Client Reviews</h3>
+              <p id="review-filter-note">Showing reviews based on your selected or viewed services.</p>
+            </div>
+            <div class="reviews-grid" id="reviews-grid" aria-live="polite"></div>
+          </div>
+
+          <form class="review-form reveal" id="review-form">
+            <h3>Share Your Experience</h3>
+            <label for="review-client-name">Client Name
+              <input type="text" id="review-client-name" name="clientName" placeholder="Your name" required>
+            </label>
+            <label for="review-service-type">Service Type
+              <select id="review-service-type" name="serviceType" required>
+                <option value="">Select service</option>
+                <option value="Website">Website</option>
+                <option value="Data Analysis">Data Analysis</option>
+                <option value="SEO">SEO</option>
+                <option value="Ads">Ads</option>
+                <option value="Automation">Automation</option>
+              </select>
+            </label>
+            <label for="review-rating">Rating
+              <select id="review-rating" name="rating" required>
+                <option value="">Select rating</option>
+                <option value="5">5 stars</option>
+                <option value="4">4 stars</option>
+                <option value="3">3 stars</option>
+                <option value="2">2 stars</option>
+                <option value="1">1 star</option>
+              </select>
+            </label>
+            <label for="review-text">Review Text
+              <textarea id="review-text" name="reviewText" rows="5" placeholder="What changed after working together?" required></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Submit Review</button>
+            <p class="form-note" id="review-message" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <section class="section quote-form-section" id="enquiry-form">
       <div class="container form-grid">
         <div class="form-copy reveal">
