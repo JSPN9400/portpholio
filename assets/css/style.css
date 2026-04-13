@@ -995,7 +995,7 @@ html.light .brand-mark {
   }
 
   .main-nav.open {
-    max-height: 320px;
+    max-height: 440px;
   }
 
   .nav-link {
@@ -1034,6 +1034,50 @@ html.light .brand-mark {
 
   .resume-frame {
     min-height: 68vh;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    width: min(100% - 1.25rem, var(--container));
+  }
+
+  .nav-container {
+    gap: 0.45rem;
+    min-height: 64px;
+  }
+
+  .brand-mark {
+    font-size: 0.78rem;
+    padding: 0.38rem 0.52rem;
+  }
+
+  .theme-toggle {
+    padding: 0.42rem 0.56rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 1rem;
+  }
+
+  .hero-actions,
+  .case-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .footer-wrap,
+  .footer-links {
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
   }
 }
 
