@@ -716,7 +716,7 @@ function createPdf(formData, selected) {
   return doc;
 }
 
-const GOOGLE_SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbyGQ_-5PrENrWqrHJUHyQiugplbZOpQgMof-Oc2JPUs3R4e8JQ0EilSGYDdETsDQc9z/exec";
+const GOOGLE_SHEETS_ENDPOINT = https://script.google.com/macros/s/AKfycbyGQ_-5PrENrWqrHJUHyQiugplbZOpQgMof-Oc2JPUs3R4e8JQ0EilSGYDdETsDQc9z/exec"
 
 function formatServiceList(selected) {
   return selected
