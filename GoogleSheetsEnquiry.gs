@@ -64,6 +64,8 @@ function doOptions(e) {
       'Access-Control-Allow-Headers': 'Content-Type',
     });
 }
+
+function sendNotificationEmail(payload) {
   const subject = `New client enquiry from ${payload.name || "Unknown"}`;
   const body = [
     `Name: ${payload.name || "-"}`,

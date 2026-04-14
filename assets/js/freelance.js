@@ -822,7 +822,8 @@ function initQuotationForm() {
       message.classList.add("error");
       message.textContent = error.message;
     }
-  });
+  })
+
 
   downloadButton.addEventListener("click", () => {
     if (!latestPdf) return;
