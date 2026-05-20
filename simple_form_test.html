@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Form Test - Google Sheets Integration</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .form-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      transition: border-color 0.3s;
+    }
+    
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: none;
+    }
+    
+    .message.show {
+      display: block;
+    }
+    
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .message.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .message.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>📋 Send Enquiry</h1>
+    
+    <form id="enquiry-form">
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="business-type">Business Type *</label>
+        <select id="business-type" name="businessType" required>
+          <option value="">-- Select Business Type --</option>
+          <option value="Retail Shop">Retail Shop</option>
+          <option value="Restaurant">Restaurant</option>
+          <option value="Coaching">Coaching</option>
+          <option value="Service">Service Business</option>
+          <option value="Startup">Startup</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="contact">Contact (Phone/Email) *</label>
+        <input type="text" id="contact" name="contact" placeholder="9876543210 or email@example.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="services">Services Interested In</label>
+        <input type="text" id="services" name="services" placeholder="Website, SEO, Ads, etc.">
+      </div>
+      
+      <div class="form-group">
+        <label for="notes">Message / Requirements</label>
+        <textarea id="notes" name="notes" placeholder="Tell us more about your project..."></textarea>
+      </div>
+      
+      <button type="submit">
+        <span id="button-text">Send Enquiry</span>
+        <span id="button-spinner" class="loading-spinner" style="display: none; margin-left: 8px;"></span>
+      </button>
+    </form>
+    
+    <div id="message" class="message"></div>
+  </div>
+
+  <script>
+    // Replace with your actual Google Apps Script deploy URL
+    const GOOGLE_SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbw0i3MxMtfZaQbnh2TUu0V7MKt_XzaHYmdvG_wPrPipN-ldfI8xjAhn4PXL1tdHG5iN/exec";
+    
+    const form = document.getElementById("enquiry-form");
+    const messageDiv = document.getElementById("message");
+    const submitButton = form.querySelector("button[type='submit']");
+    const buttonText = document.getElementById("button-text");
+    const buttonSpinner = document.getElementById("button-spinner");
+    
+    function showMessage(text, type) {
+      messageDiv.textContent = text;
+      messageDiv.className = `message show ${type}`;
+      console.log(`[${type.toUpperCase()}] ${text}`);
+    }
+    
+    function clearMessage() {
+      messageDiv.className = "message";
+      messageDiv.textContent = "";
+    }
+    
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage();
+      
+      // Disable button and show loading
+      submitButton.disabled = true;
+      buttonText.style.display = "none";
+      buttonSpinner.style.display = "inline-block";
+      
+      try {
+        // Get form data
+        const formData = Object.fromEntries(new FormData(form).entries());
+        
+        console.log("📤 Sending data:", formData);
+        
+        // Create payload
+        const payload = {
+          name: formData.name || "",
+          businessType: formData.businessType || "",
+          contact: formData.contact || "",
+          services: formData.services || "",
+          total: 0,
+          notes: formData.notes || "",
+          source: "Website enquiry form",
+        };
+        
+        console.log("📮 Payload:", payload);
+        
+        // Send to Google Apps Script
+        const response = await fetch(GOOGLE_SHEETS_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        
+        console.log("📨 Response status:", response.status, response.statusText);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("❌ Error response:", errorText);
+          throw new Error(`Server error: ${response.status} ${response.statusText}`);
+        }
+        
+        const result = await response.json();
+        console.log("✅ Response data:", result);
+        
+        if (result.success) {
+          showMessage("✅ Enquiry sent successfully! We'll contact you soon.", "success");
+          form.reset();
+          
+          // Reset button
+          setTimeout(() => {
+            submitButton.disabled = false;
+            buttonText.style.display = "inline";
+            buttonSpinner.style.display = "none";
+          }, 2000);
+        } else {
+          throw new Error(result.error || "Unknown error");
+        }
+      } catch (error) {
+        console.error("❌ Error:", error);
+        showMessage(`❌ Error: ${error.message}`, "error");
+        
+        // Reset button
+        submitButton.disabled = false;
+        buttonText.style.display = "inline";
+        buttonSpinner.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
