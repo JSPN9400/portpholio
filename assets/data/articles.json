@@ -1,0 +1,68 @@
+[
+  {
+    "id": "data-changes-business-decisions",
+    "title": "How Data Changes Business Decisions",
+    "excerpt": "Most businesses make decisions on instinct. The ones that scale don't. Here's what I've seen when data finally enters the room — and what happens when it doesn't.",
+    "category": "Business Intelligence",
+    "categoryColor": "#2563EB",
+    "status": "coming-soon",
+    "readTime": "6 min read",
+    "date": "Coming Soon",
+    "gradient": "linear-gradient(135deg, #2563EB, #0891B2)"
+  },
+  {
+    "id": "ai-will-not-replace-analysts",
+    "title": "AI Will Not Replace Data Analysts — Here's Why",
+    "excerpt": "After integrating Claude, ChatGPT, and Cursor AI into my daily workflow, the truth about AI and analyst jobs is more nuanced — and more interesting — than the headlines suggest.",
+    "category": "AI & Technology",
+    "categoryColor": "#D97706",
+    "status": "coming-soon",
+    "readTime": "8 min read",
+    "date": "Coming Soon",
+    "gradient": "linear-gradient(135deg, #F59E0B, #EF4444)"
+  },
+  {
+    "id": "small-businesses-bihar-analytics",
+    "title": "Why Small Businesses in Bihar Need Analytics",
+    "excerpt": "Construction firms, schools, and local businesses in Bihar sit on mountains of unread data. What changes when they finally learn to use it?",
+    "category": "Society & Business",
+    "categoryColor": "#7C3AED",
+    "status": "coming-soon",
+    "readTime": "5 min read",
+    "date": "Coming Soon",
+    "gradient": "linear-gradient(135deg, #8B5CF6, #EC4899)"
+  },
+  {
+    "id": "cost-of-poor-data-quality",
+    "title": "The Real Cost of Poor Data Quality",
+    "excerpt": "Bad data doesn't just slow teams down. It costs money, creates liability, and quietly erodes management trust. I've seen what it looks like from inside the finance office.",
+    "category": "Data Quality",
+    "categoryColor": "#059669",
+    "status": "coming-soon",
+    "readTime": "7 min read",
+    "date": "Coming Soon",
+    "gradient": "linear-gradient(135deg, #10B981, #3B82F6)"
+  },
+  {
+    "id": "lessons-construction-analytics",
+    "title": "Lessons From Construction Analytics",
+    "excerpt": "Building dashboards for construction projects taught me more about data storytelling than any course ever could. The lessons apply across every domain.",
+    "category": "Career & Craft",
+    "categoryColor": "#EA580C",
+    "status": "coming-soon",
+    "readTime": "6 min read",
+    "date": "Coming Soon",
+    "gradient": "linear-gradient(135deg, #F97316, #EAB308)"
+  },
+  {
+    "id": "open-data-india-governance",
+    "title": "Open Data and India's Governance Gap",
+    "excerpt": "India generates enormous government data. Most of it goes nowhere. What would a data-literate Bihar look like — and who builds the infrastructure for it?",
+    "category": "Public Policy",
+    "categoryColor": "#0891B2",
+    "status": "coming-soon",
+    "readTime": "9 min read",
+    "date": "Coming Soon",
+    "gradient": "linear-gradient(135deg, #06B6D4, #6366F1)"
+  }
+]

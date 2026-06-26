@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /admin.html
-Disallow: /simple_form_test.html
 Sitemap: https://jspn9400.github.io/portpholio/sitemap.xml

@@ -1,97 +1,55 @@
-# My Portfolio
+# Jaishankar Prasad Nirala — Portfolio Website
 
-Personal portfolio website for **Jaishankar Prasad Nirala** – a Data Analyst, Python Data Analyst, SQL Reporting Specialist and Power BI Dashboard Developer based in India. This SEO‑optimized site serves recruiters, business owners, and Upwork/LinkedIn clients searching by name or keyword.
+## 🚀 How to Deploy on GitHub Pages
 
-Built with plain **HTML**, **CSS**, and **JavaScript**.
+### Step 1: Upload all files to your GitHub repo
+Upload the ENTIRE folder structure to: `https://github.com/JSPN9400/portpholio`
 
-## Current Features
-
-### Home page
-- SEO headline and meta tags targeting “Data Analyst Portfolio”, “Python Data Analyst”, “SQL Reporting Specialist”, etc.
-- Hero section with professional positioning and CTA buttons
-- About section with recruiter‑friendly narrative and business impact metrics
-- Skills section with impact-focused cards and animated progress bars
-- KPI statistics section showing projects completed, dashboards built, automation improvement, years of practice
-- Contact section with direct professional links (Email, LinkedIn, Instagram, GitHub) and Formspree contact form
-- Resume quick actions: View Resume and Download Resume buttons
-
-### Navigation
-- Sticky navbar
-- Transparent navbar at top that turns solid on scroll
-- Active nav link highlight by current section
-- Smooth scrolling to sections
-- Mobile hamburger navigation
-
-### Theme and UX
-- Light/Dark theme toggle with localStorage persistence
-- Scroll-based reveal animations
-- Responsive layout for desktop/tablet/mobile
-
-### Extra pages
-- `projects.html` for project showcase
-- `writing.html` for articles/poems
-- `resume.html` for in-browser resume view + direct PDF download
-- `admin.html` for local content management
-
-## Important Notes
-
-- Contact is intentionally kept simple with direct links for faster recruiter response.
-- Resume file path used by the site: `assets/others/resume.pdf`
-
-## Project Structure
-
-```text
-portpholio/
-|-- index.html
-|-- projects.html
-|-- writing.html
-|-- resume.html
-|-- admin.html
-|-- README.md
-|-- ADMIN_GUIDE.md
-`-- assets/
-    |-- css/
-    |   |-- style.css
-    |   `-- project.css
-    |-- js/
-    |   |-- script.js
-    |   |-- project.js
-    |   |-- writing.js
-    |   `-- admin.js
-    `-- others/
-        |-- resume.pdf
-        `-- images
+### File Structure:
 ```
+portpholio/
+├── index.html                    ← Main website file
+├── README.md                     ← This file
+└── assets/
+    ├── css/
+    │   └── main.css              ← All styles
+    ├── js/
+    │   └── app.js                ← All JavaScript
+    ├── data/
+    │   ├── projects.json         ← Edit to update projects
+    │   ├── articles.json         ← Edit to add blog posts
+    │   ├── timeline.json         ← Edit to update journey
+    │   ├── testimonials.json     ← Edit to add testimonials
+    │   └── Jaishankar_Prasad_Nirala_Resume.docx
+    └── images/
+        └── photo.jpg             ← ADD YOUR PHOTO HERE
 
-## Local Run
+### Step 2: Enable GitHub Pages
+1. Go to repo Settings
+2. Click "Pages" in left sidebar
+3. Under "Source" → select "main" branch → "/ (root)"
+4. Click Save
+5. Wait 2-3 minutes → live at: https://jspn9400.github.io/portpholio/
 
-1. Open `index.html` in a browser, or
-2. Use VS Code Live Server.
+### Step 3: Add Your Photo
+- Name your photo: `photo.jpg`
+- Upload to: `assets/images/photo.jpg`
+- Best size: 400x400px, square crop
 
-## Recent Updates (February 24, 2026)
+## ✏️ How to Update Content (No Coding Needed)
 
-- Implemented full responsive design with mobile-first layout
-- Added hamburger menu, navigation underline animation, and scroll behavior
-- Integrated SEO enhancements (meta tags, keywords, canonical links, sitemap/robots)
-- Created contact form powered by Formspree with validation and success messages
-- Added KPI statistics section with animated counters and icons
-- Introduced subtle scroll animations, button effects, and dark mode refinements
-- Updated admin portal, projects, and writing pages with SEO-friendly content
+### Add a new project:
+Edit `assets/data/projects.json` — copy an existing project block and change the values.
 
-(see earlier February 23 log for previous changes)
+### Add a blog article:
+Edit `assets/data/articles.json` — add a new entry at the top of the array.
 
-## Tech
+### Update your journey:
+Edit `assets/data/timeline.json` — add or edit entries.
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- localStorage (theme/content persistence)
+### Add client testimonials:
+Edit `assets/data/testimonials.json` — add new testimonial objects.
 
-## Author
-
-**Jaishankar Prasad Nirala**  
-Data Analyst | Python Data Analyst | SQL Reporting Specialist | Power BI Dashboard Developer
-
-- Email: `nirala9400@gmail.com`
-- GitHub: `https://github.com/JSPN9400`
-- LinkedIn: `https://www.linkedin.com/in/jaishankar-prasad-nirala-440a44243/`
+## 📧 Contact Form
+The contact button opens the user's email client with your info pre-filled.
+To change email: search `jaishankar.9400@gmail.com` in `assets/js/app.js`

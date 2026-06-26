@@ -1,0 +1,56 @@
+[
+  {
+    "id": "roots",
+    "year": "Origin",
+    "icon": "🌾",
+    "title": "Bihar Roots",
+    "subtitle": "Aurangabad, Bihar",
+    "description": "Grew up understanding Bihar's business landscape from the inside — construction economics, institutional structures, and how local enterprises actually operate. This ground-level knowledge later became my biggest professional differentiator.",
+    "color": "#059669"
+  },
+  {
+    "id": "bca",
+    "year": "2020–24",
+    "icon": "🎓",
+    "title": "BCA Graduate",
+    "subtitle": "Ram Lakhan Singh Yadav College, Aurangabad",
+    "description": "Bachelor of Computer Applications — studied Database Management, Programming, Statistics, and Information Systems. Built the technical foundation that would later power real analytics work. Graduated 2024.",
+    "color": "#2563EB"
+  },
+  {
+    "id": "finance-ops",
+    "year": "May 2024",
+    "icon": "💼",
+    "title": "Finance Operations",
+    "subtitle": "PM Modern Academy",
+    "description": "Joined as Finance Assistant (Data Operations). Managed ₹8–10 lakh/month of transaction data, automated 4 monthly Python reports, and learned how financial data flows inside a real institution — with real consequences when it doesn't.",
+    "color": "#7C3AED"
+  },
+  {
+    "id": "data-analytics",
+    "year": "2024–25",
+    "icon": "📊",
+    "title": "Analytics Depth",
+    "subtitle": "Power BI · SQL · Python mastery",
+    "description": "Invested in mastering the full analytics stack — Power BI, DAX, PostgreSQL, Pandas, OpenPyXL. Started integrating AI tools (Claude, ChatGPT, Cursor) into daily workflow. Shifted from reporting to genuine BI architecture.",
+    "color": "#D97706"
+  },
+  {
+    "id": "freelance",
+    "year": "Sep 2025",
+    "icon": "🚀",
+    "title": "Freelance Consulting",
+    "subtitle": "Self-Employed · Construction & Business Analytics",
+    "description": "Launched independent practice. Built construction intelligence dashboards, automated financial workflows, and designed KPI frameworks for 3+ business clients. Real deliverables. Measurable outcomes. Paid work.",
+    "color": "#EA580C"
+  },
+  {
+    "id": "future",
+    "year": "2026 →",
+    "icon": "🔭",
+    "title": "Next Chapter",
+    "subtitle": "BI Engineer · PL-300 · Enterprise Scale",
+    "description": "Pursuing Microsoft PL-300 certification (Q3 2026) and Google Data Analytics Certificate (Q4 2026). Targeting senior BI Analyst or Analytics Engineer roles — building toward enterprise-scale data infrastructure and team leadership.",
+    "color": "#2563EB"
+  }
+]

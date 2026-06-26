@@ -1,0 +1,90 @@
+[
+  {
+    "id": "construction-intelligence",
+    "title": "Construction Intelligence Dashboard",
+    "tagline": "Turned scattered Excel files into a live command centre for construction management.",
+    "domain": "Construction Analytics",
+    "domainColor": "#EA580C",
+    "domainBg": "#FFF7ED",
+    "featured": true,
+    "image": "assets/images/proj-construction.png",
+    "problem": "A construction firm was detecting cost overruns weeks after they occurred. Project data lived in 5+ separate Excel sheets maintained by different teams. The management team spent 5+ hours every week just consolidating numbers before they could make a single decision.",
+    "approach": "I mapped all data flows, designed a normalised SQL schema in PostgreSQL, wrote Python ETL scripts (OpenPyXL + Pandas) to automate weekly data ingestion, then built a Power BI model with DAX measures for cost-per-sq-ft, stage completion %, and contractor variance. Management now opens one dashboard instead of calling 3 people.",
+    "tools": ["SQL", "PostgreSQL", "Python", "Pandas", "OpenPyXL", "Power BI", "DAX", "Power Query"],
+    "metrics": [
+      { "value": "40%", "label": "Reporting time reduced" },
+      { "value": "Days", "label": "vs weeks for overrun detection" },
+      { "value": "5 hrs/wk", "label": "Manual consolidation eliminated" },
+      { "value": "3", "label": "Custom construction KPIs built" }
+    ],
+    "impact": "Management shifted from reactive cost reviews to proactive weekly monitoring. Cost overrun detection moved from weeks to days.",
+    "github": "https://github.com/JSPN9400",
+    "demo": null
+  },
+  {
+    "id": "school-finance-analytics",
+    "title": "School Finance Analytics Dashboard",
+    "tagline": "Automated ₹8–10 lakh/month of transaction reporting and surfaced hidden billing anomalies.",
+    "domain": "Financial Analytics",
+    "domainColor": "#059669",
+    "domainBg": "#F0FDF4",
+    "featured": false,
+    "image": "assets/images/proj-finance.png",
+    "problem": "PM Modern Academy's finance team was manually consolidating fee collections, vendor payments, and expense records for 500+ students every month. The process took 8+ hours and still missed anomalies — including a billing error that had been repeating for months undetected.",
+    "approach": "Built structured SQL tables for fees, payments, and expenses. Wrote 4 Python automation scripts (Pandas) for monthly report generation. Added data validation checks that flag statistical outliers before they reach the report stage. Delivered a Power BI dashboard showing collection efficiency by class, outstanding dues, and department-wise spending.",
+    "tools": ["SQL", "Python", "Pandas", "Power BI", "Excel", "Data Validation"],
+    "metrics": [
+      { "value": "25%", "label": "Reporting effort reduced" },
+      { "value": "500+", "label": "Student records tracked" },
+      { "value": "20%", "label": "Data validation accuracy up" },
+      { "value": "3/qtr", "label": "Anomalies surfaced & fixed" }
+    ],
+    "impact": "Finance team reclaimed 2+ hours per month. Caught a recurring billing error in the first month that had been missed for quarters.",
+    "github": "https://github.com/JSPN9400",
+    "demo": null
+  },
+  {
+    "id": "ecommerce-customer-analytics",
+    "title": "E-Commerce Sales & Customer Analytics",
+    "tagline": "Found the 20% of customers driving 65% of revenue — and built the dashboard to keep finding them.",
+    "domain": "Customer Analytics",
+    "domainColor": "#2563EB",
+    "domainBg": "#EFF6FF",
+    "featured": false,
+    "image": "assets/images/proj-ecommerce.png",
+    "problem": "A large transaction dataset held patterns no one was reading: which customers were about to churn, which product categories were quietly underperforming, and where the high-value revenue cluster actually sat.",
+    "approach": "Ingested 100,000+ transaction records into PostgreSQL. Applied RFM (Recency-Frequency-Monetary) segmentation using Python and SQL to cluster customers by behaviour. Built Power BI dashboards with revenue trend lines, retention cohorts, and churn-risk alerts. Identified top customer segments for targeted retention campaigns.",
+    "tools": ["SQL", "PostgreSQL", "Python", "Pandas", "Power BI", "RFM Analysis", "Cohort Analysis"],
+    "metrics": [
+      { "value": "100K+", "label": "Transactions analysed" },
+      { "value": "65%", "label": "Revenue from top 20% customers" },
+      { "value": "RFM", "label": "Advanced segmentation model" },
+      { "value": "Churn", "label": "Risk cohorts identified" }
+    ],
+    "impact": "Identified the customer segments worth retaining. Revenue distribution analysis challenged the team's assumptions about their best customers.",
+    "github": "https://github.com/JSPN9400",
+    "demo": null
+  },
+  {
+    "id": "job-market-intelligence",
+    "title": "India Job Market Intelligence Dashboard",
+    "tagline": "Mapped salary benchmarks and skill demand across 5,000+ data analytics job postings in India.",
+    "domain": "Market Intelligence",
+    "domainColor": "#7C3AED",
+    "domainBg": "#F5F3FF",
+    "featured": false,
+    "image": "assets/images/proj-jobmarket.png",
+    "problem": "Data professionals in India lacked a rigorous, data-driven view of which skills command premium salaries, which cities are actually hiring, and what the skill-demand gap looks like across Data Analytics, BI, and AI roles.",
+    "approach": "Collected and cleaned 5,000+ job postings using Python scraping and parsing. Normalised data into a SQL schema covering role types, required skills, salary ranges, cities, and company sizes. Built a Power BI dashboard enabling drill-down by city, role, skill stack, and compensation band.",
+    "tools": ["Python", "SQL", "PostgreSQL", "Power BI", "Web Scraping", "Data Cleaning"],
+    "metrics": [
+      { "value": "5K+", "label": "Job postings analysed" },
+      { "value": "Top 10", "label": "In-demand skills mapped" },
+      { "value": "Salary", "label": "Benchmarks by role & city" },
+      { "value": "Pan-India", "label": "Geographic coverage" }
+    ],
+    "impact": "Produced a clear map of where Data Analytics demand is concentrated in India, which skills are most valued, and realistic salary expectations by experience level.",
+    "github": "https://github.com/JSPN9400",
+    "demo": null
+  }
+]

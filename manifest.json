@@ -1,0 +1,13 @@
+{
+  "name": "Jaishankar Prasad Nirala — Portfolio",
+  "short_name": "JSPN",
+  "description": "Data Analyst & BI Consultant — Power BI, Python, SQL",
+  "start_url": "/portpholio/",
+  "display": "standalone",
+  "background_color": "#020B18",
+  "theme_color": "#2563EB",
+  "icons": [
+    { "src": "assets/images/photo-400.jpg", "sizes": "192x192", "type": "image/jpeg" },
+    { "src": "assets/images/photo-400.jpg", "sizes": "512x512", "type": "image/jpeg" }
+  ]
+}

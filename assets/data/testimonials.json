@@ -1,0 +1,29 @@
+[
+  {
+    "id": "t1",
+    "quote": "Jaishankar delivered a construction dashboard that changed how we track project costs. The domain understanding — cost-per-sq-ft tracking, contractor variance — was something we didn't expect from someone at this career stage.",
+    "name": "Construction Client",
+    "role": "Project Manager",
+    "company": "Construction Firm, Aurangabad",
+    "initials": "CK",
+    "stars": 5
+  },
+  {
+    "id": "t2",
+    "quote": "The Python automation he built for our monthly reports saved our finance team hours every month. The anomaly detection alone caught a billing error we'd been missing for quarters. Worth every rupee.",
+    "name": "PM Modern Academy",
+    "role": "Finance Team",
+    "company": "PM Modern Academy, Aurangabad",
+    "initials": "PM",
+    "stars": 5
+  },
+  {
+    "id": "t3",
+    "quote": "Very structured approach — he asked the right business questions before writing a single line of code. The final dashboard was exactly what we needed, built in less time than I expected.",
+    "name": "Local Business Client",
+    "role": "Business Owner",
+    "company": "SME, Bihar",
+    "initials": "BC",
+    "stars": 4
+  }
+]
