@@ -354,3 +354,56 @@ const renderHomepageProjects = () => {
 
 // Patch init to also call homepage projects
 const _origInit = window._jspnInit;
+
+/* ── TOOL MINI BARS ── */
+const initToolBars = () => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.tool-bar-mini-fill').forEach((bar, i) => {
+        setTimeout(() => bar.style.width = bar.dataset.w + '%', i * 60);
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.2 });
+  const toolSection = document.querySelector('.tool-stack-section');
+  if (toolSection) obs.observe(toolSection);
+};
+
+/* ── DOMAIN KPI BARS ── */
+const initDomainBars = () => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.domain-kpi-bar').forEach((bar, i) => {
+        setTimeout(() => bar.style.width = bar.dataset.w + '%', i * 100);
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.domain-card').forEach(c => obs.observe(c));
+};
+
+/* ── DASHBOARD BAR CHART ANIMATION ── */
+const initDashChart = () => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.bar-fill').forEach((bar, i) => {
+        setTimeout(() => bar.style.height = bar.dataset.h, i * 120);
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  const dash = document.querySelector('.dashboard-preview');
+  if (dash) obs.observe(dash);
+};
+
+/* Hook into DOMContentLoaded */
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    initToolBars();
+    initDomainBars();
+    initDashChart();
+  }, 500);
+});
