@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | JSPN Portfolio</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #020B18; --navy-2: #040F1E; --navy-3: #071424; --navy-4: #0A1929;
+  --blue: #2563EB; --blue-l: #3B82F6; --teal: #14B8A6; --green: #22C55E;
+  --red: #EF4444; --amber: #F59E0B; --violet: #8B5CF6;
+  --text: #F1F5F9; --text-2: #94A3B8; --text-3: #475569;
+  --border: rgba(255,255,255,0.07); --border-2: rgba(255,255,255,0.12);
+  --surface: #071424; --surface-2: #0A1929;
+  --r: 10px; --font: 'Inter',-apple-system,sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: var(--font); background: var(--navy); color: var(--text); -webkit-font-smoothing: antialiased; overflow: hidden; }
+
+/* LAYOUT */
+.admin-wrap { display: flex; height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px; flex-shrink: 0; background: var(--navy-2);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column;
+  padding: 0; overflow-y: auto;
+}
+.sidebar-brand {
+  padding: 20px 20px 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.brand-mark {
+  width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px; color: #fff;
+}
+.brand-text { font-size: 14px; font-weight: 700; color: var(--text); }
+.brand-sub  { font-size: 11px; color: var(--text-3); }
+
+.sidebar-nav { padding: 12px 10px; flex: 1; }
+.nav-section-title { font-size: 10px; font-weight: 700; color: var(--text-3); letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 10px 6px; }
+.nav-item {
+  display: flex; align-items: center; gap: 9px; padding: 9px 12px;
+  border-radius: 7px; font-size: 13.5px; font-weight: 500; color: var(--text-2);
+  cursor: pointer; transition: all 0.15s; border: none; background: none;
+  width: 100%; text-align: left; font-family: var(--font); margin-bottom: 2px;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+.nav-item.active { background: rgba(37,99,235,0.18); color: #fff; font-weight: 600; }
+.nav-item-icon { width: 18px; text-align: center; font-size: 16px; flex-shrink: 0; }
+.nav-badge {
+  margin-left: auto; background: var(--blue); color: #fff;
+  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 20px;
+}
+
+.sidebar-footer { padding: 12px 16px; border-top: 1px solid var(--border); }
+.view-site-btn {
+  display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600;
+  color: var(--blue-l); text-decoration: none; padding: 8px 10px; border-radius: 7px;
+  transition: background 0.15s;
+}
+.view-site-btn:hover { background: rgba(37,99,235,0.12); }
+
+/* MAIN CONTENT */
+.admin-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+.topbar {
+  height: 56px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; background: var(--navy-2); flex-shrink: 0;
+}
+.topbar-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.topbar-save {
+  background: var(--blue); color: #fff; font-size: 13px; font-weight: 700;
+  padding: 8px 18px; border-radius: 7px; border: none; cursor: pointer;
+  font-family: var(--font); transition: background 0.15s;
+}
+.topbar-save:hover { background: #1D4ED8; }
+.topbar-save.saved { background: var(--green); }
+.topbar-preview { font-size: 13px; color: var(--text-2); text-decoration: none; padding: 8px 14px; border: 1px solid var(--border-2); border-radius: 7px; transition: all 0.15s; }
+.topbar-preview:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+.panel-area { flex: 1; overflow-y: auto; padding: 24px; }
+
+/* PANELS */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* FORM ELEMENTS */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-full { grid-column: 1 / -1; }
+.form-group { margin-bottom: 0; }
+.form-label { display: block; font-size: 12px; font-weight: 700; color: var(--text-2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px; }
+.form-input, .form-textarea, .form-select {
+  width: 100%; padding: 10px 13px; background: var(--surface-2);
+  border: 1.5px solid var(--border-2); border-radius: 8px;
+  font-size: 13.5px; font-family: var(--font); color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s; outline: none;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+.form-textarea { resize: vertical; min-height: 90px; }
+.form-select option { background: var(--navy-3); }
+.form-hint { font-size: 11.5px; color: var(--text-3); margin-top: 5px; }
+
+/* SECTION CARDS */
+.section-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 20px; margin-bottom: 16px;
+}
+.section-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.section-card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+.section-card-badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 5px; background: rgba(37,99,235,0.15); color: var(--blue-l); }
+
+/* ITEM LIST (projects/blogs) */
+.item-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.item-row {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.item-row-icon { font-size: 22px; flex-shrink: 0; }
+.item-row-info { flex: 1; min-width: 0; }
+.item-row-title { font-size: 13.5px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-row-sub   { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.item-row-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.item-btn {
+  font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 6px;
+  border: none; cursor: pointer; font-family: var(--font); transition: all 0.15s;
+}
+.item-btn-edit   { background: rgba(37,99,235,0.15); color: var(--blue-l); }
+.item-btn-edit:hover   { background: rgba(37,99,235,0.25); }
+.item-btn-feat   { background: rgba(245,158,11,0.15); color: var(--amber); }
+.item-btn-feat.on { background: rgba(245,158,11,0.25); }
+.item-btn-delete { background: rgba(239,68,68,0.12); color: #F87171; }
+.item-btn-delete:hover { background: rgba(239,68,68,0.22); }
+.item-btn-add {
+  display: flex; align-items: center; gap: 6px;
+  width: 100%; padding: 11px 16px; border-radius: 8px; border: 1.5px dashed var(--border-2);
+  background: transparent; color: var(--text-3); font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: var(--font); transition: all 0.15s;
+}
+.item-btn-add:hover { border-color: var(--blue); color: var(--blue-l); background: rgba(37,99,235,0.05); }
+
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--navy-3); border: 1px solid var(--border-2);
+  border-radius: 14px; width: 100%; max-width: 640px; max-height: 90vh;
+  overflow-y: auto; padding: 24px;
+}
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.modal-title { font-size: 16px; font-weight: 800; color: var(--text); }
+.modal-close { font-size: 20px; color: var(--text-3); cursor: pointer; background: none; border: none; color: var(--text-3); transition: color 0.15s; }
+.modal-close:hover { color: var(--text); }
+.modal-form { display: flex; flex-direction: column; gap: 14px; }
+.modal-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+.modal-btn-cancel { padding: 9px 18px; border-radius: 7px; border: 1px solid var(--border-2); background: transparent; color: var(--text-2); font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font); }
+.modal-btn-save   { padding: 9px 22px; border-radius: 7px; border: none; background: var(--blue); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font); transition: background 0.15s; }
+.modal-btn-save:hover { background: #1D4ED8; }
+
+/* STATS ROW */
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; }
+.stat-num  { font-size: 28px; font-weight: 900; color: var(--text); letter-spacing: -1px; }
+.stat-lbl  { font-size: 12px; color: var(--text-3); margin-top: 3px; }
+.stat-icon { font-size: 20px; float: right; margin-top: -4px; }
+
+/* TOGGLE */
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.toggle-row:last-child { border-bottom: none; }
+.toggle-label { font-size: 13.5px; font-weight: 600; color: var(--text); }
+.toggle-sub   { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.toggle-switch {
+  width: 44px; height: 24px; background: var(--border-2); border-radius: 12px;
+  position: relative; cursor: pointer; transition: background 0.2s; flex-shrink: 0;
+  border: none;
+}
+.toggle-switch.on { background: var(--blue); }
+.toggle-switch::after {
+  content:''; position:absolute; width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; top: 3px; left: 3px; transition: left 0.2s;
+}
+.toggle-switch.on::after { left: 23px; }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  background: var(--green); color: #fff; font-size: 13.5px; font-weight: 700;
+  padding: 12px 20px; border-radius: 10px; display: none;
+  align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  animation: slide-in 0.3s ease;
+}
+.toast.show { display: flex; }
+@keyframes slide-in { from{transform:translateY(20px);opacity:0} to{transform:none;opacity:1} }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* RESPONSIVE SIDEBAR */
+@media(max-width: 768px) {
+  .sidebar { width: 60px; }
+  .brand-text, .brand-sub, .nav-section-title, .nav-item span:not(.nav-item-icon), .nav-badge, .sidebar-footer .view-site-btn span { display: none; }
+  .nav-item { justify-content: center; padding: 10px; }
+  .panel-area { padding: 16px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="admin-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">JN</div>
+      <div>
+        <div class="brand-text">JSPN Admin</div>
+        <div class="brand-sub">Portfolio CMS</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Overview</div>
+      <button class="nav-item active" data-panel="dashboard">
+        <span class="nav-item-icon">📊</span><span>Dashboard</span>
+      </button>
+
+      <div class="nav-section-title">Content</div>
+      <button class="nav-item" data-panel="projects">
+        <span class="nav-item-icon">🗂️</span><span>Projects</span>
+        <span class="nav-badge" id="badge-projects">4</span>
+      </button>
+      <button class="nav-item" data-panel="blogs">
+        <span class="nav-item-icon">✍️</span><span>Blog Posts</span>
+        <span class="nav-badge" id="badge-blogs">6</span>
+      </button>
+      <button class="nav-item" data-panel="about">
+        <span class="nav-item-icon">👤</span><span>About Me</span>
+      </button>
+      <button class="nav-item" data-panel="skills">
+        <span class="nav-item-icon">⚡</span><span>Skills</span>
+      </button>
+      <button class="nav-item" data-panel="experience">
+        <span class="nav-item-icon">💼</span><span>Experience</span>
+      </button>
+
+      <div class="nav-section-title">Personal</div>
+      <button class="nav-item" data-panel="contact">
+        <span class="nav-item-icon">📞</span><span>Contact Info</span>
+      </button>
+      <button class="nav-item" data-panel="resume">
+        <span class="nav-item-icon">📄</span><span>Resume</span>
+      </button>
+      <button class="nav-item" data-panel="settings">
+        <span class="nav-item-icon">⚙️</span><span>Settings</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="view-site-btn" href="../index.html" target="_blank">
+        🔗 <span>View Website</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-right">
+        <a class="topbar-preview" href="../index.html" target="_blank">👁 Preview Site</a>
+        <button class="topbar-save" id="save-btn" onclick="saveAll()">💾 Save All Changes</button>
+      </div>
+    </div>
+
+    <div class="panel-area">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="stats-row">
+          <div class="stat-card"><span class="stat-icon">🗂️</span><div class="stat-num" id="stat-projects">4</div><div class="stat-lbl">Projects</div></div>
+          <div class="stat-card"><span class="stat-icon">✍️</span><div class="stat-num" id="stat-blogs">6</div><div class="stat-lbl">Blog Posts</div></div>
+          <div class="stat-card"><span class="stat-icon">🏆</span><div class="stat-num">1</div><div class="stat-lbl">Featured Project</div></div>
+          <div class="stat-card"><span class="stat-icon">⭐</span><div class="stat-num">1</div><div class="stat-lbl">Featured Blog</div></div>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header">
+            <div class="section-card-title">🚀 Quick Actions</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+            <button class="item-btn-add" onclick="showPanel('projects');openProjectModal()">➕ Add New Project</button>
+            <button class="item-btn-add" onclick="showPanel('blogs');openBlogModal()">✍️ Write Blog Post</button>
+            <button class="item-btn-add" onclick="showPanel('contact')">📞 Update Contact</button>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">ℹ️ How to Use Admin Panel</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:var(--text-2);line-height:1.6">
+            <div>📌 <strong style="color:var(--text)">Projects</strong> — Add/edit/delete projects. Mark one as "Featured" to show on homepage.</div>
+            <div>📌 <strong style="color:var(--text)">Blog Posts</strong> — Write and manage articles. Latest one shows on homepage automatically.</div>
+            <div>📌 <strong style="color:var(--text)">About Me</strong> — Update your bio, tagline, and profile description.</div>
+            <div>📌 <strong style="color:var(--text)">Contact Info</strong> — Change phone, email, LinkedIn, GitHub links.</div>
+            <div>📌 <strong style="color:var(--text)">Resume</strong> — Update resume link or upload instructions.</div>
+            <div>📌 <strong style="color:var(--text)">Save All Changes</strong> — Click the blue Save button. Changes saved in browser storage.</div>
+            <div style="margin-top:6px;padding:12px;background:rgba(245,158,11,0.08);border-radius:8px;border:1px solid rgba(245,158,11,0.2);color:#FCD34D;font-size:12.5px">
+              ⚠️ Data is saved in your browser's LocalStorage. After saving, copy the generated JSON from Settings → Export and paste into your JSON files to make changes permanent on GitHub.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="panel" id="panel-projects">
+        <div class="section-card">
+          <div class="section-card-header">
+            <div class="section-card-title">🗂️ All Projects</div>
+            <div class="section-card-badge" id="project-count-badge">4 projects</div>
+          </div>
+          <div class="item-list" id="project-list"></div>
+          <button class="item-btn-add" onclick="openProjectModal()">➕ Add New Project</button>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">💡 Tips</div></div>
+          <div style="font-size:13px;color:var(--text-3);line-height:1.7">
+            • The <strong style="color:var(--amber)">⭐ Featured</strong> project shows on the homepage.<br>
+            • All other projects show on the Projects page.<br>
+            • Only one project can be featured at a time.
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOGS -->
+      <div class="panel" id="panel-blogs">
+        <div class="section-card">
+          <div class="section-card-header">
+            <div class="section-card-title">✍️ Blog Posts</div>
+            <div class="section-card-badge" id="blog-count-badge">6 articles</div>
+          </div>
+          <div class="item-list" id="blog-list"></div>
+          <button class="item-btn-add" onclick="openBlogModal()">✍️ Write New Post</button>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">💡 Tips</div></div>
+          <div style="font-size:13px;color:var(--text-3);line-height:1.7">
+            • The <strong style="color:var(--amber)">⭐ Latest</strong> blog shows on homepage.<br>
+            • First 3 articles show in the homepage Blog section.<br>
+            • All articles show on the Blog page with category filters.
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="panel" id="panel-about">
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">👤 About Me</div></div>
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="about-name" value="Jaishankar Prasad Nirala"></div>
+            <div class="form-group"><label class="form-label">Short Name (for nav)</label><input class="form-input" id="about-shortname" value="Jaishankar Nirala"></div>
+            <div class="form-group form-full"><label class="form-label">Professional Tagline</label><input class="form-input" id="about-tagline" value="Data Analyst & BI Consultant · Aurangabad, Bihar"></div>
+            <div class="form-group form-full"><label class="form-label">Hero Description</label><textarea class="form-textarea" id="about-hero-desc" style="min-height:100px">I turn raw business data into clear decisions. Power BI dashboards, Python automation, and SQL analytics — delivered for real construction and finance clients with measurable, documented outcomes.</textarea></div>
+            <div class="form-group form-full"><label class="form-label">Full Bio (About Page)</label><textarea class="form-textarea" id="about-bio" style="min-height:140px">I'm a Data Analyst based in Aurangabad, Bihar, with hands-on experience in construction project analytics and institutional finance. I build Power BI dashboards, automate Python workflows, and design SQL data pipelines that deliver real business impact.
+
+I graduated with a BCA from Ram Lakhan Singh Yadav College in 2024 and immediately started delivering real analytics work for clients. I integrate AI tools like Claude AI, ChatGPT, and Cursor AI into my daily workflow to prototype faster and stay aligned with how modern data teams operate.</textarea></div>
+            <div class="form-group"><label class="form-label">Location</label><input class="form-input" id="about-location" value="Aurangabad, Bihar"></div>
+            <div class="form-group"><label class="form-label">Availability Status</label><input class="form-input" id="about-availability" value="Available Across India & Remote"></div>
+            <div class="form-group"><label class="form-label">Years of Experience</label><input class="form-input" id="about-exp" value="1+ Year Experience"></div>
+            <div class="form-group"><label class="form-label">Education</label><input class="form-input" id="about-edu" value="BCA — Ram Lakhan Singh Yadav College, 2024"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="panel" id="panel-skills">
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">⚡ Core Skills & Proficiency</div></div>
+          <div id="skills-list" style="display:flex;flex-direction:column;gap:10px"></div>
+          <button class="item-btn-add" style="margin-top:10px" onclick="addSkill()">➕ Add Skill</button>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">🏷️ Skill Tags</div></div>
+          <div class="form-group form-full">
+            <label class="form-label">Business Intelligence Tags (comma separated)</label>
+            <input class="form-input" id="skill-tags-bi" value="Power BI Desktop, DAX Measures, Power Query (M), Data Modelling, Star Schema, KPI Design">
+          </div>
+          <div class="form-group form-full" style="margin-top:12px">
+            <label class="form-label">Database & SQL Tags</label>
+            <input class="form-input" id="skill-tags-sql" value="PostgreSQL, DBeaver, Window Functions, CTEs, Joins & Aggregations, Data Normalisation">
+          </div>
+          <div class="form-group form-full" style="margin-top:12px">
+            <label class="form-label">Domain Expertise Tags</label>
+            <input class="form-input" id="skill-tags-domain" value="Construction Analytics, Financial Reporting, Fee Collection Analysis, Cost Variance, Anomaly Detection, RFM Segmentation">
+          </div>
+          <div class="form-group form-full" style="margin-top:12px">
+            <label class="form-label">AI & Tools Tags</label>
+            <input class="form-input" id="skill-tags-ai" value="Claude AI, ChatGPT, Cursor AI, Prompt Engineering, AI-Assisted SQL">
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="panel" id="panel-experience">
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">💼 Work Experience</div></div>
+          <div id="experience-list"></div>
+          <button class="item-btn-add" style="margin-top:10px" onclick="openExpModal()">➕ Add Experience</button>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">🎓 Education & Certifications</div></div>
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Degree</label><input class="form-input" id="edu-degree" value="Bachelor of Computer Applications (BCA)"></div>
+            <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="edu-school" value="Ram Lakhan Singh Yadav College, Aurangabad"></div>
+            <div class="form-group"><label class="form-label">Year</label><input class="form-input" id="edu-year" value="2020 – 2024"></div>
+            <div class="form-group"><label class="form-label">Subjects</label><input class="form-input" id="edu-subjects" value="Database Management, Programming, Statistics, Information Systems"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="panel" id="panel-contact">
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">📞 Contact Details</div></div>
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" id="contact-email" type="email" value="jaishankar.9400@gmail.com"><div class="form-hint">This is where contact form messages go</div></div>
+            <div class="form-group"><label class="form-label">Phone Number</label><input class="form-input" id="contact-phone" type="tel" value="+91 8084310066"></div>
+            <div class="form-group"><label class="form-label">LinkedIn URL</label><input class="form-input" id="contact-linkedin" value="https://linkedin.com/in/jspn94"></div>
+            <div class="form-group"><label class="form-label">GitHub URL</label><input class="form-input" id="contact-github" value="https://github.com/JSPN9400"></div>
+            <div class="form-group"><label class="form-label">LinkedIn Handle (display)</label><input class="form-input" id="contact-linkedin-handle" value="linkedin.com/in/jspn94"></div>
+            <div class="form-group"><label class="form-label">GitHub Handle (display)</label><input class="form-input" id="contact-github-handle" value="github.com/JSPN9400"></div>
+            <div class="form-group form-full"><label class="form-label">Address / Location</label><input class="form-input" id="contact-address" value="Aurangabad, Bihar, India"></div>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">🔢 Homepage Metrics</div></div>
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Metric 1 Number</label><input class="form-input" id="metric-1-num" value="100"></div>
+            <div class="form-group"><label class="form-label">Metric 1 Suffix</label><input class="form-input" id="metric-1-sfx" value="K+"></div>
+            <div class="form-group"><label class="form-label">Metric 1 Label</label><input class="form-input" id="metric-1-lbl" value="Records Processed"></div>
+            <div class="form-group"></div>
+            <div class="form-group"><label class="form-label">Metric 2 Number</label><input class="form-input" id="metric-2-num" value="40"></div>
+            <div class="form-group"><label class="form-label">Metric 2 Suffix</label><input class="form-input" id="metric-2-sfx" value="%"></div>
+            <div class="form-group"><label class="form-label">Metric 2 Label</label><input class="form-input" id="metric-2-lbl" value="Reporting Time Saved"></div>
+            <div class="form-group"></div>
+            <div class="form-group"><label class="form-label">Metric 3 Number</label><input class="form-input" id="metric-3-num" value="3"></div>
+            <div class="form-group"><label class="form-label">Metric 3 Suffix</label><input class="form-input" id="metric-3-sfx" value="+"></div>
+            <div class="form-group"><label class="form-label">Metric 3 Label</label><input class="form-input" id="metric-3-lbl" value="Business Clients"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESUME -->
+      <div class="panel" id="panel-resume">
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">📄 Resume Settings</div></div>
+          <div class="form-grid">
+            <div class="form-group form-full">
+              <label class="form-label">Resume File Path (relative to index.html)</label>
+              <input class="form-input" id="resume-path" value="assets/data/Jaishankar_Prasad_Nirala_Resume.docx">
+              <div class="form-hint">To update resume: upload new file to assets/data/ folder on GitHub and change filename here</div>
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">Resume Display Name</label>
+              <input class="form-input" id="resume-name" value="Jaishankar_Prasad_Nirala_Resume.docx">
+            </div>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">📋 How to Update Resume on GitHub</div></div>
+          <div style="font-size:13.5px;color:var(--text-2);line-height:1.8;display:flex;flex-direction:column;gap:8px">
+            <div>1. Open your GitHub repo: <code style="background:var(--surface-2);padding:2px 6px;border-radius:4px;font-size:12px">JSPN9400/portpholio</code></div>
+            <div>2. Go to <code style="background:var(--surface-2);padding:2px 6px;border-radius:4px;font-size:12px">assets/data/</code> folder</div>
+            <div>3. Click <strong style="color:var(--text)">"Upload files"</strong></div>
+            <div>4. Upload your new resume (keep same filename OR update path above)</div>
+            <div>5. Click <strong style="color:var(--text)">"Commit changes"</strong></div>
+            <div>6. Website automatically updates within 1-2 minutes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="panel" id="panel-settings">
+
+        <!-- GITHUB PUSH SECTION -->
+        <div class="section-card" style="border:1px solid rgba(37,99,235,0.3);background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(20,184,166,0.03))">
+          <div class="section-card-header">
+            <div class="section-card-title">🚀 Push to GitHub — Direct Deploy</div>
+            <div class="section-card-badge" id="gh-status-badge">Not Connected</div>
+          </div>
+          <div style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:16px">
+            Connect your GitHub account once — then push all changes directly from admin panel. No ZIP download needed.
+          </div>
+
+          <!-- Step 1: Token -->
+          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px">
+            <label class="form-label">Step 1 — GitHub Personal Access Token</label>
+            <div style="display:flex;gap:8px">
+              <input class="form-input" id="gh-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="flex:1">
+              <button class="item-btn item-btn-edit" onclick="testGitHubToken()" style="white-space:nowrap;padding:0 16px">Test Token</button>
+            </div>
+            <div class="form-hint">
+              Get token: <a href="https://github.com/settings/tokens/new?scopes=repo&description=JSPN+Portfolio+Admin" target="_blank" style="color:var(--blue-l)">github.com/settings/tokens</a> → Select <strong style="color:var(--text)">repo</strong> scope → Generate → Paste here
+            </div>
+          </div>
+
+          <!-- Step 2: Repo -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+            <div>
+              <label class="form-label">Step 2 — GitHub Username</label>
+              <input class="form-input" id="gh-username" placeholder="JSPN9400" value="JSPN9400">
+            </div>
+            <div>
+              <label class="form-label">Repository Name</label>
+              <input class="form-input" id="gh-repo" placeholder="portpholio" value="portpholio">
+            </div>
+            <div>
+              <label class="form-label">Branch</label>
+              <input class="form-input" id="gh-branch" placeholder="main" value="main">
+            </div>
+            <div>
+              <label class="form-label">Folder path in repo</label>
+              <input class="form-input" id="gh-path" placeholder="assets/data" value="assets/data">
+            </div>
+          </div>
+
+          <!-- Token test result -->
+          <div id="gh-test-result" style="display:none;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px"></div>
+
+          <!-- Push buttons -->
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+            <button class="topbar-save" id="gh-push-projects" onclick="pushToGitHub('projects')" style="font-size:13px;padding:9px 18px">
+              📤 Push projects.json
+            </button>
+            <button class="topbar-save" id="gh-push-articles" onclick="pushToGitHub('articles')" style="font-size:13px;padding:9px 18px">
+              📤 Push articles.json
+            </button>
+            <button class="topbar-save" id="gh-push-all" onclick="pushAllToGitHub()" style="font-size:13px;padding:9px 18px;background:linear-gradient(135deg,var(--blue),var(--teal))">
+              🚀 Push All Files
+            </button>
+          </div>
+          <div id="gh-push-log" style="display:none;margin-top:12px;background:var(--navy);border-radius:8px;padding:12px;font-family:monospace;font-size:12px;color:var(--teal);max-height:160px;overflow-y:auto;border:1px solid var(--border)"></div>
+
+          <!-- Save token checkbox -->
+          <div style="margin-top:10px;display:flex;align-items:center;gap:8px">
+            <input type="checkbox" id="gh-save-token" style="cursor:pointer" onchange="toggleSaveToken()">
+            <label for="gh-save-token" style="font-size:12.5px;color:var(--text-3);cursor:pointer">Remember token in this browser (localStorage — only if this is your personal device)</label>
+          </div>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">📖 How GitHub Push Works</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:var(--text-2);line-height:1.65">
+            <div style="display:flex;gap:10px"><span style="color:var(--blue-l);font-weight:700;flex-shrink:0">1.</span><span>Generate a GitHub token with <strong style="color:var(--text)">repo</strong> permission from the link above</span></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--blue-l);font-weight:700;flex-shrink:0">2.</span><span>Paste token + confirm your username & repo name (<code style="background:var(--surface-2);padding:1px 6px;border-radius:4px">JSPN9400/portpholio</code>)</span></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--blue-l);font-weight:700;flex-shrink:0">3.</span><span>Click <strong style="color:var(--text)">Test Token</strong> — confirm it shows ✅</span></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--blue-l);font-weight:700;flex-shrink:0">4.</span><span>Edit projects / blogs in Admin → Click <strong style="color:var(--text)">🚀 Push All Files</strong></span></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--blue-l);font-weight:700;flex-shrink:0">5.</span><span>GitHub Pages automatically rebuilds in <strong style="color:var(--text)">1–2 minutes</strong> — website updated!</span></div>
+          </div>
+        </div>
+
+        <!-- SITE SETTINGS TOGGLES -->
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">⚙️ Site Settings</div></div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Dark Mode Default</div><div class="toggle-sub">Website opens in dark mode by default</div></div>
+            <button class="toggle-switch on" id="toggle-darkmode"></button>
+          </div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Show "Available" Badge</div><div class="toggle-sub">Green availability badge in hero</div></div>
+            <button class="toggle-switch on" id="toggle-available"></button>
+          </div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Show Testimonials Section</div><div class="toggle-sub">Client testimonials on homepage</div></div>
+            <button class="toggle-switch on" id="toggle-testimonials"></button>
+          </div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Show FAQ Section</div><div class="toggle-sub">Frequently asked questions</div></div>
+            <button class="toggle-switch on" id="toggle-faq"></button>
+          </div>
+        </div>
+
+        <!-- EXPORT (backup) -->
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">📤 Manual Export (Backup)</div></div>
+          <div style="font-size:13px;color:var(--text-3);margin-bottom:12px">Copy JSON manually as backup or to paste directly into GitHub file editor.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="item-btn item-btn-edit" onclick="exportData('projects')">📋 projects.json</button>
+            <button class="item-btn item-btn-edit" onclick="exportData('articles')">📋 articles.json</button>
+            <button class="item-btn item-btn-edit" onclick="exportData('contact')">📋 contact info</button>
+          </div>
+          <textarea class="form-textarea" id="export-output" style="margin-top:12px;min-height:140px;font-family:monospace;font-size:12px" readonly placeholder="Click a button above to export..."></textarea>
+        </div>
+
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">🗑️ Reset</div></div>
+          <button class="item-btn item-btn-delete" style="padding:10px 18px;font-size:13px" onclick="resetAll()">Reset All Admin Data to Defaults</button>
+          <div class="form-hint" style="margin-top:8px">Clears all saved admin changes. Original JSON files on GitHub not affected.</div>
+        </div>
+      </div>
+
+    </div><!-- end panel-area -->
+  </div><!-- end admin-main -->
+</div><!-- end admin-wrap -->
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="project-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="project-modal-title">Add New Project</div>
+      <button class="modal-close" onclick="closeModal('project-modal')">✕</button>
+    </div>
+    <div class="modal-form">
+      <input type="hidden" id="edit-project-id">
+      <div class="form-grid">
+        <div class="form-group form-full"><label class="form-label">Project Title *</label><input class="form-input" id="p-title" placeholder="e.g. Construction Intelligence Dashboard"></div>
+        <div class="form-group form-full"><label class="form-label">Short Tagline *</label><input class="form-input" id="p-tagline" placeholder="One line summary of the project"></div>
+        <div class="form-group"><label class="form-label">Domain / Category</label><input class="form-input" id="p-domain" placeholder="e.g. Construction Analytics"></div>
+        <div class="form-group"><label class="form-label">Domain Color</label><input class="form-input" id="p-color" placeholder="#EA580C" value="#2563EB"></div>
+        <div class="form-group form-full"><label class="form-label">Problem Statement</label><textarea class="form-textarea" id="p-problem" placeholder="What business problem did this solve?"></textarea></div>
+        <div class="form-group form-full"><label class="form-label">My Approach / Solution</label><textarea class="form-textarea" id="p-approach" placeholder="How did you build the solution?"></textarea></div>
+        <div class="form-group form-full"><label class="form-label">Business Impact</label><textarea class="form-textarea" id="p-impact" placeholder="What changed for the client?"></textarea></div>
+        <div class="form-group form-full"><label class="form-label">Tools Used (comma separated)</label><input class="form-input" id="p-tools" placeholder="SQL, Python, Power BI, DAX"></div>
+        <div class="form-group form-full"><label class="form-label">Key Metrics (format: value|label, value|label)</label><input class="form-input" id="p-metrics" placeholder="40%|Reporting Time Saved, 100K+|Records Analysed"></div>
+        <div class="form-group form-full"><label class="form-label">GitHub Link</label><input class="form-input" id="p-github" placeholder="https://github.com/JSPN9400"></div>
+        <div class="form-group"><label class="form-label">Mark as Featured?</label><select class="form-select" id="p-featured"><option value="false">No — show on Projects page</option><option value="true">⭐ Yes — show on Homepage</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer" style="margin-top:20px">
+      <button class="modal-btn-cancel" onclick="closeModal('project-modal')">Cancel</button>
+      <button class="modal-btn-save" onclick="saveProject()">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG MODAL -->
+<div class="modal-overlay" id="blog-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="blog-modal-title">Write New Blog Post</div>
+      <button class="modal-close" onclick="closeModal('blog-modal')">✕</button>
+    </div>
+    <div class="modal-form">
+      <div class="form-grid">
+        <input type="hidden" id="edit-blog-id">
+        <div class="form-group form-full"><label class="form-label">Article Title *</label><input class="form-input" id="b-title" placeholder="e.g. How Data Changes Business Decisions"></div>
+        <div class="form-group form-full"><label class="form-label">Short Excerpt *</label><textarea class="form-textarea" id="b-excerpt" placeholder="2-3 sentence summary shown in cards..."></textarea></div>
+        <div class="form-group"><label class="form-label">Category</label>
+          <select class="form-select" id="b-category">
+            <option>Business Intelligence</option><option>Data Analytics</option>
+            <option>AI & Technology</option><option>Python</option>
+            <option>SQL</option><option>Power BI</option>
+            <option>Career & Craft</option><option>Society & Business</option>
+            <option>Data Quality</option><option>Public Policy</option>
+            <option>Philosophy</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Category Color</label><input class="form-input" id="b-catcolor" value="#2563EB" placeholder="#2563EB"></div>
+        <div class="form-group"><label class="form-label">Read Time</label><input class="form-input" id="b-readtime" placeholder="6 min read"></div>
+        <div class="form-group"><label class="form-label">Status</label>
+          <select class="form-select" id="b-status">
+            <option value="coming-soon">Coming Soon</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+          </select>
+        </div>
+        <div class="form-group form-full"><label class="form-label">Gradient (for card stripe)</label><input class="form-input" id="b-gradient" placeholder="linear-gradient(135deg, #2563EB, #0891B2)"></div>
+      </div>
+    </div>
+    <div class="modal-footer" style="margin-top:20px">
+      <button class="modal-btn-cancel" onclick="closeModal('blog-modal')">Cancel</button>
+      <button class="modal-btn-save" onclick="saveBlog()">Save Post</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ <span id="toast-msg">Saved successfully!</span></div>
+
+<script>
+// ── STATE ──
+let projects = [];
+let articles = [];
+let editingProjectId = null;
+let editingBlogId = null;
+
+const defaultProjects = [
+  {id:'p1',title:'Construction Intelligence Dashboard',tagline:'Turned scattered Excel files into a live command centre for construction management.',domain:'Construction Analytics',domainColor:'#EA580C',domainBg:'#FFF7ED',featured:true,problem:'A construction firm was detecting cost overruns weeks after they occurred. Project data lived in 5+ separate Excel sheets maintained by different teams.',approach:'Built a normalised SQL schema in PostgreSQL, wrote Python ETL scripts to automate weekly data ingestion, then built a Power BI model with DAX measures for cost-per-sq-ft, stage completion %, and contractor variance.',impact:'Management shifted from reactive cost reviews to proactive weekly monitoring. Cost overrun detection moved from weeks to days.',tools:['SQL','PostgreSQL','Python','Pandas','OpenPyXL','Power BI','DAX'],metrics:[{value:'40%',label:'Reporting time reduced'},{value:'Days',label:'vs weeks for overrun detection'},{value:'5 hrs/wk',label:'Manual work eliminated'},{value:'3 KPIs',label:'Custom construction metrics'}],github:'https://github.com/JSPN9400'},
+  {id:'p2',title:'School Finance Analytics Dashboard',tagline:'Automated ₹8–10 lakh/month of transaction reporting and surfaced hidden billing anomalies.',domain:'Financial Analytics',domainColor:'#059669',domainBg:'#F0FDF4',featured:false,problem:'PM Modern Academy finance team manually consolidated fee collections and expenses for 500+ students — taking 8+ hours monthly and still missing anomalies.',approach:'Built structured SQL tables, wrote 4 Python automation scripts for monthly report generation, added data validation checks, and delivered a Power BI dashboard.',impact:'Finance team reclaimed 2+ hours per month. Caught a recurring billing error in the first month that had been missed for quarters.',tools:['SQL','Python','Pandas','Power BI','Excel'],metrics:[{value:'25%',label:'Reporting effort reduced'},{value:'500+',label:'Student records tracked'},{value:'20%',label:'Validation accuracy up'},{value:'3/qtr',label:'Anomalies surfaced'}],github:'https://github.com/JSPN9400'},
+  {id:'p3',title:'E-Commerce Sales & Customer Analytics',tagline:'Found the 20% of customers driving 65% of revenue using RFM segmentation.',domain:'Customer Analytics',domainColor:'#2563EB',domainBg:'#EFF6FF',featured:false,problem:'100,000+ transaction records held hidden patterns — churning customers, underperforming categories, and high-value revenue clusters no one was reading.',approach:'Applied RFM segmentation using Python and SQL. Built Power BI dashboards with revenue trend lines, retention cohorts, and churn-risk alerts.',impact:'Identified customer segments worth retaining. Revenue distribution analysis challenged assumptions about best customers.',tools:['SQL','PostgreSQL','Python','Pandas','Power BI','RFM Analysis'],metrics:[{value:'100K+',label:'Transactions analysed'},{value:'65%',label:'Revenue from top 20%'},{value:'RFM',label:'Advanced segmentation'},{value:'Churn',label:'Risk cohorts identified'}],github:'https://github.com/JSPN9400'},
+  {id:'p4',title:'India Job Market Intelligence Dashboard',tagline:'Mapped salary benchmarks across 5,000+ data analytics job postings in India.',domain:'Market Intelligence',domainColor:'#7C3AED',domainBg:'#F5F3FF',featured:false,problem:'Data professionals in India lacked a data-driven view of which skills command higher salaries and where the demand actually is.',approach:'Collected and cleaned 5,000+ job postings using Python. Normalised data into SQL schema covering role types, skills, salary ranges, and cities.',impact:'Produced a clear map of Data Analytics demand in India, high-value skills, and realistic salary expectations by experience level.',tools:['Python','SQL','PostgreSQL','Power BI','Web Scraping'],metrics:[{value:'5K+',label:'Job postings analysed'},{value:'Top 10',label:'Skills mapped'},{value:'Salary',label:'Benchmarks by city'},{value:'Pan-India',label:'Geographic coverage'}],github:'https://github.com/JSPN9400'}
+];
+
+const defaultArticles = [
+  {id:'a1',title:'How Data Changes Business Decisions',excerpt:'Most businesses make decisions on instinct. The ones that scale do not. Here is what I have seen when data finally enters the room.',category:'Business Intelligence',categoryColor:'#2563EB',status:'coming-soon',readTime:'6 min read',date:'Coming Soon',gradient:'linear-gradient(135deg, #2563EB, #0891B2)'},
+  {id:'a2',title:'AI Will Not Replace Data Analysts — Here\'s Why',excerpt:'After integrating Claude, ChatGPT, and Cursor AI into my daily workflow, the truth about AI and analyst jobs is more nuanced than headlines suggest.',category:'AI & Technology',categoryColor:'#D97706',status:'coming-soon',readTime:'8 min read',date:'Coming Soon',gradient:'linear-gradient(135deg, #F59E0B, #EF4444)'},
+  {id:'a3',title:'Why Small Businesses in Bihar Need Analytics',excerpt:'Construction firms, schools, and local businesses in Bihar sit on mountains of unread data. What changes when they finally learn to use it?',category:'Society & Business',categoryColor:'#7C3AED',status:'coming-soon',readTime:'5 min read',date:'Coming Soon',gradient:'linear-gradient(135deg, #8B5CF6, #EC4899)'},
+  {id:'a4',title:'The Real Cost of Poor Data Quality',excerpt:'Bad data does not just slow teams down. It costs money, creates liability, and quietly erodes management trust.',category:'Data Quality',categoryColor:'#059669',status:'coming-soon',readTime:'7 min read',date:'Coming Soon',gradient:'linear-gradient(135deg, #10B981, #3B82F6)'},
+  {id:'a5',title:'Lessons From Construction Analytics',excerpt:'Building dashboards for construction projects taught me more about data storytelling than any course. The lessons apply across every domain.',category:'Career & Craft',categoryColor:'#EA580C',status:'coming-soon',readTime:'6 min read',date:'Coming Soon',gradient:'linear-gradient(135deg, #F97316, #EAB308)'},
+  {id:'a6',title:'Open Data and India\'s Governance Gap',excerpt:'India generates enormous government data. Most of it goes nowhere. What would a data-literate Bihar look like?',category:'Public Policy',categoryColor:'#0891B2',status:'coming-soon',readTime:'9 min read',date:'Coming Soon',gradient:'linear-gradient(135deg, #06B6D4, #6366F1)'}
+];
+
+// ── INIT ──
+function init() {
+  projects = JSON.parse(localStorage.getItem('jspn_projects') || 'null') || defaultProjects;
+  articles = JSON.parse(localStorage.getItem('jspn_articles') || 'null') || defaultArticles;
+  renderProjects();
+  renderBlogs();
+  renderSkills();
+  renderExperience();
+  updateStats();
+  setupToggles();
+}
+
+// ── NAVIGATION ──
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id)?.classList.add('active');
+  document.querySelector(`[data-panel="${id}"]`)?.classList.add('active');
+  const titles = {dashboard:'Dashboard',projects:'Projects',blogs:'Blog Posts',about:'About Me',skills:'Skills',experience:'Experience',contact:'Contact Info',resume:'Resume',settings:'Settings'};
+  document.getElementById('topbar-title').textContent = titles[id] || id;
+}
+
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.addEventListener('click', () => showPanel(btn.dataset.panel));
+});
+
+// ── STATS ──
+function updateStats() {
+  const pc = projects.length; const bc = articles.length;
+  document.getElementById('stat-projects').textContent = pc;
+  document.getElementById('stat-blogs').textContent = bc;
+  document.getElementById('badge-projects').textContent = pc;
+  document.getElementById('badge-blogs').textContent = bc;
+  document.getElementById('project-count-badge').textContent = pc + ' projects';
+  document.getElementById('blog-count-badge').textContent = bc + ' articles';
+}
+
+// ── PROJECTS ──
+function renderProjects() {
+  const list = document.getElementById('project-list');
+  if (!list) return;
+  list.innerHTML = projects.map(p => `
+    <div class="item-row">
+      <div class="item-row-icon" style="color:${p.domainColor}">📊</div>
+      <div class="item-row-info">
+        <div class="item-row-title">${p.title}</div>
+        <div class="item-row-sub">${p.domain} ${p.featured ? '· ⭐ Featured on Homepage' : ''}</div>
+      </div>
+      <div class="item-row-actions">
+        <button class="item-btn item-btn-feat ${p.featured ? 'on' : ''}" onclick="toggleFeatured('${p.id}')" title="${p.featured ? 'Remove from featured' : 'Set as featured'}">⭐</button>
+        <button class="item-btn item-btn-edit" onclick="openProjectModal('${p.id}')">Edit</button>
+        <button class="item-btn item-btn-delete" onclick="deleteProject('${p.id}')">Delete</button>
+      </div>
+    </div>`).join('');
+  updateStats();
+}
+
+function toggleFeatured(id) {
+  projects = projects.map(p => ({...p, featured: p.id === id}));
+  renderProjects();
+  toast('Featured project updated!');
+}
+
+function deleteProject(id) {
+  if (!confirm('Delete this project?')) return;
+  projects = projects.filter(p => p.id !== id);
+  renderProjects();
+  toast('Project deleted');
+}
+
+function openProjectModal(id) {
+  editingProjectId = id || null;
+  const modal = document.getElementById('project-modal');
+  document.getElementById('project-modal-title').textContent = id ? 'Edit Project' : 'Add New Project';
+  if (id) {
+    const p = projects.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('p-title').value = p.title;
+    document.getElementById('p-tagline').value = p.tagline;
+    document.getElementById('p-domain').value = p.domain;
+    document.getElementById('p-color').value = p.domainColor;
+    document.getElementById('p-problem').value = p.problem;
+    document.getElementById('p-approach').value = p.approach;
+    document.getElementById('p-impact').value = p.impact;
+    document.getElementById('p-tools').value = p.tools.join(', ');
+    document.getElementById('p-metrics').value = p.metrics.map(m => `${m.value}|${m.label}`).join(', ');
+    document.getElementById('p-github').value = p.github;
+    document.getElementById('p-featured').value = p.featured ? 'true' : 'false';
+  } else {
+    ['p-title','p-tagline','p-domain','p-problem','p-approach','p-impact','p-tools','p-metrics','p-github'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('p-color').value = '#2563EB';
+    document.getElementById('p-featured').value = 'false';
+  }
+  modal.classList.add('open');
+}
+
+function saveProject() {
+  const title = document.getElementById('p-title').value.trim();
+  if (!title) { alert('Title is required'); return; }
+  const metricsRaw = document.getElementById('p-metrics').value.split(',').map(s => s.trim()).filter(Boolean);
+  const metrics = metricsRaw.map(m => { const [v, l] = m.split('|'); return {value: (v||'').trim(), label: (l||'').trim()}; });
+  const proj = {
+    id: editingProjectId || 'p' + Date.now(),
+    title, tagline: document.getElementById('p-tagline').value.trim(),
+    domain: document.getElementById('p-domain').value.trim(),
+    domainColor: document.getElementById('p-color').value.trim(),
+    domainBg: '#F1F5F9',
+    featured: document.getElementById('p-featured').value === 'true',
+    problem: document.getElementById('p-problem').value.trim(),
+    approach: document.getElementById('p-approach').value.trim(),
+    impact: document.getElementById('p-impact').value.trim(),
+    tools: document.getElementById('p-tools').value.split(',').map(s => s.trim()).filter(Boolean),
+    metrics, github: document.getElementById('p-github').value.trim()
+  };
+  if (proj.featured) projects = projects.map(p => ({...p, featured: false}));
+  if (editingProjectId) projects = projects.map(p => p.id === editingProjectId ? proj : p);
+  else projects.push(proj);
+  closeModal('project-modal');
+  renderProjects();
+  toast('Project saved!');
+}
+
+// ── BLOGS ──
+function renderBlogs() {
+  const list = document.getElementById('blog-list');
+  if (!list) return;
+  list.innerHTML = articles.map((a, i) => `
+    <div class="item-row">
+      <div class="item-row-icon">✍️</div>
+      <div class="item-row-info">
+        <div class="item-row-title">${a.title}</div>
+        <div class="item-row-sub">${a.category} · ${a.readTime} · ${a.status === 'published' ? '🟢 Published' : a.status === 'draft' ? '🟡 Draft' : '🔵 Coming Soon'} ${i === 0 ? '· ⭐ Latest' : ''}</div>
+      </div>
+      <div class="item-row-actions">
+        <button class="item-btn item-btn-edit" onclick="openBlogModal('${a.id}')">Edit</button>
+        <button class="item-btn item-btn-delete" onclick="deleteBlog('${a.id}')">Delete</button>
+      </div>
+    </div>`).join('');
+  updateStats();
+}
+
+function deleteBlog(id) {
+  if (!confirm('Delete this blog post?')) return;
+  articles = articles.filter(a => a.id !== id);
+  renderBlogs();
+  toast('Blog post deleted');
+}
+
+function openBlogModal(id) {
+  editingBlogId = id || null;
+  document.getElementById('blog-modal-title').textContent = id ? 'Edit Blog Post' : 'Write New Post';
+  if (id) {
+    const a = articles.find(x => x.id === id);
+    if (!a) return;
+    document.getElementById('b-title').value = a.title;
+    document.getElementById('b-excerpt').value = a.excerpt;
+    document.getElementById('b-category').value = a.category;
+    document.getElementById('b-catcolor').value = a.categoryColor;
+    document.getElementById('b-readtime').value = a.readTime;
+    document.getElementById('b-status').value = a.status;
+    document.getElementById('b-gradient').value = a.gradient;
+  } else {
+    ['b-title','b-excerpt','b-gradient'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('b-readtime').value = '5 min read';
+    document.getElementById('b-status').value = 'coming-soon';
+    document.getElementById('b-catcolor').value = '#2563EB';
+    document.getElementById('b-gradient').value = 'linear-gradient(135deg, #2563EB, #0891B2)';
+  }
+  document.getElementById('blog-modal').classList.add('open');
+}
+
+function saveBlog() {
+  const title = document.getElementById('b-title').value.trim();
+  if (!title) { alert('Title is required'); return; }
+  const now = new Date(); const dateStr = now.toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'});
+  const art = {
+    id: editingBlogId || 'a' + Date.now(),
+    title, excerpt: document.getElementById('b-excerpt').value.trim(),
+    category: document.getElementById('b-category').value,
+    categoryColor: document.getElementById('b-catcolor').value,
+    status: document.getElementById('b-status').value,
+    readTime: document.getElementById('b-readtime').value || '5 min read',
+    date: document.getElementById('b-status').value === 'published' ? dateStr : 'Coming Soon',
+    gradient: document.getElementById('b-gradient').value || 'linear-gradient(135deg, #2563EB, #0891B2)'
+  };
+  if (editingBlogId) articles = articles.map(a => a.id === editingBlogId ? art : a);
+  else articles.unshift(art);
+  closeModal('blog-modal');
+  renderBlogs();
+  toast('Blog post saved!');
+}
+
+// ── SKILLS ──
+const defaultSkills = [
+  {name:'SQL (PostgreSQL)',pct:88},{name:'Python (Pandas, NumPy)',pct:82},
+  {name:'Power BI & DAX',pct:85},{name:'Excel & Power Query',pct:87},
+  {name:'Pandas',pct:85},{name:'OpenPyXL',pct:82},{name:'NumPy',pct:78},{name:'Plotly',pct:70}
+];
+let skills = JSON.parse(localStorage.getItem('jspn_skills') || 'null') || defaultSkills;
+
+function renderSkills() {
+  const list = document.getElementById('skills-list');
+  if (!list) return;
+  list.innerHTML = skills.map((s, i) => `
+    <div class="item-row" style="gap:10px">
+      <div class="item-row-info">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <input class="form-input" value="${s.name}" style="flex:1;padding:6px 10px;font-size:13px" onchange="skills[${i}].name=this.value">
+          <input class="form-input" type="number" value="${s.pct}" min="0" max="100" style="width:70px;padding:6px 10px;font-size:13px" onchange="skills[${i}].pct=+this.value">
+          <span style="font-size:12px;color:var(--text-3)">%</span>
+        </div>
+        <div style="height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden">
+          <div style="height:100%;width:${s.pct}%;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:2px"></div>
+        </div>
+      </div>
+      <button class="item-btn item-btn-delete" onclick="deleteSkill(${i})">✕</button>
+    </div>`).join('');
+}
+
+function addSkill() {
+  skills.push({name: 'New Skill', pct: 75});
+  renderSkills();
+}
+function deleteSkill(i) {
+  skills.splice(i, 1);
+  renderSkills();
+}
+
+// ── EXPERIENCE ──
+const defaultExp = [
+  {id:'e1',role:'Freelance Data Analyst & BI Consultant',company:'Self-Employed',location:'Aurangabad, Bihar',period:'Sep 2025 – Present',type:'Freelance',bullets:['Built Construction Intelligence Dashboards — reduced reporting time by 40%','Automated Excel workflows using Python — eliminated 6+ hrs/week manual work','Designed construction-specific KPI frameworks','Integrated AI tools (Claude, ChatGPT, Cursor AI) for 35% faster development']},
+  {id:'e2',role:'Finance Assistant — Data Operations',company:'PM Modern Academy',location:'Aurangabad, Bihar',period:'May 2024 – Apr 2025',type:'Full-Time',bullets:['Automated 4 monthly financial reports — reduced time by 25%','Improved data validation accuracy by 20%','Surfaced 3 financial anomalies per quarter','Built Power BI dashboards for management review']}
+];
+let experience = JSON.parse(localStorage.getItem('jspn_exp') || 'null') || defaultExp;
+
+function renderExperience() {
+  const list = document.getElementById('experience-list');
+  if (!list) return;
+  list.innerHTML = experience.map(e => `
+    <div class="item-row" style="margin-bottom:8px">
+      <div class="item-row-icon">💼</div>
+      <div class="item-row-info">
+        <div class="item-row-title">${e.role}</div>
+        <div class="item-row-sub">${e.company} · ${e.period}</div>
+      </div>
+      <div class="item-row-actions">
+        <button class="item-btn item-btn-edit" onclick="openExpModal('${e.id}')">Edit</button>
+        <button class="item-btn item-btn-delete" onclick="deleteExp('${e.id}')">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function deleteExp(id) {
+  if (!confirm('Delete this experience?')) return;
+  experience = experience.filter(e => e.id !== id);
+  renderExperience();
+  toast('Experience deleted');
+}
+
+function openExpModal(id) {
+  const e = id ? experience.find(x => x.id === id) : null;
+  const role = prompt('Job Title / Role:', e ? e.role : '');
+  if (!role) return;
+  const company = prompt('Company:', e ? e.company : '');
+  const period  = prompt('Period (e.g. Jan 2024 – Present):', e ? e.period : '');
+  const bullet1 = prompt('Key Achievement 1:', e ? e.bullets[0] : '');
+  const bullet2 = prompt('Key Achievement 2 (optional):', e ? e.bullets[1] : '');
+  const bullet3 = prompt('Key Achievement 3 (optional):', e ? e.bullets[2] : '');
+  const exp = {id: id || 'e'+Date.now(), role, company: company||'', location:'', period: period||'', type:'', bullets:[bullet1,bullet2,bullet3].filter(Boolean)};
+  if (id) experience = experience.map(e => e.id === id ? exp : e);
+  else experience.unshift(exp);
+  renderExperience();
+  toast('Experience saved!');
+}
+
+// ── TOGGLES ──
+function setupToggles() {
+  document.querySelectorAll('.toggle-switch').forEach(btn => {
+    btn.addEventListener('click', () => btn.classList.toggle('on'));
+  });
+}
+
+// ── MODALS ──
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+// ── SAVE ALL ──
+function saveAll() {
+  localStorage.setItem('jspn_projects',  JSON.stringify(projects));
+  localStorage.setItem('jspn_articles',  JSON.stringify(articles));
+  localStorage.setItem('jspn_skills',    JSON.stringify(skills));
+  localStorage.setItem('jspn_exp',       JSON.stringify(experience));
+
+  const contactFields = ['email','phone','linkedin','github','linkedin-handle','github-handle','address'];
+  const contact = {};
+  contactFields.forEach(f => { const el = document.getElementById('contact-'+f); if(el) contact[f] = el.value; });
+  localStorage.setItem('jspn_contact', JSON.stringify(contact));
+
+  const about = {};
+  ['name','shortname','tagline','hero-desc','bio','location','availability','exp','edu'].forEach(f => {
+    const el = document.getElementById('about-'+f); if(el) about[f] = el.value;
+  });
+  localStorage.setItem('jspn_about', JSON.stringify(about));
+  localStorage.setItem('jspn_skill_tags', JSON.stringify({
+    bi: document.getElementById('skill-tags-bi')?.value,
+    sql: document.getElementById('skill-tags-sql')?.value,
+    domain: document.getElementById('skill-tags-domain')?.value,
+    ai: document.getElementById('skill-tags-ai')?.value,
+  }));
+
+  const btn = document.getElementById('save-btn');
+  btn.textContent = '✅ Saved!'; btn.classList.add('saved');
+  setTimeout(() => { btn.textContent = '💾 Save All Changes'; btn.classList.remove('saved'); }, 2500);
+  toast('All changes saved successfully!');
+}
+
+// ── EXPORT ──
+function exportData(type) {
+  let data;
+  if (type === 'projects') data = JSON.stringify(projects, null, 2);
+  else if (type === 'articles') data = JSON.stringify(articles, null, 2);
+  else if (type === 'contact') {
+    const contact = JSON.parse(localStorage.getItem('jspn_contact') || '{}');
+    data = JSON.stringify(contact, null, 2);
+  }
+  const out = document.getElementById('export-output');
+  out.value = data;
+  out.select();
+  try { document.execCommand('copy'); toast('Copied to clipboard!'); }
+  catch { toast('Select all text in the box and copy manually'); }
+}
+
+// ── RESET ──
+function resetAll() {
+  if (!confirm('Reset all admin data to defaults? This cannot be undone.')) return;
+  ['jspn_projects','jspn_articles','jspn_skills','jspn_exp','jspn_contact','jspn_about','jspn_skill_tags'].forEach(k => localStorage.removeItem(k));
+  location.reload();
+}
+
+// ── TOAST ──
+function toast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+init();
+
+/* ═══════════════════════════════════════
+   GITHUB API — DIRECT PUSH
+═══════════════════════════════════════ */
+
+function getGHConfig() {
+  return {
+    token:    document.getElementById('gh-token')?.value.trim(),
+    username: document.getElementById('gh-username')?.value.trim() || 'JSPN9400',
+    repo:     document.getElementById('gh-repo')?.value.trim()     || 'portpholio',
+    branch:   document.getElementById('gh-branch')?.value.trim()   || 'main',
+    path:     document.getElementById('gh-path')?.value.trim()     || 'assets/data',
+  };
+}
+
+function ghLog(msg, type='info') {
+  const log = document.getElementById('gh-push-log');
+  if (!log) return;
+  log.style.display = 'block';
+  const colors = { info:'#94A3B8', success:'#4ADE80', error:'#F87171', warn:'#FCD34D' };
+  const prefix = { info:'›', success:'✓', error:'✗', warn:'⚠' };
+  const time = new Date().toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  log.innerHTML += `<div style="color:${colors[type]}">[${time}] ${prefix[type]} ${msg}</div>`;
+  log.scrollTop = log.scrollHeight;
+}
+
+function ghClearLog() {
+  const log = document.getElementById('gh-push-log');
+  if (log) { log.innerHTML = ''; log.style.display = 'none'; }
+}
+
+async function testGitHubToken() {
+  const { token, username, repo } = getGHConfig();
+  const result = document.getElementById('gh-test-result');
+  if (!token) { 
+    result.style.display = 'block';
+    result.style.background = 'rgba(239,68,68,0.1)'; result.style.border = '1px solid rgba(239,68,68,0.2)'; result.style.color = '#F87171';
+    result.textContent = '❌ Please enter your GitHub token first';
+    return;
+  }
+  result.style.display = 'block';
+  result.style.background = 'rgba(245,158,11,0.1)'; result.style.border = '1px solid rgba(245,158,11,0.2)'; result.style.color = '#FCD34D';
+  result.textContent = '⏳ Testing token...';
+  try {
+    // Test user auth
+    const userRes = await fetch('https://api.github.com/user', {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!userRes.ok) throw new Error('Invalid token — HTTP ' + userRes.status);
+    const user = await userRes.json();
+    // Test repo access
+    const repoRes = await fetch(`https://api.github.com/repos/${username}/${repo}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!repoRes.ok) throw new Error(`Cannot access repo ${username}/${repo} — check username/repo name`);
+    const repoData = await repoRes.json();
+    result.style.background = 'rgba(34,197,94,0.1)'; result.style.border = '1px solid rgba(34,197,94,0.2)'; result.style.color = '#4ADE80';
+    result.textContent = `✅ Connected! Logged in as @${user.login} · Repo: ${repoData.full_name} · Branch: ${repoData.default_branch}`;
+    document.getElementById('gh-status-badge').textContent = '✅ Connected';
+    document.getElementById('gh-status-badge').style.background = 'rgba(34,197,94,0.15)';
+    document.getElementById('gh-status-badge').style.color = '#4ADE80';
+    if (document.getElementById('gh-save-token')?.checked) {
+      localStorage.setItem('jspn_gh_token', token);
+      localStorage.setItem('jspn_gh_username', username);
+      localStorage.setItem('jspn_gh_repo', repo);
+    }
+  } catch(err) {
+    result.style.background = 'rgba(239,68,68,0.1)'; result.style.border = '1px solid rgba(239,68,68,0.2)'; result.style.color = '#F87171';
+    result.textContent = '❌ ' + err.message;
+    document.getElementById('gh-status-badge').textContent = '❌ Error';
+  }
+}
+
+async function getFileSHA(token, username, repo, branch, filePath) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${filePath}?ref=${branch}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (res.status === 404) return null;
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.sha || null;
+  } catch { return null; }
+}
+
+async function pushFileToGitHub(token, username, repo, branch, filePath, content, commitMsg) {
+  const sha = await getFileSHA(token, username, repo, branch, filePath);
+  const encoded = btoa(unescape(encodeURIComponent(content)));
+  const body = { message: commitMsg, content: encoded, branch };
+  if (sha) body.sha = sha;
+  const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${filePath}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${token}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || 'Push failed — HTTP ' + res.status);
+  }
+  return await res.json();
+}
+
+async function pushToGitHub(type) {
+  const { token, username, repo, branch, path } = getGHConfig();
+  if (!token) { toast('❌ Enter GitHub token first → Settings'); return; }
+  ghClearLog();
+  let content, filename, label;
+  if (type === 'projects') {
+    content = JSON.stringify(projects, null, 2);
+    filename = 'projects.json'; label = 'Projects';
+  } else if (type === 'articles') {
+    content = JSON.stringify(articles, null, 2);
+    filename = 'articles.json'; label = 'Articles';
+  } else if (type === 'testimonials') {
+    content = JSON.stringify(JSON.parse(localStorage.getItem('jspn_testimonials') || '[]'), null, 2);
+    filename = 'testimonials.json'; label = 'Testimonials';
+  }
+  const filePath = path ? `${path}/${filename}` : filename;
+  const btn = document.getElementById(`gh-push-${type}`);
+  if (btn) { btn.textContent = '⏳ Pushing...'; btn.disabled = true; }
+  ghLog(`Pushing ${label} to ${username}/${repo}...`);
+  try {
+    await pushFileToGitHub(token, username, repo, branch, filePath, content, `✏️ Admin: Update ${filename} via portfolio admin panel`);
+    ghLog(`✅ ${label} pushed to GitHub successfully!`, 'success');
+    ghLog(`GitHub Pages rebuilds in ~1-2 minutes`, 'info');
+    ghLog(`Live URL: https://${username}.github.io/${repo}/`, 'info');
+    toast(`✅ ${label} pushed to GitHub!`);
+  } catch(err) {
+    ghLog('ERROR: ' + err.message, 'error');
+    toast('❌ Push failed: ' + err.message);
+  } finally {
+    if (btn) { btn.textContent = type === 'projects' ? '📤 Push projects.json' : '📤 Push articles.json'; btn.disabled = false; }
+  }
+}
+
+async function pushAllToGitHub() {
+  const { token, username, repo, branch, path } = getGHConfig();
+  if (!token) { toast('❌ Enter GitHub token first in Settings'); showPanel('settings'); return; }
+  ghClearLog();
+  const btn = document.getElementById('gh-push-all');
+  btn.textContent = '⏳ Pushing all files...'; btn.disabled = true;
+  const files = [
+    { name: 'projects.json',     content: JSON.stringify(projects, null, 2)  },
+    { name: 'articles.json',     content: JSON.stringify(articles, null, 2)  },
+  ];
+  let success = 0;
+  ghLog(`Starting push to ${username}/${repo} (branch: ${branch})...`);
+  for (const file of files) {
+    const filePath = path ? `${path}/${file.name}` : file.name;
+    try {
+      ghLog(`Pushing ${file.name}...`);
+      await pushFileToGitHub(token, username, repo, branch, filePath, file.content, `✏️ Admin: Update ${file.name}`);
+      ghLog(`✅ ${file.name} — done`, 'success');
+      success++;
+      await new Promise(r => setTimeout(r, 600)); // small delay between pushes
+    } catch(err) {
+      ghLog(`✗ ${file.name} — ${err.message}`, 'error');
+    }
+  }
+  ghLog(`───────────────────────────────────`);
+  ghLog(`Push complete: ${success}/${files.length} files pushed`, success === files.length ? 'success' : 'warn');
+  if (success > 0) {
+    ghLog(`GitHub Pages updating... wait 1-2 minutes`, 'info');
+    ghLog(`👉 View live: https://${username}.github.io/${repo}/`, 'success');
+    toast(`🚀 ${success} files pushed to GitHub!`);
+  }
+  btn.textContent = '🚀 Push All Files'; btn.disabled = false;
+}
+
+function toggleSaveToken() {
+  const save = document.getElementById('gh-save-token')?.checked;
+  if (!save) {
+    localStorage.removeItem('jspn_gh_token');
+    localStorage.removeItem('jspn_gh_username');
+    localStorage.removeItem('jspn_gh_repo');
+  }
+}
+
+// Load saved GitHub config on init
+function loadGHConfig() {
+  const saved_token    = localStorage.getItem('jspn_gh_token');
+  const saved_username = localStorage.getItem('jspn_gh_username');
+  const saved_repo     = localStorage.getItem('jspn_gh_repo');
+  if (saved_token) {
+    const el = document.getElementById('gh-token');
+    if (el) { el.value = saved_token; document.getElementById('gh-save-token').checked = true; }
+  }
+  if (saved_username) { const el = document.getElementById('gh-username'); if(el) el.value = saved_username; }
+  if (saved_repo)     { const el = document.getElementById('gh-repo');     if(el) el.value = saved_repo; }
+}
+
+// Add to init
+const _origInit = init;
+function initWithGH() {
+  _origInit();
+  setTimeout(loadGHConfig, 100);
+}
+document.addEventListener('DOMContentLoaded', () => {}, false);
+// Override init
+window.addEventListener('load', loadGHConfig);
+
+</script>
+</body>
+</html>
