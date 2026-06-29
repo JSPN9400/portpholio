@@ -210,17 +210,22 @@ ul, ol { list-style: none; }
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
   transition: opacity 0.5s, visibility 0.5s;
 }
-#loader.done { opacity: 0; visibility: hidden; }
+#loader.done {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
 .loader-mark {
   width: 52px; height: 52px; border-radius: var(--r-md);
   background: linear-gradient(135deg, var(--blue-600), var(--teal-500));
   display: flex; align-items: center; justify-content: center;
   font-size: 20px; font-weight: 900; color: #fff; letter-spacing: -0.5px;
-  animation: loader-breathe 1.4s ease-in-out infinite;
+  animation: loader-breathe 1s ease-in-out infinite;
 }
 @keyframes loader-breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
 .loader-track { width: 180px; height: 2px; background: rgba(255,255,255,0.08); border-radius: 1px; overflow: hidden; }
-.loader-fill  { height: 100%; background: linear-gradient(90deg, var(--blue-500), var(--teal-400)); border-radius: 1px; width: 0; animation: loader-prog 1.3s var(--ease) forwards; }
+.loader-fill  { height: 100%; background: linear-gradient(90deg, var(--blue-500), var(--teal-400)); border-radius: 1px; width: 0; animation: loader-prog 0.8s var(--ease) forwards; }
 @keyframes loader-prog { to { width: 100%; } }
 
 /* ============================================================
@@ -1078,4 +1083,264 @@ ul, ol { list-style: none; }
 @media(max-width:768px){
   #featured-project.feat-wrap { grid-template-columns: 1fr; }
   .feat-right { order: -1; }
+}
+
+/* ============================================================
+   PREMIUM SUBTLE ANIMATIONS v2
+   — Floating particles, gradient shifts, micro-interactions,
+     number tickers, shimmer, card lifts, section transitions
+   ============================================================ */
+
+/* ── GLOBAL: Smooth page entry ── */
+body { animation: page-enter 0.6s ease forwards; }
+@keyframes page-enter { from{opacity:0} to{opacity:1} }
+
+/* ── HERO: animated gradient mesh ── */
+.hero-mesh { animation: mesh-drift 12s ease-in-out infinite alternate; }
+@keyframes mesh-drift {
+  0%   { background-position: 0% 50%; opacity: 0.8; }
+  50%  { background-position: 100% 50%; opacity: 1; }
+  100% { background-position: 0% 50%; opacity: 0.8; }
+}
+
+/* ── HERO: floating particles ── */
+.hero-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.particle {
+  position: absolute; border-radius: 50%; opacity: 0;
+  animation: particle-float linear infinite;
+}
+@keyframes particle-float {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-20px) scale(1.2); opacity: 0; }
+}
+
+/* ── HERO name: shimmer on load ── */
+.hero-name-grad {
+  background-size: 200% auto;
+  animation: shimmer-text 4s linear infinite;
+}
+@keyframes shimmer-text {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── METRICS BAR: count-up glow ── */
+.metric-num { position: relative; }
+.metric-cell { transition: transform 0.3s var(--ease); }
+.metric-cell:hover { transform: translateY(-3px); }
+.metric-sfx { animation: sfx-pop 0.5s var(--ease) both; animation-delay: 1.8s; }
+@keyframes sfx-pop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+
+/* ── WHY CARDS: stagger + border glow ── */
+.why-card { animation: none; }
+.why-card.visible { animation: card-rise 0.5s var(--ease) both; }
+@keyframes card-rise {
+  from { opacity:0; transform: translateY(20px) scale(0.97); }
+  to   { opacity:1; transform: none; }
+}
+.why-card:hover .why-icon { animation: icon-bounce 0.4s var(--ease); }
+@keyframes icon-bounce { 0%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} 70%{transform:translateY(-3px)} }
+
+/* ── SECTION HEADERS: line draw ── */
+.eyebrow.visible::before {
+  animation: line-draw 0.6s var(--ease) both;
+}
+@keyframes line-draw { from{width:0;opacity:0} to{width:16px;opacity:1} }
+
+/* ── PIPELINE: flowing arrow animation ── */
+.pipe-arrow { animation: arrow-pulse 1.8s ease-in-out infinite; }
+@keyframes arrow-pulse {
+  0%,100% { opacity:0.5; transform: translateX(0); }
+  50%     { opacity:1;   transform: translateX(4px); }
+}
+.pipe-step { transition: all 0.25s var(--ease); }
+.pipe-step:hover { transform: translateY(-6px) scale(1.02); }
+
+/* ── DOMAIN CARDS: gradient shimmer ── */
+.domain-card.construction { background-size: 200% 200%; animation: domain-shift 6s ease-in-out infinite alternate; }
+.domain-card.finance      { background-size: 200% 200%; animation: domain-shift 8s ease-in-out infinite alternate-reverse; }
+@keyframes domain-shift {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/* ── DASHBOARD PREVIEW: subtle scan line ── */
+.dashboard-preview { position: relative; overflow: hidden; }
+.dashboard-preview::after {
+  content: '';
+  position: absolute; top: -100%; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,0.4), transparent);
+  animation: scan-line 4s ease-in-out infinite;
+}
+@keyframes scan-line {
+  0%   { top: -2px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.5; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ── IMPACT CARDS: number glow ── */
+.impact-num { transition: all 0.3s; }
+.impact-card:hover .impact-num { filter: drop-shadow(0 0 12px rgba(37,99,235,0.5)); transform: scale(1.05); }
+.impact-card { transition: all 0.3s var(--ease); }
+.impact-card:hover { transform: translateY(-6px); }
+
+/* ── PROCESS STEPS: connected animation ── */
+.process-num-circle { transition: all 0.3s var(--ease); }
+.process-step-card:hover .process-num-circle {
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 0 0 6px rgba(37,99,235,0.15), 0 0 20px rgba(37,99,235,0.3);
+}
+.process-step-card { transition: transform 0.25s var(--ease); }
+.process-step-card:hover { transform: translateY(-4px); }
+
+/* ── TOOL CARDS: icon spin on hover ── */
+.tool-card:hover .tool-icon { animation: icon-spin-y 0.5s var(--ease); }
+@keyframes icon-spin-y {
+  0%   { transform: rotateY(0deg) scale(1); }
+  50%  { transform: rotateY(90deg) scale(1.2); }
+  100% { transform: rotateY(0deg) scale(1.15); }
+}
+
+/* ── BLOG CARDS: shimmer on hover ── */
+.blog-card, .article-card, .blog-page-card {
+  position: relative; overflow: hidden;
+}
+.blog-card::before, .article-card::before, .blog-page-card::before {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  transform: skewX(-20deg); transition: left 0.5s;
+}
+.blog-card:hover::before, .article-card:hover::before, .blog-page-card:hover::before { left: 150%; }
+
+/* ── JOURNEY CARDS: current pulse ── */
+.journey-card.current .journey-icon {
+  animation: current-pulse 2s ease-in-out infinite;
+}
+@keyframes current-pulse {
+  0%,100% { box-shadow: 0 0 0 2px rgba(37,99,235,0.2), 0 4px 12px rgba(37,99,235,0.1); }
+  50%     { box-shadow: 0 0 0 6px rgba(37,99,235,0.12), 0 8px 24px rgba(37,99,235,0.2); }
+}
+
+/* ── TESTIMONIAL CARDS: quote mark float ── */
+.testi-card { position: relative; overflow: hidden; }
+.testi-card::before {
+  content: '"';
+  position: absolute; top: -10px; right: 16px;
+  font-size: 80px; font-family: Georgia, serif;
+  color: var(--blue-600); opacity: 0.06;
+  line-height: 1; pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.testi-card:hover::before { opacity: 0.10; transform: scale(1.1) translateY(-4px); }
+
+/* ── FAQ: smooth expand ── */
+.faq-a { transition: max-height 0.4s var(--ease), padding 0.3s; }
+.faq-q { transition: color 0.2s; }
+.faq-item.open .faq-q { color: var(--blue-600); }
+[data-theme="dark"] .faq-item.open .faq-q { color: var(--blue-400); }
+
+/* ── CONTACT LINKS: slide right ── */
+.contact-lnk { transition: all 0.25s var(--ease); }
+.contact-lnk:hover .contact-lnk-val { color: var(--blue-600); }
+[data-theme="dark"] .contact-lnk:hover .contact-lnk-val { color: var(--blue-400); }
+
+/* ── RECRUITER SECTION: glow on checks ── */
+.rec-check:hover .rec-check-icon {
+  background: rgba(20,184,166,0.25);
+  box-shadow: 0 0 12px rgba(20,184,166,0.3);
+  transform: scale(1.1);
+}
+.rec-check-icon { transition: all 0.25s var(--ease); }
+
+/* ── SCROLL PROGRESS BAR ── */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 9999;
+  background: linear-gradient(90deg, var(--blue-600), var(--teal-500));
+  width: 0%; transition: width 0.1s linear;
+}
+
+/* ── SECTION REVEAL: staggered children ── */
+.why-grid .why-card:nth-child(1)  { transition-delay: 0.05s; }
+.why-grid .why-card:nth-child(2)  { transition-delay: 0.10s; }
+.why-grid .why-card:nth-child(3)  { transition-delay: 0.15s; }
+.why-grid .why-card:nth-child(4)  { transition-delay: 0.20s; }
+.why-grid .why-card:nth-child(5)  { transition-delay: 0.25s; }
+.why-grid .why-card:nth-child(6)  { transition-delay: 0.30s; }
+.tool-grid .tool-card:nth-child(1)  { transition-delay: 0.02s; }
+.tool-grid .tool-card:nth-child(2)  { transition-delay: 0.04s; }
+.tool-grid .tool-card:nth-child(3)  { transition-delay: 0.06s; }
+.tool-grid .tool-card:nth-child(4)  { transition-delay: 0.08s; }
+.tool-grid .tool-card:nth-child(5)  { transition-delay: 0.10s; }
+.tool-grid .tool-card:nth-child(6)  { transition-delay: 0.12s; }
+.tool-grid .tool-card:nth-child(7)  { transition-delay: 0.14s; }
+.tool-grid .tool-card:nth-child(8)  { transition-delay: 0.16s; }
+.tool-grid .tool-card:nth-child(9)  { transition-delay: 0.18s; }
+.tool-grid .tool-card:nth-child(10) { transition-delay: 0.20s; }
+.tool-grid .tool-card:nth-child(11) { transition-delay: 0.22s; }
+.tool-grid .tool-card:nth-child(12) { transition-delay: 0.24s; }
+.proj-grid .proj-card:nth-child(1) { transition-delay: 0.05s; }
+.proj-grid .proj-card:nth-child(2) { transition-delay: 0.10s; }
+.proj-grid .proj-card:nth-child(3) { transition-delay: 0.15s; }
+.proj-grid .proj-card:nth-child(4) { transition-delay: 0.20s; }
+
+/* ── FOOTER: subtle top border glow ── */
+#footer { position: relative; }
+#footer::before {
+  content: '';
+  position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,0.4), rgba(20,184,166,0.4), transparent);
+}
+
+/* ── SKILL BARS: animated fill ── */
+.skill-bar {
+  position: relative;
+}
+.skill-bar::after {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0; width: 30px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15));
+  animation: skill-shine 2s ease-in-out infinite;
+  opacity: 0; border-radius: 2px;
+}
+.skill-bar:not([style*="width: 0"]):after { opacity: 1; }
+@keyframes skill-shine {
+  0%,100% { opacity: 0; }
+  50%     { opacity: 1; }
+}
+
+/* ── NAV: smooth underline on active ── */
+.nav-links a { position: relative; }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -2px; left: 50%; right: 50%;
+  height: 1.5px; background: var(--blue-400); transition: all 0.25s var(--ease);
+  border-radius: 1px;
+}
+.nav-links a.active::after, .nav-links a:hover::after { left: 12px; right: 12px; }
+
+/* ── BUTTONS: ripple effect ── */
+.btn { position: relative; overflow: hidden; }
+.btn::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.btn:active::after { opacity: 1; }
+
+/* ── FLOATING BADGE in hero ── */
+.hero-tag { animation: badge-float 3s ease-in-out infinite; }
+@keyframes badge-float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-4px); }
+}
+
+/* ── QUOTE SECTION: text fade-in word by word ── */
+.quote-text { animation: quote-reveal 1s var(--ease) both; animation-play-state: paused; }
+.quote-text.visible { animation-play-state: running; }
+@keyframes quote-reveal {
+  from { opacity:0; transform: translateY(12px); }
+  to   { opacity:1; transform: none; }
 }

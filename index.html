@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="Power BI, Python, SQL — real analytics work with measurable impact in Bihar.">
 <meta name="twitter:image" content="https://jspn9400.github.io/portpholio/assets/images/og-image.jpg">
 <meta name="data-base" content="assets/data">
-<link rel="manifest" href="manifest.json">
+<!-- manifest loaded conditionally by JS for http only -->
 <meta name="theme-color" content="#2563EB">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -42,6 +42,7 @@
 <body>
 
 <!-- LOADER -->
+<div id="scroll-progress" aria-hidden="true"></div>
 <div id="loader">
   <div class="loader-mark">JN</div>
   <div class="loader-track"><div class="loader-fill"></div></div>
@@ -87,6 +88,7 @@
 <!-- HERO -->
 <section id="hero" aria-label="Introduction">
   <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="hero-particles" id="hero-particles" aria-hidden="true"></div>
   <div class="hero-dots" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-inner">

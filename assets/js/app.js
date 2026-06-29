@@ -271,9 +271,17 @@ const toggleTheme = () => setTheme(document.documentElement.getAttribute('data-t
 
 /* ── LOADER ── */
 const hideLoader = () => {
-  const l = $('#loader');
-  if (l) setTimeout(() => l.classList.add('done'), 1200);
+  const l = document.getElementById('loader');
+  if (!l) return;
+  l.classList.add('done');
+  setTimeout(() => { try { l.parentNode.removeChild(l); } catch(e){} }, 600);
 };
+
+// SAFETY: Always hide loader after 3s no matter what
+setTimeout(() => {
+  const l = document.getElementById('loader');
+  if (l) { l.classList.add('done'); setTimeout(() => { try{l.parentNode.removeChild(l);}catch(e){} }, 600); }
+}, 3000);
 
 /* ── NAV ── */
 const initNav = () => {
@@ -374,6 +382,12 @@ const initReveal = () => {
 
   const sObs = new IntersectionObserver(e => { if (e[0].isIntersecting) animateSkills(); }, { threshold: 0.15 });
   const skillSec = $('#skills'); if (skillSec) sObs.observe(skillSec);
+  // Also trigger tool mini bars observer
+  const toolSec = document.querySelector('.tool-stack-section');
+  if (toolSec) {
+    const tObs = new IntersectionObserver(e => { if(e[0].isIntersecting) initToolBars(); },{threshold:0.15});
+    tObs.observe(toolSec);
+  }
 };
 
 /* ── FAQ ── */
@@ -424,35 +438,33 @@ const loadData = async () => {
 };
 
 const renderFeatured = () => {
-  const el = $('#featured-project'); if (!el) return;
-  const p = state.projects.find(p => p.featured);
-  if (!p) {
-    // fallback: show first project if none marked featured
-    const first = state.projects[0];
-    if (!first) return;
-    first.featured = true;
+  const el = $('#featured-project');
+  if (!el) return;
+  // Find featured project, fallback to first
+  let proj = state.projects.find(item => item.featured);
+  if (!proj && state.projects.length) {
+    proj = state.projects[0];
+    proj.featured = true;
   }
-  const proj = state.projects.find(p => p.featured);
   if (!proj) return;
-  const p = proj;
   el.innerHTML = `
     <div class="feat-left reveal reveal-left">
-      <div class="feat-eyebrow badge badge-blue">⭐ Featured Case Study · ${esc(p.domain)}</div>
-      <h2 class="feat-title">${esc(p.title)}</h2>
-      <p class="feat-desc">${esc(p.tagline)}</p>
+      <div class="feat-eyebrow badge badge-blue">⭐ Featured Case Study · ${esc(proj.domain)}</div>
+      <h2 class="feat-title">${esc(proj.title)}</h2>
+      <p class="feat-desc">${esc(proj.tagline)}</p>
       <div class="feat-steps">
-        <div class="feat-step"><div class="feat-step-num">1</div><div><div class="feat-step-title">Problem</div><div class="feat-step-desc">${esc(p.problem)}</div></div></div>
-        <div class="feat-step"><div class="feat-step-num">2</div><div><div class="feat-step-title">Approach</div><div class="feat-step-desc">${esc(p.approach)}</div></div></div>
-        <div class="feat-step"><div class="feat-step-num">3</div><div><div class="feat-step-title">Impact</div><div class="feat-step-desc">${esc(p.impact)}</div></div></div>
+        <div class="feat-step"><div class="feat-step-num">1</div><div><div class="feat-step-title">Problem</div><div class="feat-step-desc">${esc(proj.problem)}</div></div></div>
+        <div class="feat-step"><div class="feat-step-num">2</div><div><div class="feat-step-title">Approach</div><div class="feat-step-desc">${esc(proj.approach)}</div></div></div>
+        <div class="feat-step"><div class="feat-step-num">3</div><div><div class="feat-step-title">Impact</div><div class="feat-step-desc">${esc(proj.impact)}</div></div></div>
       </div>
       <div class="feat-btns">
-        <a href="${esc(p.github)}" target="_blank" rel="noopener" class="btn btn-primary">🐙 View on GitHub</a>
+        <a href="${esc(proj.github)}" target="_blank" rel="noopener" class="btn btn-primary">🐙 View on GitHub</a>
         <a href="pages/projects.html" class="btn btn-outline">View All Projects →</a>
       </div>
     </div>
     <div class="feat-right reveal reveal-right">
-      <div class="feat-metrics-grid">${p.metrics.map(m => `<div class="feat-metric"><div class="feat-metric-val">${esc(m.value)}</div><div class="feat-metric-lbl">${esc(m.label)}</div></div>`).join('')}</div>
-      <div class="feat-tools">${p.tools.map(t => `<span class="badge badge-blue">${esc(t)}</span>`).join('')}</div>
+      <div class="feat-metrics-grid">${proj.metrics.map(m => `<div class="feat-metric"><div class="feat-metric-val">${esc(m.value)}</div><div class="feat-metric-lbl">${esc(m.label)}</div></div>`).join('')}</div>
+      <div class="feat-tools">${proj.tools.map(t => `<span class="badge badge-blue">${esc(t)}</span>`).join('')}</div>
     </div>`;
 };
 
@@ -592,37 +604,69 @@ const initScroll = () => {
 
 /* ── PWA ── */
 const initPWA = () => {
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/portpholio/sw.js').catch(() => {});
+  // Only register SW and manifest on http/https — not on file://
+  if (location.protocol === 'file:') return;
+  // Add manifest link dynamically
+  const link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = location.pathname.includes('/pages/') ? '../manifest.json' : 'manifest.json';
+  document.head.appendChild(link);
+  // Register service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/portpholio/sw.js').catch(() => {});
+  }
 };
 
 /* ── MAIN ── */
 async function init() {
-  initTheme();
-  initNav();
-  initTyping();
-  initPhoto();
-  initBtt();
-  initScroll();
-  initFaq();
-  initPWA();
-  await loadData();
-  renderFeatured();
-  renderBlogLatest();
-  renderJourney();
-  renderTestimonials();
-  renderProjectsPage();
-  renderHomepageProjects();
-  renderBlogPage();
-  initReveal();
-  initForm();
+  try {
+    initTheme();
+    initNav();
+    initTyping();
+    initPhoto();
+    initBtt();
+    initScroll();
+    initFaq();
+    initPWA();
+  } catch(e) { console.warn('Init phase 1:', e); }
+
+  try {
+    await loadData();
+  } catch(e) { console.warn('Data load failed, using embedded:', e); }
+
+  try {
+    renderFeatured();
+    renderBlogLatest();
+    renderJourney();
+    renderTestimonials();
+    renderProjectsPage();
+    renderHomepageProjects();
+    renderBlogPage();
+  } catch(e) { console.warn('Render error:', e); }
+
+  try {
+    initReveal();
+    initForm();
+    initScrollProgress();
+    initParticles();
+    initStaggerReveal();
+  } catch(e) { console.warn('Extras error:', e); }
+
+  // ALWAYS hide loader - this must run
   hideLoader();
+
   setTimeout(() => {
-    $$('.reveal:not(.visible)').forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight * 0.95) el.classList.add('visible');
-    });
-  }, 300);
+    try { initTilt(); } catch(e){}
+  }, 1200);
+  setTimeout(() => {
+    try {
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.95) el.classList.add('visible');
+      });
+    } catch(e){}
+  }, 400);
 }
-document.addEventListener('DOMContentLoaded', init);
+/* init called below */
 
 /* ── HOMEPAGE PROJECTS (3-4 cards teaser) ── */
 const renderHomepageProjects = () => {
@@ -699,3 +743,99 @@ document.addEventListener('DOMContentLoaded', () => {
     initDashChart();
   }, 500);
 });
+
+/* ── SCROLL PROGRESS BAR ── */
+const initScrollProgress = () => {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+};
+
+/* ── FLOATING PARTICLES ── */
+const initParticles = () => {
+  const container = document.getElementById('hero-particles');
+  if (!container) return;
+  const colors = ['rgba(37,99,235,0.35)', 'rgba(20,184,166,0.25)', 'rgba(96,165,250,0.3)', 'rgba(45,212,191,0.2)'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random() * 100}%;
+      background:${colors[Math.floor(Math.random() * colors.length)]};
+      animation-duration:${Math.random() * 12 + 8}s;
+      animation-delay:${Math.random() * 8}s;
+    `;
+    container.appendChild(p);
+  }
+};
+
+/* ── STAGGER REVEAL for grid children ── */
+const initStaggerReveal = () => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const children = entry.target.querySelectorAll('.why-card, .tool-card, .proj-card, .blog-card, .testi-card, .journey-card, .svc-card, .impact-card, .pipe-step, .process-step-card');
+      children.forEach((child, i) => {
+        setTimeout(() => {
+          child.classList.add('visible');
+          child.style.opacity = '1';
+          child.style.transform = 'none';
+        }, i * 55);
+      });
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.why-grid, .tool-grid, .proj-grid, .blog-grid, .testi-grid, .journey-grid, .services-grid, .impact-row, .pipeline-wrap, .process-grid').forEach(el => {
+    // Set initial state
+    el.querySelectorAll('.why-card, .tool-card, .proj-card, .blog-card, .testi-card, .journey-card, .svc-card, .impact-card, .pipe-step, .process-step-card').forEach(child => {
+      child.style.opacity = '0';
+      child.style.transform = 'translateY(18px)';
+      child.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+    });
+    obs.observe(el);
+  });
+};
+
+/* ── TILT EFFECT on cards ── */
+const initTilt = () => {
+  if (window.matchMedia('(hover: none)').matches) return; // skip on touch
+  document.querySelectorAll('.why-card, .proj-card, .impact-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.style.transform = `translateY(-4px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+};
+
+/* ── NUMBER TICKER with easing ── */
+const animateTicker = (el, target) => {
+  const dur = 1600; const start = performance.now();
+  const update = now => {
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(target * eased);
+    if (p < 1) requestAnimationFrame(update);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(update);
+};
+
+/* ── SINGLE ENTRY POINT ── */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  // DOM already ready
+  init();
+}
